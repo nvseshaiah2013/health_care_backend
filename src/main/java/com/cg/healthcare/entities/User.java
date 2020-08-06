@@ -7,17 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "USER_MASTER")
+@SequenceGenerator(name = "user_id", initialValue = 1000, allocationSize = 1)
 public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id")
 	private int id;
 	@Column(name="USERNAME", unique = true)
 	private String username;

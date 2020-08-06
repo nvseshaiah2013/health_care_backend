@@ -14,24 +14,23 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name="BEDS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "BED_TYPE",discriminatorType = DiscriminatorType.INTEGER)
+@SequenceGenerator(name = "bed_id",initialValue = 1000, allocationSize = 1)
 public class Bed implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bed_id")
 	private int id;
 	
 	@Column(name="IS_OCCUPIED")
-	@ColumnDefault(value="false")
-	private boolean isOccupied;
+	private boolean isOccupied = false;
 	
 	@OneToOne
 	@JoinColumn(name = "APPOINTMENT_ID")
