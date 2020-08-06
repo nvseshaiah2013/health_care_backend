@@ -1,6 +1,5 @@
 package com.cg.healthcare.service;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -10,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.healthcare.dao.BedRepository;
 import com.cg.healthcare.dao.DiagnosticCenterRepository;
 import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.entities.Bed;
@@ -19,6 +19,8 @@ import com.cg.healthcare.entities.IntensiveCareBed;
 import com.cg.healthcare.entities.IntensiveCriticalCareBed;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.VentilatorBed;
+import com.cg.healthcare.exception.BedNotFoundException;
+import com.cg.healthcare.exception.OccupiedBedException;
 
 @Service
 @Transactional
@@ -29,6 +31,9 @@ public class DiagnosticCenterService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private BedRepository bedRepository;
 
 	public DiagnosticCenter getDiagnosticCenterByUsername(String diagnosticCenterUsername) {
 		User user = userRepository.findByUsername(diagnosticCenterUsername);
@@ -43,6 +48,7 @@ public class DiagnosticCenterService {
 			newBeds.add(new IntensiveCareBed(bedPrice));
 		}
 		diagnosticCenter.getBeds().addAll(newBeds);
+		diagnosticCenterRepo.save(diagnosticCenter);
 	}
 
 	public void addICCUBeds(String diagnosticCenterUsername, int noOfBeds, double bedPrice) throws Exception {
@@ -77,15 +83,18 @@ public class DiagnosticCenterService {
 		return diagnosticCenter.getBeds();
 	}
 
-	public void removeBeds(String diagnosticCenterUsername, Integer bedId) throws Exception {
+	public void removeBed(String diagnosticCenterUsername, Integer bedId) throws Exception {
 		DiagnosticCenter diagnosticCenter = getDiagnosticCenterByUsername(diagnosticCenterUsername);
 		Set<Bed> beds = diagnosticCenter.getBeds();
 		Optional<Bed> toBeDeletedBed = beds.stream().filter((bed) -> bed.getId() == bedId).findFirst();
 		if(toBeDeletedBed.isPresent()) {
-			
+			if(toBeDeletedBed.get().isOccupied()) {
+				throw new OccupiedBedException("Bed Exception", "The bed cannot be deleted as the bed is already occupied");
+			} else {
+				beds.remove(toBeDeletedBed.get());			}
 		}
 		else {
-			throw new Exception("The requested resource does not exist or unauthorized operation");
+			throw new BedNotFoundException("Bed Exception","The requested resource does not exist or unauthorized operation");
 		}
 	}
 
