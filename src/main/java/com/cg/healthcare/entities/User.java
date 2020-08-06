@@ -4,24 +4,37 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
 @Entity
-@Table(name = "user_master")
+@Table(name = "USER_MASTER")
 public class User implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Column(name="USERNAME", unique = true)
 	private String username;
+	
 	private String password;
 	@Pattern(regexp ="ROLE_(PATIENT|ADMIN|CENTER)")
 	private String role;
 		
 	public User() {
-		super();
+		
+	}
+	
+	public User(String username, String password, String role)
+	{
+		this.username = username;
+		this.password = password;
+		this.role = role;
 	}
 	
 	public int getId() {

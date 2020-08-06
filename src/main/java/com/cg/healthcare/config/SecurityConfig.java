@@ -17,52 +17,44 @@ import com.cg.healthcare.filter.JwtFilter;
 import com.cg.healthcare.service.LoginUserService;
 
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter  {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private LoginUserService loginUserService;
-	
+
 	@Autowired
 	private JwtFilter jwtFilter;
-	
-	
-	 @Override 
-	 protected void configure(AuthenticationManagerBuilder auth) throws Exception { 
-		  auth.userDetailsService(loginUserService);  
-	 }
-	 
-	 
-	 @Override 
-	 protected void configure(HttpSecurity http) throws Exception
-	 {
-		 
-		 http.
-		 csrf().disable().	
-		 authorizeRequests().antMatchers("/users/authenticate","/users/add")
-		 .permitAll()
-		 .antMatchers(HttpMethod.OPTIONS,"/**")
-		 .permitAll()
-		 .anyRequest()
-		 .authenticated()
-		 .and()
-		 .sessionManagement()
-		 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		 http.cors();
-		 http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-		 
-	 }
-	 
-	 @Override
-		@Bean
-		public AuthenticationManager authenticationManagerBean() throws Exception {
-			return super.authenticationManagerBean();
-		}
-	 
-	  @Bean
-	  public PasswordEncoder passwordEncoder()
-	  {
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(loginUserService);
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+
+		http.csrf().disable().authorizeRequests()
+				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+				.antMatchers("/api/public/**").permitAll()
+				.antMatchers("/api/admin/**").hasRole("ADMIN")
+				.antMatchers("/api/patient/**").hasRole("PATIENT")
+				.antMatchers("/api/center/**").hasRole("CENTER")
+				.anyRequest().authenticated().and().exceptionHandling().and().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.cors();
+		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+	}
+
+	@Override
+	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
 //		  return NoOpPasswordEncoder.getInstance();
-		  return new BCryptPasswordEncoder();
-	  }
-	 
-	
+		return new BCryptPasswordEncoder();
+	}
+
 }

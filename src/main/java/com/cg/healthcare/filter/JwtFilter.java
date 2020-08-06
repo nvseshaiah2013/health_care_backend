@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,12 +35,6 @@ public class JwtFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		
-		if(request.getMethod().equalsIgnoreCase("OPTIONS"))
-		{
-			response.setStatus(HttpServletResponse.SC_OK);
-			return;
-		}
 		final String authHeader = request.getHeader("Authorization");
 		
 		String username = null;
@@ -72,7 +65,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		catch(JwtException e) {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			response.getWriter().print(new ErrorMessage(HttpStatus.FORBIDDEN, e.getMessage()));
+			response.getWriter().print(new ErrorMessage("Authorization Error", e.getMessage()));
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);			
 			return;
 		}
