@@ -159,4 +159,5 @@ public class DiagnosticCenterTests {
 			diagnosticCenterService.removeBed(mockDiagnosticUser.getUsername(),bedId);
 		} );
 	}
+	
 }
