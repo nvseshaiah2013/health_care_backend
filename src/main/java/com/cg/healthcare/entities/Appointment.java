@@ -61,6 +61,10 @@ public class Appointment implements Serializable{
 	@JoinColumn(name="D_CENTER_ID", nullable = false)
 	private DiagnosticCenter diagnosticCenter;
 	
+	public Appointment()
+	{
+		
+	}
 	
 
 	public Appointment(int id, Timestamp appointmentDate, int approvalStatus, String diagnosis, String symptoms, Patient patient, DiagnosticCenter diagnosticCenter) {

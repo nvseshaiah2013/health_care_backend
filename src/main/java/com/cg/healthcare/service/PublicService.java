@@ -42,7 +42,7 @@ public class PublicService {
 	public void registerPatient(PatientSignUpRequest patientRequest) throws Exception {
 		User user = userRepository.findByUsername(patientRequest.getUsername());
 		if (user != null) {
-			throw new UsernameAlreadyExistsException();
+			throw new UsernameAlreadyExistsException("Sign Up Exception"," Username Already exists in the System");
 		} else {
 			String salt = BCrypt.gensalt(10);
 			User newUser = new User(patientRequest.getUsername(), BCrypt.hashpw(patientRequest.getPassword(), salt),
