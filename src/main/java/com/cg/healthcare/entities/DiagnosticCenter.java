@@ -54,6 +54,20 @@ public class DiagnosticCenter implements Serializable {
 	public DiagnosticCenter() {
 
 	}
+	
+	
+
+	public DiagnosticCenter(int id, String name, String contactNo, String address, String contactEmail,
+			String servicesOffered) {
+		this.id = id;
+		this.name = name;
+		this.contactNo = contactNo;
+		this.address = address;
+		this.contactEmail = contactEmail;
+		this.servicesOffered = servicesOffered;
+	}
+
+
 
 	public DiagnosticCenter(String name, String contactNo, String address, String contactEmail, String servicesOffered) {
 		this.address = address;

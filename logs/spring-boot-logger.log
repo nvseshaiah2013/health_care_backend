@@ -1,0 +1,24 @@
+2020-08-07 12:15:47,345 INFO org.springframework.boot.StartupInfoLogger [main] Starting DiagnosticCenterTests on DESKTOP-RCJH2B2 with PID 6916 (started by Sachin Randhawa in D:\BootCamp( 3rd Aug)\Project\health_care_backend)
+2020-08-07 12:15:47,362 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-08-07 12:15:51,032 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-08-07 12:15:51,315 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 259ms. Found 9 JPA repository interfaces.
+2020-08-07 12:15:53,058 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-08-07 12:15:53,374 INFO org.hibernate.jpa.internal.util.LogHelper [task-1] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-08-07 12:15:53,627 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-08-07 12:15:53,791 INFO org.hibernate.Version [task-1] HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-08-07 12:15:54,475 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [task-1] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-08-07 12:15:55,405 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Starting...
+2020-08-07 12:15:55,420 WARN com.zaxxer.hikari.util.DriverDataSource [task-1] Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2020-08-07 12:15:56,280 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4f94e148, org.springframework.security.web.context.SecurityContextPersistenceFilter@48528634, org.springframework.security.web.header.HeaderWriterFilter@fab35b1, org.springframework.web.filter.CorsFilter@7ff8a9dc, org.springframework.security.web.authentication.logout.LogoutFilter@5d43409a, com.cg.healthcare.filter.JwtFilter@5b051a5c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4047d2d9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1b1f5012, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2cde651b, org.springframework.security.web.session.SessionManagementFilter@3374b5bc, org.springframework.security.web.access.ExceptionTranslationFilter@14b789f6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@46963479]
+2020-08-07 12:15:56,585 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Start completed.
+2020-08-07 12:15:56,769 INFO org.hibernate.dialect.Dialect [task-1] HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-08-07 12:15:57,979 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-08-07 12:15:59,502 INFO org.hibernate.tuple.PojoInstantiator [task-1] HHH000182: No default (no-argument) constructor for class: com.cg.healthcare.entities.Appointment (class must be instantiated by Interceptor)
+2020-08-07 12:16:00,305 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [task-1] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-08-07 12:16:00,316 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [task-1] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-08-07 12:16:01,559 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-08-07 12:16:01,581 INFO org.springframework.boot.StartupInfoLogger [main] Started DiagnosticCenterTests in 15.598 seconds (JVM running for 20.398)
+2020-08-07 12:16:02,234 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringContextShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-08-07 12:16:02,244 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-08-07 12:16:02,246 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown initiated...
+2020-08-07 12:16:02,289 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown completed.

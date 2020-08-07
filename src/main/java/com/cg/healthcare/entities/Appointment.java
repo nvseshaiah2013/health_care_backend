@@ -60,6 +60,18 @@ public class Appointment implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="D_CENTER_ID", nullable = false)
 	private DiagnosticCenter diagnosticCenter;
+	
+	
+
+	public Appointment(int id, Timestamp appointmentDate, int approvalStatus, String diagnosis, String symptoms, Patient patient, DiagnosticCenter diagnosticCenter) {
+		this.id = id;
+		this.appointmentDate = appointmentDate;
+		this.approvalStatus = approvalStatus;
+		this.diagnosis = diagnosis;
+		this.symptoms = symptoms;
+		this.patient = patient;
+		this.diagnosticCenter = diagnosticCenter;
+	}
 
 	public int getId() {
 		return id;
