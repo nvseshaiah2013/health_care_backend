@@ -1,13 +1,14 @@
 package com.cg.healthcare.exception;
 
-public class UsernameAlreadyExistsException extends Exception{
+public class InvalidICUBedException extends Exception {
 
 	private static final long serialVersionUID = 1L;
+	
 	private String header;
 	
-	public UsernameAlreadyExistsException(String header,String message)
+	public InvalidICUBedException(String header, String message)
 	{
-		super(message);	
+		super(message);
 		this.header = header;
 	}
 
@@ -21,8 +22,7 @@ public class UsernameAlreadyExistsException extends Exception{
 
 	@Override
 	public String toString() {
-		return "UsernameAlreadyExistsException [header=" + header + "]";
+		return "InvalidICUBedException [header=" + header + "]";
 	}
-	
 	
 }
