@@ -84,6 +84,8 @@ public class Appointment implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	
 
 	public Timestamp getAppointmentDate() {
 		return appointmentDate;
