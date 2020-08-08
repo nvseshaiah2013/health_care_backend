@@ -182,8 +182,6 @@ public class DiagnosticCenterTests {
 		} );
 	}
 	
-<<<<<<< HEAD
-=======
 	@Test
 	public void addVentilatorBedThrowsException() throws Exception {
 		Mockito.when(userRepository.findByUsername("center1@gmail.com")).thenReturn(mockDiagnosticUser);
@@ -220,5 +218,4 @@ public class DiagnosticCenterTests {
 		});
 	}
 	
->>>>>>> 941284167b7897cccca2d52cf333707e49c81045
 }
