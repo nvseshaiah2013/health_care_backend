@@ -11,8 +11,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.validation.Validator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,10 +18,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import com.cg.healthcare.dao.DiagnosticCenterRepository;
 import com.cg.healthcare.dao.UserRepository;
@@ -45,21 +39,10 @@ import com.cg.healthcare.exception.OccupiedBedException;
 import com.cg.healthcare.service.DiagnosticCenterService;
 
 @ExtendWith(MockitoExtension.class)
-@ContextConfiguration
 public class DiagnosticCenterTests {
 	
-	@TestConfiguration
-	static class TestConfig{
-		@Bean
-		public Validator validatorFactory()
-		{
-			return new LocalValidatorFactoryBean();
-		}
-	}
-
 	@InjectMocks
 	private DiagnosticCenterService diagnosticCenterService;
-
 
 	@Mock
 	private UserRepository userRepository;
