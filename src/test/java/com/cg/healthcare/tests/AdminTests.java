@@ -3,6 +3,10 @@ package com.cg.healthcare.tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,9 +48,13 @@ public class AdminTests {
 		mockDiagnosticUser = new User(10, "center1@gmail.com", "Password@123", "ROLE_CENTER");
 		mockDiagnosticCenter = new DiagnosticCenter(mockDiagnosticUser.getId(), "Center 1", "9876543210", "Address",
 				"email@gmail.com", "Services");
-		mockRequestSignUp = new DiagnosticCenterSignUpRequest("center1@gmail.com","Password@123","","","","","");
+		mockRequestSignUp = new DiagnosticCenterSignUpRequest("Center 1","9876543210","Address","email@gmail.com", "Services",
+				"center1@gmail.com","Password@123");
 	}
 	
+	/*
+	 * Sachin Kumar( Starts )
+	 */
 	@Test
 	public void addDiagnosticCenter() throws Exception
 	{
@@ -55,10 +63,46 @@ public class AdminTests {
 		Mockito.when(userRepository.findByUsername(mockRequestSignUp.getUserName())).thenReturn(mockDiagnosticUser);
 		Mockito.when(userRepository.save(mockDiagnosticUser)).thenReturn(mockDiagnosticUser);
 		Mockito.when(diagnosticCenterRepository.save(mockDiagnosticCenter)).thenReturn(mockDiagnosticCenter);
-		DiagnosticCenter center = adminService.addDiagnosticCenter(mockRequestSignUp);
-		
+		adminService.addDiagnosticCenter(mockRequestSignUp);
 		});
 		
 	}
 	
+	@Test
+	public void getDiagnosticCenterById()
+	{
+		Mockito.when(diagnosticCenterRepository.findById(10)).thenReturn(Optional.of(mockDiagnosticCenter));
+		DiagnosticCenter center = adminService.getDiagnosticCenterById(10);
+		assertEquals(10, center.getId());
+	}
+	
+	@Test 
+	public void removeDiagnosticCenter()
+	{
+		Mockito.when(diagnosticCenterRepository.findById(10)).thenReturn(Optional.of(mockDiagnosticCenter));
+		//Mockito.when(diagnosticCenterRepository.delete(mockDiagnosticCenter)).thenReturn(Optional.of(mockDiagnosticCenter));
+		List<DiagnosticCenter> center = adminService.removeDiagnosticCenter(mockDiagnosticCenter.getId());
+		assertEquals(0,center.size());
+	}
+	
+	@Test
+	public void updateDiagnosticCenter()
+	{
+		Mockito.when(diagnosticCenterRepository.save(mockDiagnosticCenter)).thenReturn(mockDiagnosticCenter);
+		DiagnosticCenter center = adminService.updateDiagnosticCenter(mockDiagnosticCenter);
+		assertEquals(10, center.getId());
+	}
+	
+	@Test
+	public void getAllDiagnosticCenter()
+	{
+		List<DiagnosticCenter> centers = new LinkedList<>();
+		centers.add(mockDiagnosticCenter);
+		Mockito.when(diagnosticCenterRepository.findAll()).thenReturn(centers);
+		assertEquals(1, adminService.getAllDiagnosticCenter().size());
+	}
+	
+	/*
+	 * Sachin Kumar( Ends )
+	 */
 }

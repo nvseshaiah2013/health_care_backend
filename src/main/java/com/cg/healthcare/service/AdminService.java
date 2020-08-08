@@ -33,7 +33,7 @@ public class AdminService {
 	{ 
 		User toFindUser = userRepository.findByUsername(diagnosticCenter.getUserName());
 		if(toFindUser!=null) {
-			throw new UsernameAlreadyExistsException();
+			throw new UsernameAlreadyExistsException(null, null);
 		}
 		String salt = BCrypt.gensalt(10);
 		User user = new User(diagnosticCenter.getUserName(), BCrypt.hashpw(diagnosticCenter.getPassword(),salt), "ROLE_CENTER");
