@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="TEST_MASTER")
 @SequenceGenerator(name = "test_id", initialValue = 1000, allocationSize = 1)
-public class Test implements Serializable{
+public class DiagnosticTest implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -41,12 +41,12 @@ public class Test implements Serializable{
 	@JsonIgnore
 	private Set<DiagnosticCenter> diagnosticCenters = new HashSet<>();
 	
-	public Test()
+	public DiagnosticTest()
 	{
 		
 	}
 	
-	public Test(String testName, double testPrice, String normalValue, String units)
+	public DiagnosticTest(String testName, double testPrice, String normalValue, String units)
 	{
 		this.testName = testName;
 		this.testPrice = testPrice;
