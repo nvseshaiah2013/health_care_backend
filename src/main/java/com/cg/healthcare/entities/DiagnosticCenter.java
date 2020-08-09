@@ -47,7 +47,7 @@ public class DiagnosticCenter implements Serializable {
 			inverseJoinColumns = @JoinColumn(name = "test_id")
 			)
 	@JsonIgnore
-	private Set<Test> tests = new HashSet<>();
+	private Set<DiagnosticTest> tests = new HashSet<>();
 
 
 
@@ -78,11 +78,11 @@ public class DiagnosticCenter implements Serializable {
 		this.beds = beds;
 	}
 
-	public Set<Test> getTests() {
+	public Set<DiagnosticTest> getTests() {
 		return tests;
 	}
 
-	public void setTests(Set<Test> tests) {
+	public void setTests(Set<DiagnosticTest> tests) {
 		this.tests = tests;
 	}
 
