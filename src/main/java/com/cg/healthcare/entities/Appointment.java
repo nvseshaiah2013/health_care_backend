@@ -51,7 +51,7 @@ public class Appointment implements Serializable{
 			   inverseJoinColumns = @JoinColumn(name = "TEST_ID")
 			)
 	@JsonIgnore
-	private Set<Test> assignedTests = new HashSet<>();
+	private Set<DiagnosticTest> assignedTests = new HashSet<>();
 	
 	@ManyToOne
 	@JoinColumn(name = "PATIENT_ID", nullable = false)
@@ -97,11 +97,11 @@ public class Appointment implements Serializable{
 		this.approvalStatus = approvalStatus;
 	}
 
-	public Set<Test> getAssignedTests() {
+	public Set<DiagnosticTest> getAssignedTests() {
 		return assignedTests;
 	}
 
-	public void setAssignedTests(Set<Test> assignedTests) {
+	public void setAssignedTests(Set<DiagnosticTest> assignedTests) {
 		this.assignedTests = assignedTests;
 	}
 

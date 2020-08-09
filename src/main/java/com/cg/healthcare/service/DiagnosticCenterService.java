@@ -1,6 +1,8 @@
 package com.cg.healthcare.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -11,12 +13,14 @@ import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.BedRepository;
 import com.cg.healthcare.dao.DiagnosticCenterRepository;
+import com.cg.healthcare.dao.TestRepository;
 import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.GeneralBed;
 import com.cg.healthcare.entities.IntensiveCareBed;
 import com.cg.healthcare.entities.IntensiveCriticalCareBed;
+import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.VentilatorBed;
 import com.cg.healthcare.exception.BedNotFoundException;
@@ -24,7 +28,7 @@ import com.cg.healthcare.exception.OccupiedBedException;
 
 @Service
 @Transactional
-public class DiagnosticCenterService {
+public class DiagnosticCenterService { 
 
 	@Autowired
 	private DiagnosticCenterRepository diagnosticCenterRepo;
@@ -33,7 +37,30 @@ public class DiagnosticCenterService {
 	private UserRepository userRepository;
 	
 	@Autowired
+	private TestRepository testRepository;
+	
+	@Autowired
 	private BedRepository bedRepository;
+	
+	
+	
+	public DiagnosticTest getTestInfo(String testName)
+	{
+		DiagnosticTest test = testRepository.findBytestName(testName);
+		return test;
+	}
+	
+
+	public List<Bed> listOfVacantBeds()
+	{
+		List<Bed> allBeds = bedRepository.findAll();
+		List<Bed> vacantBedsList =new ArrayList<Bed>(); 
+		for(Bed bed : allBeds) {
+			if( !(bed.isOccupied())) vacantBedsList.add(bed) ;
+		}
+		return vacantBedsList;
+		
+	}
 
 	public DiagnosticCenter getDiagnosticCenterByUsername(String diagnosticCenterUsername) {
 		User user = userRepository.findByUsername(diagnosticCenterUsername);

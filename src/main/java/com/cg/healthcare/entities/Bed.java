@@ -43,6 +43,16 @@ public class Bed implements Serializable{
 	@JoinColumn(name = "D_CENTER_ID")
 	private DiagnosticCenter diagnosticCenter;
 	
+	public Bed(int id, boolean isOccupied, Appointment appointment, double pricePerDay,
+			DiagnosticCenter diagnosticCenter) {
+		super();
+		this.id = id;
+		this.isOccupied = isOccupied;
+		this.appointment = appointment;
+		this.pricePerDay = pricePerDay;
+		this.diagnosticCenter = diagnosticCenter;
+	}
+	
 	public DiagnosticCenter getDiagnosticCenter() {
 		return diagnosticCenter;
 	}
@@ -70,12 +80,12 @@ public class Bed implements Serializable{
 		this.id = id;
 	}
 
-	public boolean isOccupied() {
-		return isOccupied;
-	}
-
 	public void setOccupied(boolean isOccupied) {
 		this.isOccupied = isOccupied;
+	}
+	
+	public boolean isOccupied() {
+		return isOccupied;
 	}
 
 	public Appointment getAppointment() {

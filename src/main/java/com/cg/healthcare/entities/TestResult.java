@@ -36,10 +36,23 @@ public class TestResult implements Serializable{
 	@ManyToOne
 	@MapsId("TEST_ID")
 	@JoinColumn(name ="TEST_ID")
-	private Test test;
+	private DiagnosticTest test;
 
 	public TestResult() {
 	}
+
+	
+	public TestResult(TestResultId id, double testReading,
+			@Pattern(regexp = "(Below Normal)|(Normal)|(Above Normal)") String condition, Appointment appointment,
+			DiagnosticTest test) {
+		super();
+		this.id = id;
+		this.testReading = testReading;
+		this.condition = condition;
+		this.appointment = appointment;
+		this.test = test;
+	}
+
 
 	public double getTestReading() {
 		return testReading;
@@ -73,11 +86,11 @@ public class TestResult implements Serializable{
 		this.appointment = appointment;
 	}
 
-	public Test getTest() {
+	public DiagnosticTest getTest() {
 		return test;
 	}
 
-	public void setTest(Test test) {
+	public void setTest(DiagnosticTest test) {
 		this.test = test;
 	}	
 	
