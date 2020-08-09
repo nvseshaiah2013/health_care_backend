@@ -28,7 +28,10 @@ import com.cg.healthcare.exception.AppointmentNotApprovedException;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 import com.cg.healthcare.exception.InvalidBedAllocationException;
 import com.cg.healthcare.exception.NoBedAvailableException;
+import com.cg.healthcare.exception.NoTestFoundAtThisCenterException;
 import com.cg.healthcare.exception.PartialBedsAllocationException;
+import com.cg.healthcare.exception.TestAlreadyFoundException;
+import com.cg.healthcare.exception.TestNotPresentInCenter;
 import com.cg.healthcare.exception.UsernameAlreadyExistsException;
 import com.cg.healthcare.requests.DiagnosticCenterSignUpRequest;
 
@@ -216,46 +219,68 @@ public class AdminService {
 	 * 
 	 * Ayush Gupta's code starts
 	 */
+
 	@Autowired
 	private TestRepository testRepository;
-
+	
 	@Autowired
 	private DiagnosticCenterRepository centerRepository;
-
-	public List<DiagnosticTest> getAllTest() {
-		List<DiagnosticTest> tests = testRepository.findAll();
+	
+	public List<DiagnosticTest> getAllTest(){
+		List<DiagnosticTest> tests=testRepository.findAll();
 		return tests;
 	}
-
+	
+	public List<DiagnosticCenter> getAllDiagnosticCenters(){
+		List<DiagnosticCenter> centers=centerRepository.findAll();
+		return centers;
+	}
 	public DiagnosticTest addNewTest(DiagnosticTest test) {
-		DiagnosticTest addedTest = testRepository.save(test);
+		DiagnosticTest addedTest=testRepository.save(test);
 		return addedTest;
 	}
-
 	public DiagnosticTest updateTestDetail(DiagnosticTest test) {
-		DiagnosticTest updatedTest = testRepository.save(test);
+		DiagnosticTest updatedTest=testRepository.save(test);
 		return updatedTest;
 	}
-
-	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) {
-		DiagnosticCenter center = getDiagnosticCenterById(centerId);
-		List<DiagnosticTest> testList = new LinkedList<>(center.getTests());
+	
+	public DiagnosticCenter getDiagnosticCentersById(int diagnosticCenterId) {
+		DiagnosticCenter center = diagnosticCenterRepository.getOne(diagnosticCenterId);
+		return center;
+	}
+	
+	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId){
+		DiagnosticCenter center=centerRepository.getOne(centerId);
+		List<DiagnosticTest> testList=new LinkedList<>(center.getTests());
+		if(testList.size()==0) {
+			throw new NoTestFoundAtThisCenterException("No Test Found At This Center");
+		}
 		return testList;
 	}
-
-	public List<DiagnosticTest> addTestToDiagnosticCenter(int centerId, List<DiagnosticTest> tests) {
-		DiagnosticCenter center = getDiagnosticCenterById(centerId);
+	public List<DiagnosticTest> addTestToDiagnosticCenter(int centerId,List<DiagnosticTest> tests) throws Exception{
+		DiagnosticCenter center=centerRepository.getOne(centerId);
+		List<DiagnosticTest> centerTest=new LinkedList<DiagnosticTest>(center.getTests());
+		for(int i=0;i<tests.size();i++) {
+			if(centerTest.contains(tests.get(i))) {
+				throw new TestAlreadyFoundException("Some Tests are already Found in Diagnostic Center");
+			}
+		}
 		center.getTests().addAll(tests);
 		centerRepository.save(center);
-		List<DiagnosticTest> updatedTestList = new LinkedList<DiagnosticTest>(center.getTests());
+		List<DiagnosticTest> updatedTestList=new LinkedList<DiagnosticTest>(center.getTests());
 		return updatedTestList;
 	}
-
-	public List<DiagnosticTest> removeTestFromDiagnosticCenter(int centerId, List<DiagnosticTest> tests) {
-		DiagnosticCenter center = getDiagnosticCenterById(centerId);
+	public List<DiagnosticTest> removeTestFromDiagnosticCenter(int centerId,List<DiagnosticTest> tests) throws Exception{
+		DiagnosticCenter center=centerRepository.getOne(centerId);
+		List<DiagnosticTest> centerTest=new LinkedList<DiagnosticTest>(center.getTests());
+		for(int i=0;i<tests.size();i++) {
+			if(!centerTest.contains(tests.get(i))) {
+				throw new TestNotPresentInCenter("Some Tests are not present in Diagnostic Center");
+			}
+		}
 		center.getTests().removeAll(tests);
 		centerRepository.save(center);
-		List<DiagnosticTest> updatedTestList = new LinkedList<DiagnosticTest>(center.getTests());
+		List<DiagnosticTest> updatedTestList=new LinkedList<DiagnosticTest>(center.getTests());
 		return updatedTestList;
 	}
 
