@@ -2,6 +2,7 @@ package com.cg.healthcare.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,8 +15,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.cg.healthcare.dao.AppointmentRepository;
 import com.cg.healthcare.dao.DiagnosticCenterRepository;
 import com.cg.healthcare.dao.UserRepository;
+import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.GeneralBed;
@@ -39,6 +42,9 @@ public class PatientTests {
 	@Mock
 	private UserRepository userRepository;
 	
+	@Mock
+	private AppointmentRepository appointmentRepository;
+	
 	private static User mockDiagnosticCenterUser;
 	private static DiagnosticCenter mockDiagnosticCenter;
 	private static User mockPatientUser;
@@ -48,6 +54,7 @@ public class PatientTests {
 	private static IntensiveCareBed mockIntensiveCareBed;
 	private static IntensiveCriticalCareBed mockIntensiveCriticalCareBed;
 	private static VentilatorBed mockVentilatorBed;
+	private static Appointment mockAppointment;
 	
 	
 	@BeforeEach
@@ -66,6 +73,8 @@ public class PatientTests {
 		mockDiagnosticCenter.getBeds().add(mockIntensiveCriticalCareBed);
 		mockDiagnosticCenter.getBeds().add(mockVentilatorBed);
 		
+		mockAppointment= new Appointment(10, new Timestamp(System.currentTimeMillis()), 1, "diagnosis", "symptoms", mockPatient, mockDiagnosticCenter);
+		
 	}
 	
 	@Test
@@ -74,10 +83,17 @@ public class PatientTests {
 		Mockito.when(diagnosticCenterRepository.getOne(20)).thenReturn(mockDiagnosticCenter);
 		Set<Bed> vacantBeds=patientService.getAllBed("dcenter@gmail.com");
 		Long count=vacantBeds.stream().count();
-		System.out.println(count);
 		assertEquals(4, count);
 		
 		
+	}
+	
+	@Test 
+	public void applyBedTest()
+	{
+		Mockito.when(appointmentRepository.getOne(10)).thenReturn(mockAppointment);
+		boolean result=patientService.applyForBed(mockAppointment.getId());
+		assertEquals(true, result);
 	}
 
 	
