@@ -112,6 +112,16 @@ public class PatientTests {
 		assertEquals(0, count);
 	}
 	
+	@Test 
+	public void viewBedStatusTest() throws Exception
+	{
+		Mockito.when(appointmentRepository.getOne(10)).thenReturn(mockAppointment);
+		boolean result=patientService.applyForBed(mockAppointment.getId());
+		Bed bed=patientService.viewBedStatus(mockAppointment.getId());
+		int id=bed.getAppointment().getId();
+		assertEquals(10,id );
+	}
+	
 	
 
 	

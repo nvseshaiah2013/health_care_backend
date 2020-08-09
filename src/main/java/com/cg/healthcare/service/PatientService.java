@@ -1,5 +1,7 @@
 package com.cg.healthcare.service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,6 +23,7 @@ import com.cg.healthcare.entities.GeneralBed;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.entities.User;
+import com.cg.healthcare.entities.WaitingPatient;
 
 @Service
 @Transactional
@@ -77,13 +80,30 @@ public class PatientService {
 		Patient patient=appointment.getPatient();
 		DiagnosticCenter diagnosticCenter=appointment.getDiagnosticCenter();
 		Bed bed = diagnosticCenter.getBeds().stream().filter(b->b.isOccupied()==false).findFirst().get();
-		if(bed==null)
+		if(bed==null) {
+			
+			WaitingPatient waitingPatient=new WaitingPatient();
+			waitingPatient.setAppointment(appointment);
+			waitingPatient.setRequestedOn(Timestamp.valueOf(LocalDateTime.now()));
+			
 			return false;
+			}
 		else {
 			bed.setOccupied(true);
 			bed.setAppointment(appointment);
 			return true;
 			}
+	}
+	
+	//view bed allocation status and details(example no of days and Total price)
+	public Bed viewBedStatus(int appointmentId) throws Exception{
+		Appointment appointment= appointmentRepository.getOne(appointmentId);
+		DiagnosticCenter diagnosticCenter= appointment.getDiagnosticCenter();
+		Bed bed = diagnosticCenter.getBeds().stream().filter(b->b.getAppointment().getId()==appointmentId).findFirst().get();
+		if (bed==null)
+			throw new Exception("No Bed booked");
+		else
+			return bed;
 	}
 	
 	
