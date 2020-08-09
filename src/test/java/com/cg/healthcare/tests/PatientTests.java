@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.cg.healthcare.dao.AppointmentRepository;
@@ -30,7 +32,7 @@ import com.cg.healthcare.entities.VentilatorBed;
 import com.cg.healthcare.service.PatientService;
 
 @ExtendWith(MockitoExtension.class)
-@ContextConfiguration
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class PatientTests {
 	
 	@InjectMocks
@@ -89,12 +91,28 @@ public class PatientTests {
 	}
 	
 	@Test 
-	public void applyBedTest()
+	public void applyForBedPassTest()
 	{
 		Mockito.when(appointmentRepository.getOne(10)).thenReturn(mockAppointment);
 		boolean result=patientService.applyForBed(mockAppointment.getId());
 		assertEquals(true, result);
 	}
+	
+	@Test
+	public void getAllVacantBedFailTest()    
+	{
+		Mockito.when(userRepository.findByUsername("dcenter@gmail.com")).thenReturn(mockDiagnosticCenterUser);
+		Mockito.when(diagnosticCenterRepository.getOne(20)).thenReturn(mockDiagnosticCenter);
+		Set<Bed> vacantBeds=patientService.getAllBed("dcenter@gmail.com");
+		for(Bed b: vacantBeds) {
+			b.setOccupied(true);
+		}
+		Set<Bed> b=patientService.getAllBed("dcenter@gmail.com");
+		Long count=b.stream().count();
+		assertEquals(0, count);
+	}
+	
+	
 
 	
 	

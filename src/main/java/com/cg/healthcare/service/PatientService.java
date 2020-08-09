@@ -1,5 +1,6 @@
 package com.cg.healthcare.service;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -76,7 +77,7 @@ public class PatientService {
 		Patient patient=appointment.getPatient();
 		DiagnosticCenter diagnosticCenter=appointment.getDiagnosticCenter();
 		Bed bed = diagnosticCenter.getBeds().stream().filter(b->b.isOccupied()==false).findFirst().get();
-		if(bed.isOccupied()==true)
+		if(bed==null)
 			return false;
 		else {
 			bed.setOccupied(true);
