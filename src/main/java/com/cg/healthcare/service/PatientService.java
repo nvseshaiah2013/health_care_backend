@@ -70,6 +70,21 @@ public class PatientService {
 		
 	}
 	
+	//apply for bed
+	public boolean applyForBed(int appointmentId) {
+		Appointment appointment= appointmentRepository.getOne(appointmentId);
+		Patient patient=appointment.getPatient();
+		DiagnosticCenter diagnosticCenter=appointment.getDiagnosticCenter();
+		Bed bed = diagnosticCenter.getBeds().stream().filter(b->b.isOccupied()==false).findFirst().get();
+		if(bed.isOccupied()==true)
+			return false;
+		else {
+			bed.setOccupied(true);
+			bed.setAppointment(appointment);
+			return true;
+			}
+	}
+	
 	
 	
 	
