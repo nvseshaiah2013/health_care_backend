@@ -1,8 +1,12 @@
 package com.cg.healthcare.service;
 
+
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+
+import java.util.List;
+
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
@@ -10,12 +14,16 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.BedRepository;
+
 import com.cg.healthcare.dao.DiagnosticCenterRepository;
 import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.entities.Bed;
@@ -32,10 +40,16 @@ import com.cg.healthcare.exception.InvalidICUBedException;
 import com.cg.healthcare.exception.InvalidVentilatorBedException;
 import com.cg.healthcare.exception.OccupiedBedException;
 
+import com.cg.healthcare.entities.Bed;
+
+
 @Service
 @Transactional
+
+
 public class DiagnosticCenterService {
 	
+
 	private static final Logger LOGGER  = LoggerFactory.getLogger(DiagnosticCenterService.class);
 
 	@Autowired
@@ -190,4 +204,22 @@ public class DiagnosticCenterService {
 	
 	// Venkat Ends
 
+	BedRepository dao;
+
+
+	public List<Bed> getBeds() {
+		return dao.getAllBeds();
+		
+	}
+	public List<Bed> admitPatient() {
+		return dao.getVacantBeds();
+		
+	}
+	public List<Bed> canNotAdmitPatient(){
+		return dao.getVacantBeds();
+	}
+	public List<Bed> dischargePatient() {
+		return dao.deallocateAssignedBed();
+		
+	}
 }
