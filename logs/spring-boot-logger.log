@@ -6696,6 +6696,7 @@ ORA-12514, TNS:listener does not currently know of service requested in connect 
 2020-08-09 12:17:01,416 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown initiated...
 2020-08-09 12:17:01,526 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown completed.
 >>>>>>> af7fb8d7522dfadca1821cda263d9961b6917279
+<<<<<<< HEAD
 2020-08-09 16:52:01,883 INFO org.springframework.boot.StartupInfoLogger [main] Starting HealthCareMasterApplicationTests on LAPTOP-H0J3BGT4 with PID 14864 (started by PATNAM in D:\BootCamp3rdAug\Project\health_care_backend)
 2020-08-09 16:52:01,898 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
 2020-08-09 16:52:04,117 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
@@ -10361,6 +10362,26 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+2020-08-09 16:59:32,335 INFO org.springframework.boot.StartupInfoLogger [main] Starting HelthCareTest on DESKTOP-QPFK5MJ with PID 13752 (started by SESHU in H:\To_String\health_care_backend)
+2020-08-09 16:59:32,339 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-08-09 16:59:33,921 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-08-09 16:59:34,171 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 226ms. Found 9 JPA repository interfaces.
+2020-08-09 16:59:35,711 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-08-09 16:59:35,857 INFO org.hibernate.jpa.internal.util.LogHelper [task-1] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-08-09 16:59:36,045 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-08-09 16:59:36,057 INFO org.hibernate.Version [task-1] HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-08-09 16:59:36,570 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [task-1] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-08-09 16:59:37,876 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Starting...
+2020-08-09 16:59:37,887 WARN com.zaxxer.hikari.util.DriverDataSource [task-1] Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2020-08-09 16:59:38,960 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@76464795, org.springframework.security.web.context.SecurityContextPersistenceFilter@5679e96b, org.springframework.security.web.header.HeaderWriterFilter@6cd64ee8, org.springframework.web.filter.CorsFilter@b34832b, org.springframework.security.web.authentication.logout.LogoutFilter@5e5af8e1, com.cg.healthcare.filter.JwtFilter@216914, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3bbf841e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@77bbadc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@48f4713c, org.springframework.security.web.session.SessionManagementFilter@68d7a2df, org.springframework.security.web.access.ExceptionTranslationFilter@1e7ab390, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@784abd3e]
+2020-08-09 16:59:40,760 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-08-09 16:59:42,027 ERROR com.zaxxer.hikari.pool.HikariPool [task-1] HikariPool-1 - Exception during pool initialization.
+java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -10392,6 +10413,7 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+<<<<<<< HEAD
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
@@ -10415,6 +10437,30 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 34 common frames omitted
+2020-08-09 16:59:42,032 WARN org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator [task-1] HHH000342: Could not obtain connection to query metadata : Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+2020-08-09 16:59:42,068 INFO org.hibernate.dialect.Dialect [task-1] HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-08-09 16:59:44,520 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Starting...
+2020-08-09 16:59:44,520 WARN com.zaxxer.hikari.util.DriverDataSource [task-1] Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2020-08-09 16:59:45,541 ERROR com.zaxxer.hikari.pool.HikariPool [task-1] HikariPool-1 - Exception during pool initialization.
+java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -10439,6 +10485,7 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+<<<<<<< HEAD
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
@@ -10456,6 +10503,24 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 27 common frames omitted
+2020-08-09 16:59:45,542 ERROR org.hibernate.hql.spi.id.IdTableHelper [task-1] Unable obtain JDBC Connection
+java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -10480,6 +10545,7 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+<<<<<<< HEAD
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
@@ -10499,6 +10565,26 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 27 common frames omitted
+2020-08-09 16:59:45,579 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Starting...
+2020-08-09 16:59:45,580 WARN com.zaxxer.hikari.util.DriverDataSource [task-1] Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2020-08-09 16:59:46,615 ERROR com.zaxxer.hikari.pool.HikariPool [task-1] HikariPool-1 - Exception during pool initialization.
+java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -10528,6 +10614,7 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+<<<<<<< HEAD
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
@@ -10543,6 +10630,32 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
 2020-08-09 16:52:58,051 ERROR org.springframework.boot.SpringApplication [main] Application run failed
 org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'testResultRepository' defined in com.cg.healthcare.dao.TestResultRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 32 common frames omitted
+2020-08-09 16:59:46,616 WARN org.hibernate.engine.jdbc.spi.SqlExceptionHelper [task-1] SQL Error: 12514, SQLState: 08006
+2020-08-09 16:59:46,617 ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper [task-1] Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+2020-08-09 16:59:46,631 WARN org.springframework.context.support.AbstractApplicationContext [main] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'waitingPatientRepository' defined in com.cg.healthcare.dao.WaitingPatientRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+2020-08-09 16:59:46,635 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-08-09 16:59:46,635 WARN org.springframework.beans.factory.support.DisposableBeanAdapter [main] Invocation of destroy method failed on bean with name 'entityManagerFactory': javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+2020-08-09 16:59:46,636 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-08-09 16:59:46,678 INFO org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener [main] 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-08-09 16:59:46,685 ERROR org.springframework.boot.SpringApplication [main] Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'waitingPatientRepository' defined in com.cg.healthcare.dao.WaitingPatientRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1697)
@@ -10576,6 +10689,7 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
 	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244)
 	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:98)
+<<<<<<< HEAD
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$null$2(ClassTestDescriptor.java:204)
 	at org.junit.jupiter.engine.descriptor.JupiterTestDescriptor.executeAndMaskThrowable(JupiterTestDescriptor.java:145)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$invokeTestInstancePostProcessors$3(ClassTestDescriptor.java:204)
@@ -10584,10 +10698,21 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1382)
 	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
 	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+=======
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$5(ClassBasedTestDescriptor.java:341)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:346)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$6(ClassBasedTestDescriptor.java:341)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
 	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:743)
 	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:742)
 	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:580)
+<<<<<<< HEAD
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.invokeTestInstancePostProcessors(ClassTestDescriptor.java:203)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.instantiateAndPostProcessTestInstance(ClassTestDescriptor.java:189)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$testInstanceProvider$1(ClassTestDescriptor.java:181)
@@ -10634,6 +10759,57 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+=======
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:340)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:263)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$2(ClassBasedTestDescriptor.java:256)
+	at java.util.Optional.orElseGet(Optional.java:267)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$3(ClassBasedTestDescriptor.java:255)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:29)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:108)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:71)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$1(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:75)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:229)
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:197)
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:211)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:191)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:137)
+	at org.eclipse.jdt.internal.junit5.runner.JUnit5TestReference.run(JUnit5TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:542)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:770)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1794)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
@@ -10642,6 +10818,7 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
+<<<<<<< HEAD
 	... 89 common frames omitted
 Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:403)
@@ -10651,6 +10828,18 @@ Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Un
 	at java.lang.Thread.run(Thread.java:748)
 Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:47)
+=======
+	... 92 common frames omitted
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:403)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:112)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:99)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:69)
@@ -10669,6 +10858,7 @@ Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Con
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	... 4 common frames omitted
+<<<<<<< HEAD
 Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 
 	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:509)
@@ -10682,6 +10872,12 @@ Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon de
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+Caused by: java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -10697,7 +10893,19 @@ Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon de
 	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:43)
 	... 18 common frames omitted
+<<<<<<< HEAD
 2020-08-09 16:52:58,051 ERROR org.springframework.test.context.TestContextManager [main] Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@113d0f75] to prepare test instance [com.cg.healthcare.HelthCareTest@4cefa0be]
+=======
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 32 common frames omitted
+2020-08-09 16:59:46,770 ERROR org.springframework.test.context.TestContextManager [main] Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@4803b726] to prepare test instance [com.cg.healthcare.HelthCareTest@76544c0a]
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:123)
@@ -10705,6 +10913,7 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
 	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244)
 	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:98)
+<<<<<<< HEAD
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$null$2(ClassTestDescriptor.java:204)
 	at org.junit.jupiter.engine.descriptor.JupiterTestDescriptor.executeAndMaskThrowable(JupiterTestDescriptor.java:145)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$invokeTestInstancePostProcessors$3(ClassTestDescriptor.java:204)
@@ -10713,10 +10922,21 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1382)
 	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
 	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+=======
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$5(ClassBasedTestDescriptor.java:341)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:346)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$6(ClassBasedTestDescriptor.java:341)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
 	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:743)
 	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:742)
 	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:580)
+<<<<<<< HEAD
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.invokeTestInstancePostProcessors(ClassTestDescriptor.java:203)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.instantiateAndPostProcessTestInstance(ClassTestDescriptor.java:189)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$testInstanceProvider$1(ClassTestDescriptor.java:181)
@@ -10763,6 +10983,57 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'testResultRepository' defined in com.cg.healthcare.dao.TestResultRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+=======
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:340)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:263)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$2(ClassBasedTestDescriptor.java:256)
+	at java.util.Optional.orElseGet(Optional.java:267)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$3(ClassBasedTestDescriptor.java:255)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:29)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:108)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:71)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$1(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:75)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:229)
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:197)
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:211)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:191)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:137)
+	at org.eclipse.jdt.internal.junit5.runner.JUnit5TestReference.run(JUnit5TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:542)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:770)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'waitingPatientRepository' defined in com.cg.healthcare.dao.WaitingPatientRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1697)
@@ -10791,8 +11062,13 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:120)
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+<<<<<<< HEAD
 	... 62 common frames omitted
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+=======
+	... 65 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1794)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
@@ -10801,6 +11077,7 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
+<<<<<<< HEAD
 	... 89 common frames omitted
 Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:403)
@@ -10810,6 +11087,18 @@ Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Un
 	at java.lang.Thread.run(Thread.java:748)
 Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:47)
+=======
+	... 92 common frames omitted
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:403)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:112)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:99)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:69)
@@ -10828,6 +11117,7 @@ Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Con
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	... 4 common frames omitted
+<<<<<<< HEAD
 Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 
 	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:509)
@@ -10841,6 +11131,12 @@ Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon de
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+Caused by: java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -10856,6 +11152,7 @@ Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon de
 	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:43)
 	... 18 common frames omitted
+<<<<<<< HEAD
 2020-08-09 16:52:58,133 INFO org.springframework.boot.StartupInfoLogger [main] Starting HelthCareTest on LAPTOP-H0J3BGT4 with PID 14864 (started by PATNAM in D:\BootCamp3rdAug\Project\health_care_backend)
 2020-08-09 16:52:58,133 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
 2020-08-09 16:52:58,519 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
@@ -10880,6 +11177,31 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 32 common frames omitted
+2020-08-09 16:59:47,170 INFO org.springframework.boot.StartupInfoLogger [main] Starting HelthCareTest on DESKTOP-QPFK5MJ with PID 13752 (started by SESHU in H:\To_String\health_care_backend)
+2020-08-09 16:59:47,186 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-08-09 16:59:48,949 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-08-09 16:59:49,102 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 152ms. Found 9 JPA repository interfaces.
+2020-08-09 16:59:50,531 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-08-09 16:59:50,744 INFO org.hibernate.jpa.internal.util.LogHelper [task-1] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-08-09 16:59:50,833 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-2 - Starting...
+2020-08-09 16:59:50,834 WARN com.zaxxer.hikari.util.DriverDataSource [task-1] Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2020-08-09 16:59:51,135 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-08-09 16:59:52,292 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@78307a56, org.springframework.security.web.context.SecurityContextPersistenceFilter@22d7fd41, org.springframework.security.web.header.HeaderWriterFilter@5a7df831, org.springframework.web.filter.CorsFilter@40d52be7, org.springframework.security.web.authentication.logout.LogoutFilter@cfd1075, com.cg.healthcare.filter.JwtFilter@15fb4566, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2c748a15, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@19fd43da, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@23ad71bf, org.springframework.security.web.session.SessionManagementFilter@667dcaad, org.springframework.security.web.access.ExceptionTranslationFilter@545b5ed0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2785db06]
+2020-08-09 16:59:52,348 ERROR com.zaxxer.hikari.pool.HikariPool [task-1] HikariPool-2 - Exception during pool initialization.
+java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -10911,6 +11233,7 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+<<<<<<< HEAD
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
@@ -10934,6 +11257,31 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 34 common frames omitted
+2020-08-09 16:59:52,360 WARN org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator [task-1] HHH000342: Could not obtain connection to query metadata : Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+2020-08-09 16:59:52,361 INFO org.hibernate.dialect.Dialect [task-1] HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-08-09 16:59:53,722 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-2 - Starting...
+2020-08-09 16:59:53,723 WARN com.zaxxer.hikari.util.DriverDataSource [task-1] Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2020-08-09 16:59:54,391 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-08-09 16:59:54,948 ERROR com.zaxxer.hikari.pool.HikariPool [task-1] HikariPool-2 - Exception during pool initialization.
+java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -10958,6 +11306,7 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+<<<<<<< HEAD
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
@@ -10975,6 +11324,24 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 27 common frames omitted
+2020-08-09 16:59:54,950 ERROR org.hibernate.hql.spi.id.IdTableHelper [task-1] Unable obtain JDBC Connection
+java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -10999,6 +11366,7 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+<<<<<<< HEAD
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
@@ -11018,6 +11386,26 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 27 common frames omitted
+2020-08-09 16:59:54,952 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-2 - Starting...
+2020-08-09 16:59:54,953 WARN com.zaxxer.hikari.util.DriverDataSource [task-1] Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2020-08-09 16:59:56,841 ERROR com.zaxxer.hikari.pool.HikariPool [task-1] HikariPool-2 - Exception during pool initialization.
+java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -11047,6 +11435,7 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+<<<<<<< HEAD
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
@@ -11062,6 +11451,32 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
 2020-08-09 16:53:02,568 ERROR org.springframework.boot.SpringApplication [main] Application run failed
 org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'testResultRepository' defined in com.cg.healthcare.dao.TestResultRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 32 common frames omitted
+2020-08-09 16:59:56,842 WARN org.hibernate.engine.jdbc.spi.SqlExceptionHelper [task-1] SQL Error: 12514, SQLState: 08006
+2020-08-09 16:59:56,842 ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper [task-1] Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+2020-08-09 16:59:56,844 WARN org.springframework.context.support.AbstractApplicationContext [main] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'appointmentRepository' defined in com.cg.healthcare.dao.AppointmentRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+2020-08-09 16:59:56,849 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-08-09 16:59:56,850 WARN org.springframework.beans.factory.support.DisposableBeanAdapter [main] Invocation of destroy method failed on bean with name 'entityManagerFactory': javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+2020-08-09 16:59:56,857 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-08-09 16:59:56,871 INFO org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener [main] 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-08-09 16:59:56,874 ERROR org.springframework.boot.SpringApplication [main] Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'appointmentRepository' defined in com.cg.healthcare.dao.AppointmentRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1697)
@@ -11095,6 +11510,7 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
 	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244)
 	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:98)
+<<<<<<< HEAD
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$null$2(ClassTestDescriptor.java:204)
 	at org.junit.jupiter.engine.descriptor.JupiterTestDescriptor.executeAndMaskThrowable(JupiterTestDescriptor.java:145)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$invokeTestInstancePostProcessors$3(ClassTestDescriptor.java:204)
@@ -11103,10 +11519,21 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1382)
 	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
 	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+=======
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$5(ClassBasedTestDescriptor.java:341)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:346)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$6(ClassBasedTestDescriptor.java:341)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
 	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:743)
 	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:742)
 	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:580)
+<<<<<<< HEAD
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.invokeTestInstancePostProcessors(ClassTestDescriptor.java:203)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.instantiateAndPostProcessTestInstance(ClassTestDescriptor.java:189)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$testInstanceProvider$1(ClassTestDescriptor.java:181)
@@ -11153,6 +11580,57 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+=======
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:340)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:263)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$2(ClassBasedTestDescriptor.java:256)
+	at java.util.Optional.orElseGet(Optional.java:267)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$3(ClassBasedTestDescriptor.java:255)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:29)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:108)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:71)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$1(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:75)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:229)
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:197)
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:211)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:191)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:137)
+	at org.eclipse.jdt.internal.junit5.runner.JUnit5TestReference.run(JUnit5TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:542)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:770)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1794)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
@@ -11161,6 +11639,7 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
+<<<<<<< HEAD
 	... 89 common frames omitted
 Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:403)
@@ -11170,6 +11649,18 @@ Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Un
 	at java.lang.Thread.run(Thread.java:748)
 Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:47)
+=======
+	... 92 common frames omitted
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:403)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:112)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:99)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:69)
@@ -11188,6 +11679,7 @@ Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Con
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	... 4 common frames omitted
+<<<<<<< HEAD
 Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 
 	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:509)
@@ -11201,6 +11693,12 @@ Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon de
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+Caused by: java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -11216,7 +11714,19 @@ Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon de
 	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:43)
 	... 18 common frames omitted
+<<<<<<< HEAD
 2020-08-09 16:53:02,601 ERROR org.springframework.test.context.TestContextManager [main] Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@113d0f75] to prepare test instance [com.cg.healthcare.HelthCareTest@6b6606d1]
+=======
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 32 common frames omitted
+2020-08-09 16:59:56,876 ERROR org.springframework.test.context.TestContextManager [main] Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@4803b726] to prepare test instance [com.cg.healthcare.HelthCareTest@523a7801]
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:123)
@@ -11224,6 +11734,7 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
 	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244)
 	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:98)
+<<<<<<< HEAD
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$null$2(ClassTestDescriptor.java:204)
 	at org.junit.jupiter.engine.descriptor.JupiterTestDescriptor.executeAndMaskThrowable(JupiterTestDescriptor.java:145)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$invokeTestInstancePostProcessors$3(ClassTestDescriptor.java:204)
@@ -11232,10 +11743,21 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1382)
 	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
 	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+=======
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$5(ClassBasedTestDescriptor.java:341)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:346)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$6(ClassBasedTestDescriptor.java:341)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
 	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:743)
 	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:742)
 	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:580)
+<<<<<<< HEAD
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.invokeTestInstancePostProcessors(ClassTestDescriptor.java:203)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.instantiateAndPostProcessTestInstance(ClassTestDescriptor.java:189)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$testInstanceProvider$1(ClassTestDescriptor.java:181)
@@ -11282,6 +11804,57 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'testResultRepository' defined in com.cg.healthcare.dao.TestResultRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+=======
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:340)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:263)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$2(ClassBasedTestDescriptor.java:256)
+	at java.util.Optional.orElseGet(Optional.java:267)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$3(ClassBasedTestDescriptor.java:255)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:29)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:108)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:71)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$1(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:75)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:229)
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:197)
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:211)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:191)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:137)
+	at org.eclipse.jdt.internal.junit5.runner.JUnit5TestReference.run(JUnit5TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:542)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:770)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'appointmentRepository' defined in com.cg.healthcare.dao.AppointmentRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1697)
@@ -11310,8 +11883,13 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:120)
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+<<<<<<< HEAD
 	... 62 common frames omitted
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+=======
+	... 65 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1794)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
@@ -11320,6 +11898,7 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
+<<<<<<< HEAD
 	... 89 common frames omitted
 Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:403)
@@ -11329,6 +11908,18 @@ Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Un
 	at java.lang.Thread.run(Thread.java:748)
 Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:47)
+=======
+	... 92 common frames omitted
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:403)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:112)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:99)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:69)
@@ -11347,6 +11938,7 @@ Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Con
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	... 4 common frames omitted
+<<<<<<< HEAD
 Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 
 	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:509)
@@ -11360,6 +11952,12 @@ Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon de
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+Caused by: java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -11375,6 +11973,7 @@ Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon de
 	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:43)
 	... 18 common frames omitted
+<<<<<<< HEAD
 2020-08-09 16:53:02,648 INFO org.springframework.boot.StartupInfoLogger [main] Starting HelthCareTest on LAPTOP-H0J3BGT4 with PID 14864 (started by PATNAM in D:\BootCamp3rdAug\Project\health_care_backend)
 2020-08-09 16:53:02,648 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
 2020-08-09 16:53:03,018 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
@@ -11399,6 +11998,31 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 32 common frames omitted
+2020-08-09 16:59:56,981 INFO org.springframework.boot.StartupInfoLogger [main] Starting HelthCareTest on DESKTOP-QPFK5MJ with PID 13752 (started by SESHU in H:\To_String\health_care_backend)
+2020-08-09 16:59:56,983 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-08-09 16:59:57,523 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-08-09 16:59:57,644 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 120ms. Found 9 JPA repository interfaces.
+2020-08-09 16:59:58,112 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-08-09 16:59:58,151 INFO org.hibernate.jpa.internal.util.LogHelper [task-1] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-08-09 16:59:58,171 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-3 - Starting...
+2020-08-09 16:59:58,174 WARN com.zaxxer.hikari.util.DriverDataSource [task-1] Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2020-08-09 16:59:58,287 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-08-09 16:59:59,075 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3c7279a5, org.springframework.security.web.context.SecurityContextPersistenceFilter@357c9bd9, org.springframework.security.web.header.HeaderWriterFilter@5db948c9, org.springframework.web.filter.CorsFilter@2bebd114, org.springframework.security.web.authentication.logout.LogoutFilter@632383b9, com.cg.healthcare.filter.JwtFilter@45d56062, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7aea704c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6d0290d8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@b379bc6, org.springframework.security.web.session.SessionManagementFilter@296edc75, org.springframework.security.web.access.ExceptionTranslationFilter@217dc48e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4702e7a5]
+2020-08-09 16:59:59,323 ERROR com.zaxxer.hikari.pool.HikariPool [task-1] HikariPool-3 - Exception during pool initialization.
+java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -11430,6 +12054,7 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+<<<<<<< HEAD
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
@@ -11453,6 +12078,31 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 34 common frames omitted
+2020-08-09 16:59:59,326 WARN org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator [task-1] HHH000342: Could not obtain connection to query metadata : Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+2020-08-09 16:59:59,328 INFO org.hibernate.dialect.Dialect [task-1] HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-08-09 17:00:00,124 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-3 - Starting...
+2020-08-09 17:00:00,124 WARN com.zaxxer.hikari.util.DriverDataSource [task-1] Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2020-08-09 17:00:00,474 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-08-09 17:00:01,153 ERROR com.zaxxer.hikari.pool.HikariPool [task-1] HikariPool-3 - Exception during pool initialization.
+java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -11477,6 +12127,7 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+<<<<<<< HEAD
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
@@ -11494,6 +12145,24 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 27 common frames omitted
+2020-08-09 17:00:01,154 ERROR org.hibernate.hql.spi.id.IdTableHelper [task-1] Unable obtain JDBC Connection
+java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -11518,6 +12187,7 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+<<<<<<< HEAD
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
@@ -11537,6 +12207,26 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 27 common frames omitted
+2020-08-09 17:00:01,155 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-3 - Starting...
+2020-08-09 17:00:01,157 WARN com.zaxxer.hikari.util.DriverDataSource [task-1] Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2020-08-09 17:00:02,205 ERROR com.zaxxer.hikari.pool.HikariPool [task-1] HikariPool-3 - Exception during pool initialization.
+java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -11566,6 +12256,7 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+<<<<<<< HEAD
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
@@ -11581,6 +12272,32 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
 2020-08-09 16:53:07,002 ERROR org.springframework.boot.SpringApplication [main] Application run failed
 org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'waitingPatientRepository' defined in com.cg.healthcare.dao.WaitingPatientRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 32 common frames omitted
+2020-08-09 17:00:02,206 WARN org.hibernate.engine.jdbc.spi.SqlExceptionHelper [task-1] SQL Error: 12514, SQLState: 08006
+2020-08-09 17:00:02,209 ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper [task-1] Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+2020-08-09 17:00:02,211 WARN org.springframework.context.support.AbstractApplicationContext [main] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'patientRepository' defined in com.cg.healthcare.dao.PatientRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+2020-08-09 17:00:02,213 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-08-09 17:00:02,214 WARN org.springframework.beans.factory.support.DisposableBeanAdapter [main] Invocation of destroy method failed on bean with name 'entityManagerFactory': javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+2020-08-09 17:00:02,214 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-08-09 17:00:02,224 INFO org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener [main] 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-08-09 17:00:02,226 ERROR org.springframework.boot.SpringApplication [main] Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'patientRepository' defined in com.cg.healthcare.dao.PatientRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1697)
@@ -11614,6 +12331,7 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
 	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244)
 	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:98)
+<<<<<<< HEAD
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$null$2(ClassTestDescriptor.java:204)
 	at org.junit.jupiter.engine.descriptor.JupiterTestDescriptor.executeAndMaskThrowable(JupiterTestDescriptor.java:145)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$invokeTestInstancePostProcessors$3(ClassTestDescriptor.java:204)
@@ -11622,10 +12340,21 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1382)
 	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
 	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+=======
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$5(ClassBasedTestDescriptor.java:341)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:346)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$6(ClassBasedTestDescriptor.java:341)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
 	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:743)
 	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:742)
 	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:580)
+<<<<<<< HEAD
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.invokeTestInstancePostProcessors(ClassTestDescriptor.java:203)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.instantiateAndPostProcessTestInstance(ClassTestDescriptor.java:189)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$testInstanceProvider$1(ClassTestDescriptor.java:181)
@@ -11672,6 +12401,57 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+=======
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:340)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:263)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$2(ClassBasedTestDescriptor.java:256)
+	at java.util.Optional.orElseGet(Optional.java:267)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$3(ClassBasedTestDescriptor.java:255)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:29)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:108)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:71)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$1(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:75)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:229)
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:197)
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:211)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:191)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:137)
+	at org.eclipse.jdt.internal.junit5.runner.JUnit5TestReference.run(JUnit5TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:542)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:770)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1794)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
@@ -11680,6 +12460,7 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
+<<<<<<< HEAD
 	... 89 common frames omitted
 Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:403)
@@ -11689,6 +12470,18 @@ Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Un
 	at java.lang.Thread.run(Thread.java:748)
 Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:47)
+=======
+	... 92 common frames omitted
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:403)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:112)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:99)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:69)
@@ -11707,6 +12500,7 @@ Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Con
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	... 4 common frames omitted
+<<<<<<< HEAD
 Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 
 	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:509)
@@ -11720,6 +12514,12 @@ Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon de
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+Caused by: java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -11735,7 +12535,19 @@ Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon de
 	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:43)
 	... 18 common frames omitted
+<<<<<<< HEAD
 2020-08-09 16:53:07,017 ERROR org.springframework.test.context.TestContextManager [main] Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@113d0f75] to prepare test instance [com.cg.healthcare.HelthCareTest@e5f05f8]
+=======
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 32 common frames omitted
+2020-08-09 17:00:02,229 ERROR org.springframework.test.context.TestContextManager [main] Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@4803b726] to prepare test instance [com.cg.healthcare.HelthCareTest@2416c658]
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:123)
@@ -11743,6 +12555,7 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
 	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244)
 	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:98)
+<<<<<<< HEAD
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$null$2(ClassTestDescriptor.java:204)
 	at org.junit.jupiter.engine.descriptor.JupiterTestDescriptor.executeAndMaskThrowable(JupiterTestDescriptor.java:145)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$invokeTestInstancePostProcessors$3(ClassTestDescriptor.java:204)
@@ -11751,10 +12564,21 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1382)
 	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
 	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+=======
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$5(ClassBasedTestDescriptor.java:341)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:346)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$6(ClassBasedTestDescriptor.java:341)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
 	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:743)
 	at java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:742)
 	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:580)
+<<<<<<< HEAD
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.invokeTestInstancePostProcessors(ClassTestDescriptor.java:203)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.instantiateAndPostProcessTestInstance(ClassTestDescriptor.java:189)
 	at org.junit.jupiter.engine.descriptor.ClassTestDescriptor.lambda$testInstanceProvider$1(ClassTestDescriptor.java:181)
@@ -11801,6 +12625,57 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'waitingPatientRepository' defined in com.cg.healthcare.dao.WaitingPatientRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+=======
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:340)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:263)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$2(ClassBasedTestDescriptor.java:256)
+	at java.util.Optional.orElseGet(Optional.java:267)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$3(ClassBasedTestDescriptor.java:255)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:29)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:108)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:71)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$1(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:75)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:229)
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:197)
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:211)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:191)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:137)
+	at org.eclipse.jdt.internal.junit5.runner.JUnit5TestReference.run(JUnit5TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:542)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:770)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'patientRepository' defined in com.cg.healthcare.dao.PatientRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1697)
@@ -11829,6 +12704,7 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:120)
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+<<<<<<< HEAD
 	... 62 common frames omitted
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1794)
@@ -12144,6 +13020,10 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
 	at com.cg.healthcare.HealthCareMasterApplication.main(HealthCareMasterApplication.java:10)
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
+=======
+	... 65 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1794)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
@@ -12152,6 +13032,7 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
+<<<<<<< HEAD
 	... 28 common frames omitted
 Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:403)
@@ -12161,6 +13042,18 @@ Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Un
 	at java.lang.Thread.run(Thread.java:748)
 Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution
 	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:47)
+=======
+	... 92 common frames omitted
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:403)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:112)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:99)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:69)
@@ -12179,6 +13072,7 @@ Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Con
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
 	... 4 common frames omitted
+<<<<<<< HEAD
 Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 
 	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:509)
@@ -12192,6 +13086,12 @@ Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon de
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1292)
 	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1025)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:743)
+=======
+Caused by: java.sql.SQLRecoverableException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:854)
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:793)
 	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:57)
 	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:747)
@@ -12207,6 +13107,7 @@ Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon de
 	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:43)
 	... 18 common frames omitted
+<<<<<<< HEAD
 2020-08-09 17:01:24,331 INFO org.springframework.boot.StartupInfoLogger [main] Starting HealthCareMasterApplication on LAPTOP-H0J3BGT4 with PID 18100 (D:\BootCamp3rdAug\Project\health_care_backend\target\classes started by PATNAM in D:\BootCamp3rdAug\Project\health_care_backend)
 2020-08-09 17:01:24,331 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
 2020-08-09 17:01:25,659 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
@@ -12414,3 +13315,65 @@ Caused by: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected token
 	at org.hibernate.internal.AbstractSharedSessionContract.getQueryPlan(AbstractSharedSessionContract.java:604)
 	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:716)
 	... 60 common frames omitted
+=======
+Caused by: oracle.net.ns.NetException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at oracle.net.ns.NSProtocolNIO.negotiateConnection(NSProtocolNIO.java:284)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:340)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1596)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:588)
+	... 32 common frames omitted
+2020-08-09 17:00:02,622 INFO org.springframework.boot.StartupInfoLogger [main] Starting HelthCareTest on DESKTOP-QPFK5MJ with PID 13752 (started by SESHU in H:\To_String\health_care_backend)
+2020-08-09 17:00:02,623 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-08-09 17:00:03,260 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-08-09 17:00:03,368 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 106ms. Found 9 JPA repository interfaces.
+2020-08-09 17:00:03,837 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-08-09 17:00:03,886 INFO org.hibernate.jpa.internal.util.LogHelper [task-1] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-08-09 17:00:03,903 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-4 - Starting...
+2020-08-09 17:00:03,903 WARN com.zaxxer.hikari.util.DriverDataSource [task-1] Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2020-08-09 17:01:19,878 INFO org.springframework.boot.StartupInfoLogger [main] Starting HealthCareMasterApplicationTests on DESKTOP-QPFK5MJ with PID 8168 (started by SESHU in H:\To_String\health_care_backend)
+2020-08-09 17:01:19,883 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-08-09 17:01:21,478 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-08-09 17:01:21,748 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 249ms. Found 9 JPA repository interfaces.
+2020-08-09 17:01:24,138 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-08-09 17:01:24,274 INFO org.hibernate.jpa.internal.util.LogHelper [task-1] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-08-09 17:01:24,467 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-08-09 17:01:24,491 INFO org.hibernate.Version [task-1] HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-08-09 17:01:24,637 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [task-1] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-08-09 17:01:26,039 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Starting...
+2020-08-09 17:01:26,972 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6be6931f, org.springframework.security.web.context.SecurityContextPersistenceFilter@5f59ea8c, org.springframework.security.web.header.HeaderWriterFilter@69aa7d76, org.springframework.web.filter.CorsFilter@6b4125ed, org.springframework.security.web.authentication.logout.LogoutFilter@723877dd, com.cg.healthcare.filter.JwtFilter@ebe067d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@64f9f455, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@d499c13, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@78da899f, org.springframework.security.web.session.SessionManagementFilter@41ccb3b9, org.springframework.security.web.access.ExceptionTranslationFilter@57a6a933, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@68c9e023]
+2020-08-09 17:01:28,377 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-08-09 17:01:33,073 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Start completed.
+2020-08-09 17:01:33,130 INFO org.hibernate.dialect.Dialect [task-1] HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-08-09 17:02:23,629 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [task-1] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-08-09 17:02:23,657 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [task-1] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-08-09 17:02:24,520 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-08-09 17:02:24,537 INFO org.springframework.boot.StartupInfoLogger [main] Started HealthCareMasterApplicationTests in 65.563 seconds (JVM running for 67.865)
+2020-08-09 17:02:27,178 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringContextShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-08-09 17:02:27,186 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-08-09 17:02:27,187 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown initiated...
+2020-08-09 17:02:30,978 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown completed.
+2020-08-09 17:02:42,156 INFO org.springframework.boot.StartupInfoLogger [main] Starting HelthCareTest on DESKTOP-QPFK5MJ with PID 5348 (started by SESHU in H:\To_String\health_care_backend)
+2020-08-09 17:02:42,159 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-08-09 17:02:43,712 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-08-09 17:02:43,914 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 186ms. Found 9 JPA repository interfaces.
+2020-08-09 17:02:45,465 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-08-09 17:02:45,608 INFO org.hibernate.jpa.internal.util.LogHelper [task-1] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-08-09 17:02:45,777 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-08-09 17:02:45,820 INFO org.hibernate.Version [task-1] HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-08-09 17:02:46,335 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [task-1] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-08-09 17:02:47,520 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Starting...
+2020-08-09 17:02:48,478 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5114b7c7, org.springframework.security.web.context.SecurityContextPersistenceFilter@6f94a5a5, org.springframework.security.web.header.HeaderWriterFilter@56a4f272, org.springframework.web.filter.CorsFilter@dd71b20, org.springframework.security.web.authentication.logout.LogoutFilter@65e21ce3, com.cg.healthcare.filter.JwtFilter@602ae7b6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@a451491, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@53e800f9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@767f6ee7, org.springframework.security.web.session.SessionManagementFilter@7fdab70c, org.springframework.security.web.access.ExceptionTranslationFilter@5679e96b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3cd9aa64]
+2020-08-09 17:02:49,733 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-08-09 17:02:53,712 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Start completed.
+2020-08-09 17:02:53,776 INFO org.hibernate.dialect.Dialect [task-1] HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-08-09 17:03:55,148 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [task-1] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-08-09 17:03:55,177 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [task-1] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-08-09 17:03:56,027 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-08-09 17:03:56,040 INFO org.springframework.boot.StartupInfoLogger [main] Started HelthCareTest in 74.797 seconds (JVM running for 76.971)
+2020-08-09 17:03:56,578 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringContextShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-08-09 17:03:56,585 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-08-09 17:03:56,587 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown initiated...
+2020-08-09 17:03:59,943 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown completed.
+>>>>>>> d376b335896cab7d8d76e64880d66cc7f87edd44
