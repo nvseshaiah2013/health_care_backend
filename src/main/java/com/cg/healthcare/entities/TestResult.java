@@ -36,7 +36,7 @@ public class TestResult implements Serializable{
 	@ManyToOne
 	@MapsId("TEST_ID")
 	@JoinColumn(name ="TEST_ID")
-	private Test test;
+	private DiagnosticTest test;
 
 	public TestResult() {
 	}
@@ -73,11 +73,11 @@ public class TestResult implements Serializable{
 		this.appointment = appointment;
 	}
 
-	public Test getTest() {
+	public DiagnosticTest getTest() {
 		return test;
 	}
 
-	public void setTest(Test test) {
+	public void setTest(DiagnosticTest test) {
 		this.test = test;
 	}	
 	
