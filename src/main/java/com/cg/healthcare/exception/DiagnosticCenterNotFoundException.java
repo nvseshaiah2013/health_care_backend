@@ -1,13 +1,14 @@
 package com.cg.healthcare.exception;
 
-public class UsernameAlreadyExistsException extends Exception{
+
+public class DiagnosticCenterNotFoundException extends Exception{
 
 	private static final long serialVersionUID = 1L;
+
 	private String header;
 	
-	public UsernameAlreadyExistsException(String header,String message)
-	{
-		super(message);	
+	public DiagnosticCenterNotFoundException(String header, String message) {
+		super(message);
 		this.header = header;
 	}
 
@@ -17,11 +18,6 @@ public class UsernameAlreadyExistsException extends Exception{
 
 	public void setHeader(String header) {
 		this.header = header;
-	}
-
-	@Override
-	public String toString() {
-		return "UsernameAlreadyExistsException [header=" + header + "]";
 	}
 	
 	

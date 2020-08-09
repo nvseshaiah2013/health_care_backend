@@ -1,12 +1,17 @@
 package com.cg.healthcare.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "PATIENTS")
@@ -29,6 +34,11 @@ public class Patient implements Serializable {
 	@Column(name = "GENDER", nullable = false)
 	@Pattern(regexp = "Male|Female|Other")
 	private String gender;
+	
+	@OneToMany(mappedBy="patient")
+	@JsonIgnore
+	private Set<Appointment> appointments=new HashSet<>();
+	
 
 	public Patient() {
 
@@ -48,6 +58,14 @@ public class Patient implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Set<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(Set<Appointment> appointments) {
+		this.appointments = appointments;
 	}
 
 	public String getName() {

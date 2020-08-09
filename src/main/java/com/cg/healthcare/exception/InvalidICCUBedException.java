@@ -1,27 +1,30 @@
 package com.cg.healthcare.exception;
 
-public class BedNotFoundException extends Exception {
+public class InvalidICCUBedException extends Exception{
 
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 	
 	private String header;
 	
-	public BedNotFoundException(String header, String message) {
+	public InvalidICCUBedException(String header, String message)
+	{
 		super(message);
 		this.header = header;
 	}
-	
+
 	public String getHeader() {
 		return header;
 	}
+
 	public void setHeader(String header) {
 		this.header = header;
 	}
 
 	@Override
 	public String toString() {
-		return "BedNotFoundException [header=" + header + "]";
+		return "InvalidICCUBedException [header=" + header + "]";
 	}
-
+	
+	
 	
 }
