@@ -4,9 +4,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,9 @@ import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.WaitingPatient;
+import com.cg.healthcare.exception.AppointmentNotApprovedException;
+import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
+import com.cg.healthcare.exception.InvalidBedAllocationException;
 import com.cg.healthcare.exception.NoBedAvailableException;
 import com.cg.healthcare.exception.PartialBedsAllocationException;
 import com.cg.healthcare.exception.UsernameAlreadyExistsException;
@@ -30,6 +36,8 @@ public class AdminService {
 	/*
 	 * Sachin Kumar (Starts)
 	 */
+	
+	private static final Logger LOGGER  = LoggerFactory.getLogger(AdminService.class);
 	
 	@Autowired
 	private DiagnosticCenterRepository diagnosticCenterRepository;
@@ -94,46 +102,117 @@ public class AdminService {
 	// Venkat Starts
 	
 	public void allocateBeds(int diagnosticCenterId, List<Integer> waitingPatientIds ) throws Exception {
+		
 		DiagnosticCenter diagnosticCenter = diagnosticCenterRepository.getOne(diagnosticCenterId);
+		
 		if(diagnosticCenter == null) {
-			throw new Exception();
+			
+			LOGGER.error("Diagnostic Center not Found");
+			
+			throw new DiagnosticCenterNotFoundException("Diagnostic Center Exception", "Diagnostic Center not Found");
+		
 		}
+		
 		Collections.sort(waitingPatientIds);
-		int waitingPatientsLength = waitingPatientIds.size();
-		int waitingIndex = 0;
+		
 		int allocations = 0;
-		for(Bed bed : diagnosticCenter.getBeds()) {
-			if(waitingIndex < waitingPatientsLength) 
-			{
+		
+		int waitingIndex = 0;
+		
+		int waitingPatientsLength = waitingPatientIds.size();
+		
+		List<WaitingPatient> waitingPatients = waitingPatientIds.stream()
+				
+						.map((waitingId) -> waitingPatientRepository.getOne(waitingId))
+						
+						.filter((waitingPatient) -> waitingPatient.getAppointment().getApprovalStatus() == 1)
+						
+						.collect(Collectors.toList());
+		
+		int approvedWaitingPatientsLength = waitingPatients.size();
+		
+		boolean differentDiagnosticCenterException = false;
+
+		for(Bed bed : diagnosticCenter.getBeds()) {	
+		
+			if(waitingIndex < approvedWaitingPatientsLength) {				
+			
 				if(!bed.isOccupied()) {
-					++allocations;
-					bed.setOccupied(true);
-					WaitingPatient patient = waitingPatientRepository.getOne(waitingPatientIds.get(waitingIndex));
-					bed.setAppointment(patient.getAppointment());
-					waitingPatientRepository.delete(patient);
+					
+					WaitingPatient patient = waitingPatients.get(waitingIndex);
+					
+					if(patient.getAppointment().getDiagnosticCenter().getId() == diagnosticCenterId)
+					{
+						++allocations;
+						
+						bed.setOccupied(true);					
+						
+						bed.setAppointment(patient.getAppointment());
+						
+						waitingPatientRepository.delete(patient);
+					}
+					else 
+					{
+						differentDiagnosticCenterException = true;
+					}
+					
+					++waitingIndex;
 				}
 			}
-			else 
-				break;
-			++waitingIndex;
+				else 
+					break;
 		}
+		
 		diagnosticCenterRepository.save(diagnosticCenter);
-		if(allocations > 0 && allocations < waitingPatientsLength) {
-			throw new PartialBedsAllocationException("Bed Allocation", "All waiting patients not be able to allocate beds");
+		
+		if(differentDiagnosticCenterException) {
+			
+			LOGGER.error("Appointment taken is from a different diagnostic Center");
+			
+			throw new InvalidBedAllocationException("Bed Allocation", "Appointment taken is from a different diagnostic Center");
+			
 		}
+		
+		if(approvedWaitingPatientsLength != waitingPatientsLength) {
+			
+			LOGGER.error("Appointment Not Approved Exception");
+			
+			throw new AppointmentNotApprovedException("Bed Allocation","Appointment Not Approved Exception");
+		
+		}
+		
+		if(allocations > 0 && allocations < approvedWaitingPatientsLength) {
+			
+			LOGGER.error("All waiting patients not be able to allocate beds");
+		
+			throw new PartialBedsAllocationException("Bed Allocation", "All waiting patients not be able to allocate beds");
+		
+		}
+		
 		if(allocations == 0) {
+		
+			LOGGER.error("No Beds Vacant");
+			
 			throw new NoBedAvailableException("Bed Allocation", "No Beds Vacant");
+		
 		}
 	}
 	
 	public Set<Bed> getBeds(int diagnosticCenterId) throws Exception {
+		
 		Optional<DiagnosticCenter> diagnosticCenter = diagnosticCenterRepository.findById(diagnosticCenterId);
+		
 		if(diagnosticCenter.isPresent()) {
+		
 			return diagnosticCenter.get().getBeds();
+		
 		}
-		else
+		
+		else		
 		{
-				return null;
+			LOGGER.error("Diagnostic Center not Found");
+			
+			throw new DiagnosticCenterNotFoundException("Diagnostic Center Exception", "Diagnostic Center not Found");
 		}
 	}
 	

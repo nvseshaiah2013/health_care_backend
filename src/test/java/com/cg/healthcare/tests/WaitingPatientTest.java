@@ -2,7 +2,6 @@ package com.cg.healthcare.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -30,6 +29,9 @@ import com.cg.healthcare.entities.GeneralBed;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.WaitingPatient;
+import com.cg.healthcare.exception.AppointmentNotApprovedException;
+import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
+import com.cg.healthcare.exception.InvalidBedAllocationException;
 import com.cg.healthcare.exception.NoBedAvailableException;
 import com.cg.healthcare.exception.PartialBedsAllocationException;
 import com.cg.healthcare.service.AdminService;
@@ -65,10 +67,6 @@ public class WaitingPatientTest {
 	private static Patient mockPatient5;
 	private static User mockPatientUser6;
 	private static Patient mockPatient6;
-	private static User mockPatientUser7;
-	private static Patient mockPatient7;
-	private static User mockPatientUser8;
-	private static Patient mockPatient8;
 		
 	@BeforeEach
 	public void init() {
@@ -105,14 +103,7 @@ public class WaitingPatientTest {
 		
 		mockPatient6 = new Patient(mockPatientUser6.getId(), "Patient 6", 21, "Female", "9796979797");
 		
-		mockPatientUser7 = new User(18, "patient7@gmail.com", "Password@123", "ROLE_PATIENT");
-		
-		mockPatient7 = new Patient(mockPatientUser7.getId(), "Patient 7", 21, "Female", "7697979797");
-		
-		mockPatientUser8 = new User(19, "patient8@gmail.com", "Password@123", "ROLE_PATIENT");
-		
-		mockPatient8 = new Patient(mockPatientUser8.getId(), "Patient 8", 21, "Female", "8797979797");	
-	}
+		}
 	
 	@Test
 	public void allocateBedToAll()  throws Exception {
@@ -131,9 +122,9 @@ public class WaitingPatientTest {
 		
 		Mockito.when(waitingPatientRepository.getOne(1)).thenReturn(waitingPatient1);
 		
-		Mockito.when(waitingPatientRepository.getOne(2)).thenReturn(waitingPatient1);
+		Mockito.when(waitingPatientRepository.getOne(2)).thenReturn(waitingPatient2);
 		
-		Mockito.when(waitingPatientRepository.getOne(3)).thenReturn(waitingPatient1);
+		Mockito.when(waitingPatientRepository.getOne(3)).thenReturn(waitingPatient3);
 		
 		Mockito.when(diagnosticCenterRepository.findById(10)).thenReturn(Optional.of(mockDiagnosticCenter1));
 		
@@ -176,9 +167,12 @@ public class WaitingPatientTest {
 		
 		Mockito.when(waitingPatientRepository.getOne(1)).thenReturn(waitingPatient1);
 		
-		Mockito.when(waitingPatientRepository.getOne(2)).thenReturn(waitingPatient1);
-				
+		Mockito.when(waitingPatientRepository.getOne(2)).thenReturn(waitingPatient2);
+		
+		Mockito.when(waitingPatientRepository.getOne(3)).thenReturn(waitingPatient3);
+		
 		Set<Bed> beds = new HashSet<>();
+		
 		for(int bedIndex = 0; bedIndex < 2; ++bedIndex) {
 			Bed bed = new GeneralBed(1000.1,true, "Steel");
 			bed.setAppointment(null);
@@ -194,9 +188,9 @@ public class WaitingPatientTest {
 		Bed bed3 =  new GeneralBed(1000.0,true, "Steel");
 			bed3.setAppointment(appointment6);
 			bed3.setOccupied(true);
-		beds.add(bed3);
-		beds.add(bed2);
 		beds.add(bed1);
+		beds.add(bed2);
+		beds.add(bed3);
 		mockDiagnosticCenter1.getBeds().addAll(beds);
 		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter1);
 		List<Integer> waitingIds = new ArrayList<>();
@@ -227,6 +221,12 @@ public class WaitingPatientTest {
 		waitingPatient3.setAppointment(appointment3);
 		waitingPatient3.setId(3);
 		
+		Mockito.when(waitingPatientRepository.getOne(1)).thenReturn(waitingPatient1);
+		
+		Mockito.when(waitingPatientRepository.getOne(2)).thenReturn(waitingPatient2);
+		
+		Mockito.when(waitingPatientRepository.getOne(3)).thenReturn(waitingPatient3);
+		
 		Set<Bed> beds = new HashSet<>();
 		Bed bed1 = new GeneralBed(1000.1,true, "Steel");
 			bed1.setAppointment(appointment4);
@@ -253,11 +253,123 @@ public class WaitingPatientTest {
 	
 	@Test
 	public void failIfAllocatedBedInDifferentCenter() {
-		assertTrue(true);
+		Appointment appointment1 = new Appointment(101, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient1, mockDiagnosticCenter1);
+		Appointment appointment2 = new Appointment(102, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient2, mockDiagnosticCenter2);
+		Appointment appointment3 = new Appointment(103, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient3, mockDiagnosticCenter1);
+		Appointment appointment4 = new Appointment(104, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient4, mockDiagnosticCenter1);
+		Appointment appointment5 = new Appointment(105, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient5, mockDiagnosticCenter1);
+		Appointment appointment6 = new Appointment(106, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient6, mockDiagnosticCenter1);
+				
+		WaitingPatient waitingPatient1 = new WaitingPatient();
+		waitingPatient1.setAppointment(appointment1);
+		waitingPatient1.setId(1);
+		WaitingPatient waitingPatient2 = new WaitingPatient();
+		waitingPatient2.setAppointment(appointment2);
+		waitingPatient2.setId(2);
+		WaitingPatient waitingPatient3 = new WaitingPatient();
+		waitingPatient3.setAppointment(appointment3);
+		waitingPatient3.setId(3);
+		
+		Mockito.when(waitingPatientRepository.getOne(1)).thenReturn(waitingPatient1);
+		
+		Mockito.when(waitingPatientRepository.getOne(2)).thenReturn(waitingPatient2);
+		
+		Mockito.when(waitingPatientRepository.getOne(3)).thenReturn(waitingPatient3);
+				
+		Set<Bed> beds = new HashSet<>();
+		for(int bedIndex = 0; bedIndex < 2; ++bedIndex) {
+			Bed bed = new GeneralBed(1000.1,true, "Steel");
+			bed.setAppointment(null);
+			bed.setOccupied(false);
+			beds.add(bed);
+		}
+		Bed bed1 = new GeneralBed(1000.1,true, "Steel");
+			bed1.setAppointment(appointment4);
+			bed1.setOccupied(true);
+		Bed bed2 = new GeneralBed(1000.1,true, "Steel");
+			bed2.setAppointment(appointment5);
+			bed2.setOccupied(true);
+		Bed bed3 =  new GeneralBed(1000.0,true, "Steel");
+			bed3.setAppointment(appointment6);
+			bed3.setOccupied(true);
+		beds.add(bed1);
+		beds.add(bed2);
+		beds.add(bed3);
+		mockDiagnosticCenter1.getBeds().addAll(beds);
+		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter1);
+		List<Integer> waitingIds = new ArrayList<>();
+		waitingIds.add(1);
+		waitingIds.add(2);
+		waitingIds.add(3);
+		assertThrows(InvalidBedAllocationException.class, () -> {
+			adminService.allocateBeds(mockDiagnosticCenter1.getId(), waitingIds);			
+		});
 	}
 	
 	@Test
 	public void failIfAppointmentIsNotApproved() {
-		assertTrue(true);
+		Appointment appointment1 = new Appointment(101, Timestamp.valueOf(LocalDateTime.now()), 0, "Diagnosis", "Symptoms", mockPatient1, mockDiagnosticCenter1);
+		Appointment appointment2 = new Appointment(102, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient2, mockDiagnosticCenter1);
+		Appointment appointment3 = new Appointment(103, Timestamp.valueOf(LocalDateTime.now()), 2, "Diagnosis", "Symptoms", mockPatient3, mockDiagnosticCenter1);
+		Appointment appointment4 = new Appointment(104, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient4, mockDiagnosticCenter1);
+		Appointment appointment5 = new Appointment(105, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient5, mockDiagnosticCenter1);
+		Appointment appointment6 = new Appointment(106, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient6, mockDiagnosticCenter1);
+				
+		WaitingPatient waitingPatient1 = new WaitingPatient();
+		waitingPatient1.setAppointment(appointment1);
+		waitingPatient1.setId(1);
+		WaitingPatient waitingPatient2 = new WaitingPatient();
+		waitingPatient2.setAppointment(appointment2);
+		waitingPatient2.setId(2);
+		WaitingPatient waitingPatient3 = new WaitingPatient();
+		waitingPatient3.setAppointment(appointment3);
+		waitingPatient3.setId(3);
+		
+		Mockito.when(waitingPatientRepository.getOne(1)).thenReturn(waitingPatient1);
+		
+		Mockito.when(waitingPatientRepository.getOne(2)).thenReturn(waitingPatient2);
+		
+		Mockito.when(waitingPatientRepository.getOne(3)).thenReturn(waitingPatient3);
+				
+		Set<Bed> beds = new HashSet<>();
+		for(int bedIndex = 0; bedIndex < 2; ++bedIndex) {
+			Bed bed = new GeneralBed(1000.1,true, "Steel");
+			bed.setAppointment(null);
+			bed.setOccupied(false);
+			beds.add(bed);
+		}
+		Bed bed1 = new GeneralBed(1000.1,true, "Steel");
+			bed1.setAppointment(appointment4);
+			bed1.setOccupied(true);
+		Bed bed2 = new GeneralBed(1000.1,true, "Steel");
+			bed2.setAppointment(appointment5);
+			bed2.setOccupied(true);
+		Bed bed3 =  new GeneralBed(1000.0,true, "Steel");
+			bed3.setAppointment(appointment6);
+			bed3.setOccupied(true);
+		beds.add(bed1);
+		beds.add(bed2);
+		beds.add(bed3);
+		mockDiagnosticCenter1.getBeds().addAll(beds);
+		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter1);
+		List<Integer> waitingIds = new ArrayList<>();
+		waitingIds.add(1);
+		waitingIds.add(2);
+		waitingIds.add(3);
+		assertThrows(AppointmentNotApprovedException.class, () -> {
+			adminService.allocateBeds(mockDiagnosticCenter1.getId(), waitingIds);			
+		});
 	}
+	
+	@Test
+	public void throwInvalidDiagnosticCenterException () throws Exception {
+		List<Integer> waitingIds = new ArrayList<>();
+		waitingIds.add(1);
+		waitingIds.add(2);
+		waitingIds.add(3);
+		assertThrows(DiagnosticCenterNotFoundException.class, () -> {
+			adminService.allocateBeds(99, waitingIds);			
+		});
+	}
+	
 }
