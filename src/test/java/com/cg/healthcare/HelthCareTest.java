@@ -13,17 +13,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.cg.healthcare.dao.BedRepository;
 import com.cg.healthcare.entities.Bed;
+import com.cg.healthcare.service.BedService;
 import com.cg.healthcare.service.DiagnosticCenterService;
 
 @SpringBootTest
 
 public class HelthCareTest {
 	@Mock
-	BedRepository dao;
+	BedRepository bedDao;
 	@InjectMocks
-	DiagnosticCenterService service;
+	BedService service;
 	
-	static ArrayList<Bed> allbeds = new ArrayList<Bed>();
+	static ArrayList<Bed> allBeds = new ArrayList<Bed>();
 	static ArrayList<Bed> vacantBeds = new ArrayList<Bed>();
 	static ArrayList<Bed> assignedBeds = new ArrayList<Bed>();
 	static Bed bed1=new Bed();
@@ -41,28 +42,28 @@ public class HelthCareTest {
 		bed1.setId(1);
 		bed1.setOccupied(false);
 		bed1.setPricePerDay(500.0);
-		allbeds.add(bed1);
+		allBeds.add(bed1);
 		bed2.setAppointment(null);
 		bed2.setDiagnosticCenter(null);
 		bed2.setId(2);
 		bed2.setOccupied(true);
 		bed2.setPricePerDay(500.0);
-		allbeds.add(bed2);
+		allBeds.add(bed2);
 		vacantBeds.add(bed1);
 	}
 	
 	@Test
 	public void testGetBeds() {
 
-		when(dao.getAllBeds()).thenReturn(allbeds);
-		assertEquals(allbeds,service.getBeds());
+		when(bedDao.getAllBeds()).thenReturn(allBeds);
+		assertEquals(allBeds,service.getBeds());
 		
 	}
 	
 	@Test
 	public void admitPatients() {
 		
-		when(dao.getVacantBeds()).thenReturn(vacantBeds);
+		when(bedDao.getVacantBeds()).thenReturn(vacantBeds);
 		assertEquals(vacantBeds,service.admitPatient());
 		
 	}
@@ -71,7 +72,7 @@ public class HelthCareTest {
 	public void canNotAdmitPatients() {
 		vacantBeds.remove(0);
 		vacantBeds.add(bed2);
-		when(dao.getVacantBeds()).thenReturn(vacantBeds);
+		when(bedDao.getVacantBeds()).thenReturn(vacantBeds);
 		assertEquals(vacantBeds,service.canNotAdmitPatient());
 		
 	}
@@ -79,7 +80,7 @@ public class HelthCareTest {
 	@Test
 	public void dischargePatient() {
 		assignedBeds.add(bed2);
-		when(dao.deallocateAssignedBed()).thenReturn(assignedBeds);
+		when(bedDao.deallocateAssignedBed()).thenReturn(assignedBeds);
 		assertEquals(assignedBeds,service.dischargePatient());
 		
 		

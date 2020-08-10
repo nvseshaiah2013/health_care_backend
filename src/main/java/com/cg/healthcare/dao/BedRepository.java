@@ -11,9 +11,10 @@ import com.cg.healthcare.entities.Bed;
 //
 //
 //}
-@Repository
+
 public interface BedRepository{
 	public List<Bed> getAllBeds();
 	public List<Bed> getVacantBeds();
 	public List<Bed> deallocateAssignedBed();
+	public boolean addBed(Bed bed);
 }

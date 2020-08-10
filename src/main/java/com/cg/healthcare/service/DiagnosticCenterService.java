@@ -204,22 +204,5 @@ public class DiagnosticCenterService {
 	
 	// Venkat Ends
 
-	BedRepository dao;
 
-
-	public List<Bed> getBeds() {
-		return dao.getAllBeds();
-		
-	}
-	public List<Bed> admitPatient() {
-		return dao.getVacantBeds();
-		
-	}
-	public List<Bed> canNotAdmitPatient(){
-		return dao.getVacantBeds();
-	}
-	public List<Bed> dischargePatient() {
-		return dao.deallocateAssignedBed();
-		
-	}
 }
