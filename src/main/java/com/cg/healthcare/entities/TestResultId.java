@@ -18,6 +18,12 @@ public class TestResultId implements Serializable{
 	private int testId;
 	
 	
+	
+	public TestResultId(int appointmentId, int testId) {
+		super();
+		this.appointmentId = appointmentId;
+		this.testId = testId;
+	}
 	public int getAppointmentId() {
 		return appointmentId;
 	}
