@@ -100,7 +100,7 @@ public class PatientService implements IPatientService {
 	@Override
 	public boolean applyForBed(int appointmentId) {
 		Appointment appointment= appointmentRepository.getOne(appointmentId);
-		Patient patient=appointment.getPatient();
+		//Patient patient=appointment.getPatient();
 		DiagnosticCenter diagnosticCenter=appointment.getDiagnosticCenter();
 		Bed bed = diagnosticCenter.getBeds().stream().filter(b->b.isOccupied()==false).findFirst().get();
 		if(bed==null) {

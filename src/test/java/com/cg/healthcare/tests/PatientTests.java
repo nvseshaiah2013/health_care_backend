@@ -148,11 +148,11 @@ public class PatientTests {
 	{
 		Mockito.when(appointmentRepository.getOne(10)).thenReturn(mockAppointment);
 		Mockito.when(diagnosticCenterRepository.getOne(20)).thenReturn(mockDiagnosticCenter);
-		DiagnosticTest dt=mockAppointment.getDiagnosticCenter().getTests().stream().findFirst().get();
-		TestResultId tri=new TestResultId(10,dt.getId());
-		Mockito.when(testResultRepository.getOne(tri)).thenReturn(mockTestResult);
-		TestResult tr=patientService.viewTestResult(tri);
-		double d=tr.getTestReading();
+		DiagnosticTest diagnosticTest=mockAppointment.getDiagnosticCenter().getTests().stream().findFirst().get();
+		TestResultId testResultId=new TestResultId(10,diagnosticTest.getId());
+		Mockito.when(testResultRepository.getOne(testResultId)).thenReturn(mockTestResult);
+		TestResult testResult=patientService.viewTestResult(testResultId);
+		double d=testResult.getTestReading();
 		assertEquals(13.5,d);
 	}
 	
