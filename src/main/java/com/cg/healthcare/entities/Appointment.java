@@ -2,8 +2,6 @@ package com.cg.healthcare.entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,15 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="APPOINTMENTS")
@@ -45,13 +39,9 @@ public class Appointment implements Serializable{
 	@Column(name="SYMPTOMS")
 	private String symptoms;
 	
-	@ManyToMany
-	@JoinTable(name = "APPOINT_TESTS",
-			   joinColumns = @JoinColumn(name = "APP_ID"),
-			   inverseJoinColumns = @JoinColumn(name = "TEST_ID")
-			)
-	@JsonIgnore
-	private Set<DiagnosticTest> assignedTests = new HashSet<>();
+	@ManyToOne
+	@JoinColumn(name = "TEST_ID", nullable = false)
+	private DiagnosticTest diagnosticTest;
 	
 	@ManyToOne
 	@JoinColumn(name = "PATIENT_ID", nullable = false)
@@ -103,14 +93,6 @@ public class Appointment implements Serializable{
 		this.approvalStatus = approvalStatus;
 	}
 
-	public Set<DiagnosticTest> getAssignedTests() {
-		return assignedTests;
-	}
-
-	public void setAssignedTests(Set<DiagnosticTest> assignedTests) {
-		this.assignedTests = assignedTests;
-	}
-
 	public Patient getPatient() {
 		return patient;
 	}
@@ -142,5 +124,16 @@ public class Appointment implements Serializable{
 	public void setDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
 		this.diagnosticCenter = diagnosticCenter;
 	}
+
+
+	public DiagnosticTest getDiagnosticTest() {
+		return diagnosticTest;
+	}
+
+
+	public void setDiagnosticTest(DiagnosticTest diagnosticTest) {
+		this.diagnosticTest = diagnosticTest;
+	}
+	
 	
 }

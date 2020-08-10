@@ -3,23 +3,27 @@ package com.cg.healthcare.entities;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
 
 @Entity
 @Table(name="TEST_RESULTS")
+@SequenceGenerator(name = "TEST_R_SEQ",allocationSize = 1, initialValue = 1001)
 public class TestResult implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@EmbeddedId
-	private TestResultId id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TEST_R_SEQ")
+	private int id;
 
 	@Column(name="TEST_READ")
 	private double testReading;
@@ -29,28 +33,24 @@ public class TestResult implements Serializable{
 	private String condition;
 	
 	@ManyToOne
-	@MapsId("APP_ID")
 	@JoinColumn(name = "APP_ID")
 	private Appointment appointment;
-	
-	@ManyToOne
-	@MapsId("TEST_ID")
-	@JoinColumn(name ="TEST_ID")
-	private DiagnosticTest test;
 
 	public TestResult() {
+		
 	}
-	public TestResult(TestResultId id, double testReading,
-			@Pattern(regexp = "(Below Normal)|(Normal)|(Above Normal)") String condition, Appointment appointment,
-			DiagnosticTest test) {
-		super();
+
+<<<<<<< HEAD
+=======
+	public TestResult(int id, double testReading,
+			@Pattern(regexp = "(Below Normal)|(Normal)|(Above Normal)") String condition, Appointment appointment) {
 		this.id = id;
 		this.testReading = testReading;
 		this.condition = condition;
 		this.appointment = appointment;
-		this.test = test;
 	}
 
+>>>>>>> d949bff287ea5e67c38ecda55dba96ada863dfbd
 
 
 	public double getTestReading() {
@@ -69,30 +69,12 @@ public class TestResult implements Serializable{
 		this.condition = condition;
 	}
 
-	public TestResultId getId() {
-		return id;
-	}
-
-	public void setId(TestResultId id) {
-		this.id = id;
-	}
-
 	public Appointment getAppointment() {
 		return appointment;
 	}
 
 	public void setAppointment(Appointment appointment) {
 		this.appointment = appointment;
-	}
-
-	public DiagnosticTest getTest() {
-		return test;
-	}
-
-	public void setTest(DiagnosticTest test) {
-		this.test = test;
 	}	
-	
-	
 	
 }

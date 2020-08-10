@@ -6,7 +6,6 @@ import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
-import com.cg.healthcare.entities.TestResultId;
 
 public interface IPatientService {
 
@@ -28,6 +27,6 @@ public interface IPatientService {
 	Bed viewBedStatus(int appointmentId) throws Exception;
 
 	// view test result for patient
-	TestResult viewTestResult(TestResultId testResultId) throws Exception;
+	TestResult viewTestResult(int testResultId) throws Exception;
 
 }

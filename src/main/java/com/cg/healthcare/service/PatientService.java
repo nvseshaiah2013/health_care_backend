@@ -22,7 +22,6 @@ import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
-import com.cg.healthcare.entities.TestResultId;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.WaitingPatient;
 import com.cg.healthcare.exception.BedNotFoundException;
@@ -138,7 +137,7 @@ public class PatientService implements IPatientService {
 	
 	// view test result for patient
 	@Override
-	public TestResult viewTestResult(TestResultId testResultId) throws Exception{
+	public TestResult viewTestResult(int testResultId) throws Exception{
 		TestResult testResult=testResultRepository.getOne(testResultId);
 		if(testResult==null) {
 			LOGGER.error("No Test Report are Present");
