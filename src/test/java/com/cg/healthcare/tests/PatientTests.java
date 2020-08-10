@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.sql.Timestamp;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,10 +29,8 @@ import com.cg.healthcare.entities.IntensiveCareBed;
 import com.cg.healthcare.entities.IntensiveCriticalCareBed;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
-import com.cg.healthcare.entities.TestResultId;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.VentilatorBed;
-import com.cg.healthcare.exception.InvalidVentilatorBedException;
 import com.cg.healthcare.exception.NoVacantBedForPatient;
 import com.cg.healthcare.service.PatientService;
 
@@ -66,9 +63,7 @@ public class PatientTests {
 	private static VentilatorBed mockVentilatorBed;
 	private static Appointment mockAppointment;
 	private static DiagnosticTest mockDiagnosticTest;
-	private static TestResult mockTestResult;
-	private static TestResultId mockTestResultId;
-	
+	private static TestResult mockTestResult;	
 	
 	
 	@BeforeEach
@@ -95,8 +90,7 @@ public class PatientTests {
 		mockDiagnosticTest=new DiagnosticTest("Corona Test", 4000.0, "19", "ppi");
 		mockDiagnosticCenter.getTests().add(mockDiagnosticTest);
 		mockDiagnosticTest.setId(102);
-		mockTestResultId=new TestResultId(10, 101);
-		mockTestResult=new TestResult(mockTestResultId, 13.5, "Normal", mockAppointment, mockDiagnosticTest);
+		mockTestResult=new TestResult(1001, 13.5, "Normal", mockAppointment);
 		
 	}
 	
@@ -149,9 +143,8 @@ public class PatientTests {
 		Mockito.when(appointmentRepository.getOne(10)).thenReturn(mockAppointment);
 		Mockito.when(diagnosticCenterRepository.getOne(20)).thenReturn(mockDiagnosticCenter);
 		DiagnosticTest dt=mockAppointment.getDiagnosticCenter().getTests().stream().findFirst().get();
-		TestResultId tri=new TestResultId(10,dt.getId());
-		Mockito.when(testResultRepository.getOne(tri)).thenReturn(mockTestResult);
-		TestResult tr=patientService.viewTestResult(tri);
+		Mockito.when(testResultRepository.getOne(1001)).thenReturn(mockTestResult);
+		TestResult tr=patientService.viewTestResult(1001);
 		double d=tr.getTestReading();
 		assertEquals(13.5,d);
 	}
