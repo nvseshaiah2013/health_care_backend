@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.cg.healthcare.entities.DiagnosticTest;
 
 public interface TestRepository extends JpaRepository<DiagnosticTest, Integer>{
-
+	DiagnosticTest findBytestName(String testName);
 }

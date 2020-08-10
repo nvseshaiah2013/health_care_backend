@@ -13,6 +13,7 @@
 	<artifactId>health-care-master</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>health-care-master</name>
+	<packaging>war</packaging>
 	<description>Health Care Management System</description>
 
 	<properties>

@@ -1,6 +1,9 @@
 package com.cg.healthcare.service;
 
+
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -15,11 +18,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.healthcare.dao.BedDao;
 import com.cg.healthcare.dao.BedRepository;
 import com.cg.healthcare.dao.DiagnosticCenterRepository;
+import com.cg.healthcare.dao.TestRepository;
 import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
+import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.GeneralBed;
 import com.cg.healthcare.entities.IntensiveCareBed;
 import com.cg.healthcare.entities.IntensiveCriticalCareBed;
@@ -32,10 +38,12 @@ import com.cg.healthcare.exception.InvalidICUBedException;
 import com.cg.healthcare.exception.InvalidVentilatorBedException;
 import com.cg.healthcare.exception.OccupiedBedException;
 
+
 @Service
 @Transactional
 public class DiagnosticCenterService {
 	
+
 	private static final Logger LOGGER  = LoggerFactory.getLogger(DiagnosticCenterService.class);
 
 	@Autowired
@@ -45,7 +53,30 @@ public class DiagnosticCenterService {
 	private UserRepository userRepository;
 
 	@Autowired
+	private TestRepository testRepository;
+	
+	@Autowired
 	private BedRepository bedRepository;
+	
+	
+	
+	public DiagnosticTest getTestInfo(String testName)
+	{
+		DiagnosticTest test = testRepository.findBytestName(testName);
+		return test;
+	}
+	
+
+	public List<Bed> listOfVacantBeds()
+	{
+		List<Bed> allBeds = bedRepository.findAll();
+		List<Bed> vacantBedsList =new ArrayList<Bed>(); 
+		for(Bed bed : allBeds) {
+			if( !(bed.isOccupied())) vacantBedsList.add(bed) ;
+		}
+		return vacantBedsList;
+		
+	}
 
 	private static Validator validator;
 	static {
@@ -190,4 +221,22 @@ public class DiagnosticCenterService {
 	
 	// Venkat Ends
 
+	BedDao dao;
+
+
+	public List<Bed> getBeds() {
+		return dao.getAllBeds();
+		
+	}
+	public List<Bed> admitPatient() {
+		return dao.getVacantBeds();
+		
+	}
+	public List<Bed> canNotAdmitPatient(){
+		return dao.getVacantBeds();
+	}
+	public List<Bed> dischargePatient() {
+		return dao.deallocateAssignedBed();
+		
+	}
 }
