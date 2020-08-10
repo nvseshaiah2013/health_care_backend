@@ -2,7 +2,6 @@ package com.cg.healthcare.service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,20 +20,18 @@ import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
-import com.cg.healthcare.entities.GeneralBed;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.entities.TestResultId;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.WaitingPatient;
 import com.cg.healthcare.exception.BedNotFoundException;
-import com.cg.healthcare.exception.NoBedAvailableException;
 import com.cg.healthcare.exception.NoTestTakenException;
 import com.cg.healthcare.exception.NoVacantBedForPatient;
 
 @Service
 @Transactional
-public class PatientService {
+public class PatientService implements IPatientService {
 	
 	private static final Logger LOGGER  = LoggerFactory.getLogger(PatientService.class);
 
@@ -60,13 +57,21 @@ public class PatientService {
 	 */
 	
 	//fetch patient details from username
+	@Override
 	public Patient getPatientByUserName(String patientUserName) {
 		User user= userRepository.findByUsername(patientUserName);
 		Patient patient=patientRepository.getOne(user.getId());
 		return patient;
 	}
 	
+	//fetch all the TestResult taken by the patient
+	@Override
+	public Set<TestResult> getAllTestResult(String patientUserName){
+		return null;
+	}
+	
 	//fetch all the vacant beds
+	@Override
 	public DiagnosticCenter getDiagnosticCenterByUsername(String diagnosticCenterUsername) {
 		User user = userRepository.findByUsername(diagnosticCenterUsername);
 		DiagnosticCenter diagnosticCenter = diagnosticCenterRepo.getOne(user.getId());
@@ -74,7 +79,10 @@ public class PatientService {
 	
 	}
 	
+
+	@Override
 	public Set<Bed> getAllBed(String diagnosticCenterUserName) throws Exception{
+
 		
 		DiagnosticCenter diagnosticCenter = getDiagnosticCenterByUsername(diagnosticCenterUserName);
 		Set<Bed> vacantBeds=diagnosticCenter.getBeds().stream().filter(b->b.isOccupied()==false).collect(Collectors.toSet());
@@ -89,6 +97,7 @@ public class PatientService {
 	}
 	
 	//apply for bed
+	@Override
 	public boolean applyForBed(int appointmentId) {
 		Appointment appointment= appointmentRepository.getOne(appointmentId);
 		Patient patient=appointment.getPatient();
@@ -112,6 +121,7 @@ public class PatientService {
 	}
 	
 	//view bed allocation status and details(example no of days and Total price)
+	@Override
 	public Bed viewBedStatus(int appointmentId) throws Exception{
 		Appointment appointment= appointmentRepository.getOne(appointmentId);
 		DiagnosticCenter diagnosticCenter= appointment.getDiagnosticCenter();
@@ -127,6 +137,7 @@ public class PatientService {
 	}
 	
 	// view test result for patient
+	@Override
 	public TestResult viewTestResult(TestResultId testResultId) throws Exception{
 		TestResult testResult=testResultRepository.getOne(testResultId);
 		if(testResult==null) {

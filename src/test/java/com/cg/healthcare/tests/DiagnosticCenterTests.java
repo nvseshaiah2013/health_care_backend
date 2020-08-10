@@ -25,6 +25,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.cg.healthcare.dao.BedRepository;
 import com.cg.healthcare.dao.DiagnosticCenterRepository;
 import com.cg.healthcare.dao.TestRepository;
+import com.cg.healthcare.dao.TestResultRepository;
 import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
@@ -43,7 +44,6 @@ import com.cg.healthcare.exception.InvalidICUBedException;
 import com.cg.healthcare.exception.InvalidVentilatorBedException;
 import com.cg.healthcare.exception.OccupiedBedException;
 import com.cg.healthcare.service.DiagnosticCenterService;
-import com.cg.healthcare.dao.TestResultRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class DiagnosticCenterTests {

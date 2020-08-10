@@ -20,7 +20,7 @@ import com.cg.healthcare.responses.LoginResponse;
 
 @Service
 @Transactional
-public class PublicService {
+public class PublicService implements IPublicService {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -39,6 +39,7 @@ public class PublicService {
 	
 	// Venkat Starts
 
+	@Override
 	public void registerPatient(PatientSignUpRequest patientRequest) throws Exception {
 		User user = userRepository.findByUsername(patientRequest.getUsername());
 		if (user != null) {
@@ -54,6 +55,7 @@ public class PublicService {
 		}
 	}
 
+	@Override
 	public LoginResponse getAuthenticationToken(String username, String password) throws Exception {
 		try {
 			authManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));

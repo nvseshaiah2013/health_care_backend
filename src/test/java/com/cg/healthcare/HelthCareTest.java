@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.cg.healthcare.dao.BedDao;
-import com.cg.healthcare.dao.BedRepository;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.service.DiagnosticCenterService;
 

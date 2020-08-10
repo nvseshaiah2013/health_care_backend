@@ -15,14 +15,14 @@ import com.cg.healthcare.requests.LoginRequest;
 import com.cg.healthcare.requests.PatientSignUpRequest;
 import com.cg.healthcare.responses.LoginResponse;
 import com.cg.healthcare.responses.SuccessMessage;
-import com.cg.healthcare.service.PublicService;
+import com.cg.healthcare.service.IPublicService;
 
 @RestController
 @RequestMapping(value = "/api/public")
 public class PublicController {
 
 	@Autowired
-	private PublicService publicService;
+	private IPublicService publicService;
 	
 	// Venkat Starts
 

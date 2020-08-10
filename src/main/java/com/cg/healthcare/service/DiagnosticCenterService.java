@@ -41,7 +41,7 @@ import com.cg.healthcare.exception.OccupiedBedException;
 
 @Service
 @Transactional
-public class DiagnosticCenterService {
+public class DiagnosticCenterService implements IDiagnosticCenterService {
 	
 
 	private static final Logger LOGGER  = LoggerFactory.getLogger(DiagnosticCenterService.class);
@@ -60,6 +60,7 @@ public class DiagnosticCenterService {
 	
 	
 	
+	@Override
 	public DiagnosticTest getTestInfo(String testName)
 	{
 		DiagnosticTest test = testRepository.findBytestName(testName);
@@ -67,6 +68,7 @@ public class DiagnosticCenterService {
 	}
 	
 
+	@Override
 	public List<Bed> listOfVacantBeds()
 	{
 		List<Bed> allBeds = bedRepository.findAll();
@@ -86,12 +88,14 @@ public class DiagnosticCenterService {
 	
 	// Venkat Starts
 
+	@Override
 	public DiagnosticCenter getDiagnosticCenterByUsername(String diagnosticCenterUsername) {
 		User user = userRepository.findByUsername(diagnosticCenterUsername);
 		DiagnosticCenter diagnosticCenter = diagnosticCenterRepo.getOne(user.getId());
 		return diagnosticCenter;
 	}
 
+	@Override
 	public void addICUBeds(String diagnosticCenterUsername, int noOfBeds, double bedPrice, boolean isKneeTiltAvailable,
 			boolean isHeadTiltAvailable, boolean isElectric, int noOfFunctions) throws Exception {
 
@@ -120,6 +124,7 @@ public class DiagnosticCenterService {
 		diagnosticCenterRepo.save(diagnosticCenter);
 	}
 
+	@Override
 	public void addICCUBeds(String diagnosticCenterUsername, int noOfBeds, double bedPrice, boolean batteryBackUp,
 			boolean hasABS, boolean remoteOperated, String type) throws Exception {
 
@@ -144,6 +149,7 @@ public class DiagnosticCenterService {
 		diagnosticCenter.getBeds().addAll(newBeds);
 	}
 
+	@Override
 	public void addGeneralBeds(String diagnosticCenterUsername, int noOfBeds, double bedPrice, boolean isMovable,
 			String frameMaterial) throws Exception {
 
@@ -166,6 +172,7 @@ public class DiagnosticCenterService {
 		diagnosticCenter.getBeds().addAll(newBeds);
 	}
 
+	@Override
 	public void addVentilatorBeds(String diagnosticCenterUsername, int noOfBeds, double bedPrice, int respiratoryRate,
 			String type) throws Exception {
 
@@ -190,11 +197,13 @@ public class DiagnosticCenterService {
 		diagnosticCenter.getBeds().addAll(newBeds);
 	}
 
+	@Override
 	public Set<Bed> getBeds(String diagnosticCenterUsername) throws Exception {
 		DiagnosticCenter diagnosticCenter = getDiagnosticCenterByUsername(diagnosticCenterUsername);
 		return diagnosticCenter.getBeds();
 	}
 
+	@Override
 	public void removeBed(String diagnosticCenterUsername, Integer bedId) throws Exception {
 
 		DiagnosticCenter diagnosticCenter = getDiagnosticCenterByUsername(diagnosticCenterUsername);
@@ -224,17 +233,21 @@ public class DiagnosticCenterService {
 	BedDao dao;
 
 
+	@Override
 	public List<Bed> getBeds() {
 		return dao.getAllBeds();
 		
 	}
+	@Override
 	public List<Bed> admitPatient() {
 		return dao.getVacantBeds();
 		
 	}
+	@Override
 	public List<Bed> canNotAdmitPatient(){
 		return dao.getVacantBeds();
 	}
+	@Override
 	public List<Bed> dischargePatient() {
 		return dao.deallocateAssignedBed();
 		

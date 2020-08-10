@@ -42,7 +42,7 @@ import com.cg.healthcare.requests.DiagnosticCenterSignUpRequest;
 
 @Service
 @Transactional
-public class AdminService {
+public class AdminService implements IAdminService {
 
 	/*
 	 * Sachin Kumar (Starts)
@@ -60,6 +60,7 @@ public class AdminService {
 	private WaitingPatientRepository waitingPatientRepository;
 
 	// Add
+	@Override
 	public DiagnosticCenter addDiagnosticCenter(DiagnosticCenterSignUpRequest diagnosticCenter) throws Exception {
 		User toFindUser = userRepository.findByUsername(diagnosticCenter.getUserName());
 		if (toFindUser != null) {
@@ -77,12 +78,14 @@ public class AdminService {
 	}
 
 	// Get by Id
+	@Override
 	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId) {
 		DiagnosticCenter center = diagnosticCenterRepository.findById(diagnosticCenterId).get();
 		return center;
 	}
 
 	// Remove
+	@Override
 	public List<DiagnosticCenter> removeDiagnosticCenter(int diagnosticCenterId) {
 		DiagnosticCenter center = getDiagnosticCenterById(diagnosticCenterId);
 		diagnosticCenterRepository.delete(center);
@@ -90,12 +93,14 @@ public class AdminService {
 	}
 
 	// Update
+	@Override
 	public DiagnosticCenter updateDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
 		DiagnosticCenter updatedCenter = diagnosticCenterRepository.save(diagnosticCenter);
 		return updatedCenter;
 	}
 
 	// GetAll
+	@Override
 	public List<DiagnosticCenter> getAllDiagnosticCenter() {
 		List<DiagnosticCenter> centers = diagnosticCenterRepository.findAll();
 		return centers;
@@ -107,6 +112,7 @@ public class AdminService {
 
 	// Venkat Starts
 
+	@Override
 	public void allocateBeds(int diagnosticCenterId, List<Integer> waitingPatientIds, String type) throws Exception {
 
 		DiagnosticCenter diagnosticCenter = diagnosticCenterRepository.getOne(diagnosticCenterId);
@@ -204,6 +210,7 @@ public class AdminService {
 		}
 	}
 
+	@Override
 	public Class<?> getBedType(String bedType) throws Exception {
 		
 		if(bedType.equals("General")) {
@@ -227,6 +234,7 @@ public class AdminService {
 	
 	
 	
+	@Override
 	public Set<Bed> getBeds(int diagnosticCenterId) throws Exception {
 
 		Optional<DiagnosticCenter> diagnosticCenter = diagnosticCenterRepository.findById(diagnosticCenterId);
@@ -260,29 +268,35 @@ public class AdminService {
 	@Autowired
 	private DiagnosticCenterRepository centerRepository;
 	
+	@Override
 	public List<DiagnosticTest> getAllTest(){
 		List<DiagnosticTest> tests=testRepository.findAll();
 		return tests;
 	}
 	
+	@Override
 	public List<DiagnosticCenter> getAllDiagnosticCenters(){
 		List<DiagnosticCenter> centers=centerRepository.findAll();
 		return centers;
 	}
+	@Override
 	public DiagnosticTest addNewTest(DiagnosticTest test) {
 		DiagnosticTest addedTest=testRepository.save(test);
 		return addedTest;
 	}
+	@Override
 	public DiagnosticTest updateTestDetail(DiagnosticTest test) {
 		DiagnosticTest updatedTest=testRepository.save(test);
 		return updatedTest;
 	}
 	
+	@Override
 	public DiagnosticCenter getDiagnosticCentersById(int diagnosticCenterId) {
 		DiagnosticCenter center = diagnosticCenterRepository.getOne(diagnosticCenterId);
 		return center;
 	}
 	
+	@Override
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId){
 		DiagnosticCenter center=centerRepository.getOne(centerId);
 		List<DiagnosticTest> testList=new LinkedList<>(center.getTests());
@@ -291,6 +305,7 @@ public class AdminService {
 		}
 		return testList;
 	}
+	@Override
 	public List<DiagnosticTest> addTestToDiagnosticCenter(int centerId,List<DiagnosticTest> tests) throws Exception{
 		DiagnosticCenter center=centerRepository.getOne(centerId);
 		List<DiagnosticTest> centerTest=new LinkedList<DiagnosticTest>(center.getTests());
@@ -304,6 +319,7 @@ public class AdminService {
 		List<DiagnosticTest> updatedTestList=new LinkedList<DiagnosticTest>(center.getTests());
 		return updatedTestList;
 	}
+	@Override
 	public List<DiagnosticTest> removeTestFromDiagnosticCenter(int centerId,List<DiagnosticTest> tests) throws Exception{
 		DiagnosticCenter center=centerRepository.getOne(centerId);
 		List<DiagnosticTest> centerTest=new LinkedList<DiagnosticTest>(center.getTests());
