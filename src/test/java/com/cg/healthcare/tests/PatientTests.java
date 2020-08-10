@@ -1,10 +1,12 @@
 package com.cg.healthcare.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,6 +35,8 @@ import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.entities.TestResultId;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.VentilatorBed;
+import com.cg.healthcare.exception.InvalidVentilatorBedException;
+import com.cg.healthcare.exception.NoVacantBedForPatient;
 import com.cg.healthcare.service.PatientService;
 
 @ExtendWith(MockitoExtension.class)
@@ -118,17 +122,17 @@ public class PatientTests {
 	}
 	
 	@Test
-	public void getAllVacantBedFailTest()    
+	public void getAllVacantBedFailTest() throws Exception    
 	{
 		Mockito.when(userRepository.findByUsername("dcenter@gmail.com")).thenReturn(mockDiagnosticCenterUser);
 		Mockito.when(diagnosticCenterRepository.getOne(20)).thenReturn(mockDiagnosticCenter);
-		Set<Bed> vacantBeds=patientService.getAllBed("dcenter@gmail.com");
+		Set<Bed> vacantBeds=mockDiagnosticCenter.getBeds();
 		for(Bed b: vacantBeds) {
 			b.setOccupied(true);
 		}
-		Set<Bed> b=patientService.getAllBed("dcenter@gmail.com");
-		Long count=b.stream().count();
-		assertEquals(0, count);
+		assertThrows(NoVacantBedForPatient.class, () -> {
+			patientService.getAllBed("dcenter@gmail.com");
+		});
 	}
 	
 	@Test 
