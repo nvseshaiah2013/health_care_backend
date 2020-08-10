@@ -1,4 +1,4 @@
-package com.cg.healthcare.service;
+ package com.cg.healthcare.service;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -22,11 +22,16 @@ import com.cg.healthcare.dao.WaitingPatientRepository;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
+import com.cg.healthcare.entities.GeneralBed;
+import com.cg.healthcare.entities.IntensiveCareBed;
+import com.cg.healthcare.entities.IntensiveCriticalCareBed;
 import com.cg.healthcare.entities.User;
+import com.cg.healthcare.entities.VentilatorBed;
 import com.cg.healthcare.entities.WaitingPatient;
 import com.cg.healthcare.exception.AppointmentNotApprovedException;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 import com.cg.healthcare.exception.InvalidBedAllocationException;
+import com.cg.healthcare.exception.InvalidBedTypeException;
 import com.cg.healthcare.exception.NoBedAvailableException;
 import com.cg.healthcare.exception.NoTestFoundAtThisCenterException;
 import com.cg.healthcare.exception.PartialBedsAllocationException;
@@ -102,7 +107,7 @@ public class AdminService {
 
 	// Venkat Starts
 
-	public void allocateBeds(int diagnosticCenterId, List<Integer> waitingPatientIds) throws Exception {
+	public void allocateBeds(int diagnosticCenterId, List<Integer> waitingPatientIds, String type) throws Exception {
 
 		DiagnosticCenter diagnosticCenter = diagnosticCenterRepository.getOne(diagnosticCenterId);
 
@@ -113,6 +118,8 @@ public class AdminService {
 			throw new DiagnosticCenterNotFoundException("Diagnostic Center Exception", "Diagnostic Center not Found");
 
 		}
+		
+		Class<?> bedType = getBedType(type);
 
 		Collections.sort(waitingPatientIds);
 
@@ -138,7 +145,7 @@ public class AdminService {
 
 			if (waitingIndex < approvedWaitingPatientsLength) {
 
-				if (!bed.isOccupied()) {
+				if (!bed.isOccupied() && bedType.isInstance(bed)) {
 
 					WaitingPatient patient = waitingPatients.get(waitingIndex);
 
@@ -197,6 +204,29 @@ public class AdminService {
 		}
 	}
 
+	public Class<?> getBedType(String bedType) throws Exception {
+		
+		if(bedType.equals("General")) {
+			return new GeneralBed().getClass();
+		}
+		else if(bedType.equals("Ventilator")){
+			return new VentilatorBed().getClass();
+		}
+		else if(bedType.equals("ICU"))
+		{
+			return new IntensiveCareBed().getClass();
+		}
+		else if(bedType.equals("ICCU")) {
+			return new IntensiveCriticalCareBed().getClass();
+		}
+		else {
+			LOGGER.error( bedType + " is not a valid kind of Bed");
+			throw new InvalidBedTypeException("Bed Type Exception", bedType + " is not a valid kind of Bed");
+		}
+	}
+	
+	
+	
 	public Set<Bed> getBeds(int diagnosticCenterId) throws Exception {
 
 		Optional<DiagnosticCenter> diagnosticCenter = diagnosticCenterRepository.findById(diagnosticCenterId);
@@ -212,6 +242,10 @@ public class AdminService {
 
 			throw new DiagnosticCenterNotFoundException("Diagnostic Center Exception", "Diagnostic Center not Found");
 		}
+	}
+	
+	List<WaitingPatient> getWaitingPatients() throws Exception {
+		return this.waitingPatientRepository.findAll();
 	}
 
 	// Venkat Ends

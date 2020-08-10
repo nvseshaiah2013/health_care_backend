@@ -1,7 +1,9 @@
 package com.cg.healthcare.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -26,12 +28,14 @@ import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.GeneralBed;
+import com.cg.healthcare.entities.IntensiveCareBed;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.WaitingPatient;
 import com.cg.healthcare.exception.AppointmentNotApprovedException;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 import com.cg.healthcare.exception.InvalidBedAllocationException;
+import com.cg.healthcare.exception.InvalidBedTypeException;
 import com.cg.healthcare.exception.NoBedAvailableException;
 import com.cg.healthcare.exception.PartialBedsAllocationException;
 import com.cg.healthcare.service.AdminService;
@@ -141,7 +145,7 @@ public class WaitingPatientTest {
 		waitingIds.add(1);
 		waitingIds.add(2);
 		waitingIds.add(3);
-		adminService.allocateBeds(mockDiagnosticCenter1.getId(), waitingIds);
+		adminService.allocateBeds(mockDiagnosticCenter1.getId(), waitingIds, "General");
 		Long count = adminService.getBeds(10).stream().filter(bed -> bed.isOccupied() == true ).count();
 		assertEquals(3, count);
 	}
@@ -198,7 +202,7 @@ public class WaitingPatientTest {
 		waitingIds.add(2);
 		waitingIds.add(3);
 		assertThrows(PartialBedsAllocationException.class, () -> {
-			adminService.allocateBeds(mockDiagnosticCenter1.getId(), waitingIds);			
+			adminService.allocateBeds(mockDiagnosticCenter1.getId(), waitingIds, "General");			
 		});		
 	}
 	
@@ -247,7 +251,7 @@ public class WaitingPatientTest {
 		waitingIds.add(2);
 		waitingIds.add(3);
 		assertThrows(NoBedAvailableException.class, () -> {
-			adminService.allocateBeds(mockDiagnosticCenter1.getId(), waitingIds);			
+			adminService.allocateBeds(mockDiagnosticCenter1.getId(), waitingIds, "General");			
 		});	
 	}
 	
@@ -302,7 +306,7 @@ public class WaitingPatientTest {
 		waitingIds.add(2);
 		waitingIds.add(3);
 		assertThrows(InvalidBedAllocationException.class, () -> {
-			adminService.allocateBeds(mockDiagnosticCenter1.getId(), waitingIds);			
+			adminService.allocateBeds(mockDiagnosticCenter1.getId(), waitingIds, "General");			
 		});
 	}
 	
@@ -357,7 +361,7 @@ public class WaitingPatientTest {
 		waitingIds.add(2);
 		waitingIds.add(3);
 		assertThrows(AppointmentNotApprovedException.class, () -> {
-			adminService.allocateBeds(mockDiagnosticCenter1.getId(), waitingIds);			
+			adminService.allocateBeds(mockDiagnosticCenter1.getId(), waitingIds, "General");			
 		});
 	}
 	
@@ -368,8 +372,28 @@ public class WaitingPatientTest {
 		waitingIds.add(2);
 		waitingIds.add(3);
 		assertThrows(DiagnosticCenterNotFoundException.class, () -> {
-			adminService.allocateBeds(99, waitingIds);			
+			adminService.allocateBeds(99, waitingIds, "General");			
 		});
 	}
 	
+	@Test
+	public void getBedTypeReturnsAICUBedClass() throws Exception {
+		Class<?> bedType = adminService.getBedType("ICU");
+		IntensiveCareBed bed = new IntensiveCareBed();
+		assertTrue(bedType.isInstance(bed));
+	}
+	
+	@Test
+	public void getBedTypeReturnDoesNotMatchOtherInheritedInstances() throws Exception {
+		Class<?> bedType = adminService.getBedType("ICCU");
+		IntensiveCareBed bed = new IntensiveCareBed();
+		assertFalse(bedType.isInstance(bed));
+	}
+	
+	@Test
+	public void getBedTypeThrowsExceptionWhenInvalidTypePassed() throws Exception {
+		assertThrows(InvalidBedTypeException.class,() -> {
+			adminService.getBedType("Some Random Type");
+		} );
+	}
 }
