@@ -40,8 +40,6 @@ public class TestResult implements Serializable{
 		
 	}
 
-	
-
 	public TestResult(int id, double testReading,
 			@Pattern(regexp = "(Below Normal)|(Normal)|(Above Normal)") String condition, Appointment appointment) {
 		this.id = id;
