@@ -40,18 +40,20 @@ public class TestResult implements Serializable{
 
 	public TestResult() {
 	}
+
 	
 
 	public TestResult(TestResultId id, double testReading,
 			@Pattern(regexp = "(Below Normal)|(Normal)|(Above Normal)") String condition, Appointment appointment,
 			DiagnosticTest test) {
-		super();
 		this.id = id;
 		this.testReading = testReading;
 		this.condition = condition;
 		this.appointment = appointment;
 		this.test = test;
 	}
+
+
 
 	public double getTestReading() {
 		return testReading;

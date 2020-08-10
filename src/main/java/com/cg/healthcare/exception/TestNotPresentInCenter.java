@@ -1,4 +1,4 @@
-package com.cg.healthcare.exception;
+   package com.cg.healthcare.exception;
 
 public class TestNotPresentInCenter extends RuntimeException{
 

@@ -19,7 +19,7 @@ public interface IPatientService {
 	//fetch all the vacant beds
 	DiagnosticCenter getDiagnosticCenterByUsername(String diagnosticCenterUsername);
 
-	Set<Bed> getAllBed(String diagnosticCenterUserName);
+	Set<Bed> getAllBed(String diagnosticCenterUserName) throws Exception;
 
 	//apply for bed
 	boolean applyForBed(int appointmentId);
