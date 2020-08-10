@@ -19,14 +19,18 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.cg.healthcare.dao.AppointmentRepository;
 import com.cg.healthcare.dao.DiagnosticCenterRepository;
+import com.cg.healthcare.dao.TestResultRepository;
 import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
+import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.GeneralBed;
 import com.cg.healthcare.entities.IntensiveCareBed;
 import com.cg.healthcare.entities.IntensiveCriticalCareBed;
 import com.cg.healthcare.entities.Patient;
+import com.cg.healthcare.entities.TestResult;
+import com.cg.healthcare.entities.TestResultId;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.VentilatorBed;
 import com.cg.healthcare.service.PatientService;
@@ -47,16 +51,22 @@ public class PatientTests {
 	@Mock
 	private AppointmentRepository appointmentRepository;
 	
+	@Mock
+	private TestResultRepository testResultRepository;
+	
 	private static User mockDiagnosticCenterUser;
 	private static DiagnosticCenter mockDiagnosticCenter;
 	private static User mockPatientUser;
 	private static Patient mockPatient;
-	private static Set<Bed> mockBeds;
 	private static GeneralBed mockGeneralBed;
 	private static IntensiveCareBed mockIntensiveCareBed;
 	private static IntensiveCriticalCareBed mockIntensiveCriticalCareBed;
 	private static VentilatorBed mockVentilatorBed;
 	private static Appointment mockAppointment;
+	private static DiagnosticTest mockDiagnosticTest;
+	private static TestResult mockTestResult;
+	private static TestResultId mockTestResultId;
+	
 	
 	
 	@BeforeEach
@@ -76,6 +86,15 @@ public class PatientTests {
 		mockDiagnosticCenter.getBeds().add(mockVentilatorBed);
 		
 		mockAppointment= new Appointment(10, new Timestamp(System.currentTimeMillis()), 1, "diagnosis", "symptoms", mockPatient, mockDiagnosticCenter);
+		
+		mockDiagnosticTest=new DiagnosticTest("Blood Test", 100.0, "12-16", "gram");
+		mockDiagnosticCenter.getTests().add(mockDiagnosticTest);
+		mockDiagnosticTest.setId(101);
+		mockDiagnosticTest=new DiagnosticTest("Corona Test", 4000.0, "19", "ppi");
+		mockDiagnosticCenter.getTests().add(mockDiagnosticTest);
+		mockDiagnosticTest.setId(102);
+		mockTestResultId=new TestResultId(10, 101);
+		mockTestResult=new TestResult(mockTestResultId, 13.5, "Normal", mockAppointment, mockDiagnosticTest);
 		
 	}
 	
@@ -120,6 +139,19 @@ public class PatientTests {
 		Bed bed=patientService.viewBedStatus(mockAppointment.getId());
 		int id=bed.getAppointment().getId();
 		assertEquals(10,id );
+	}
+	
+	@Test
+	public void viewTestResult() throws Exception
+	{
+		Mockito.when(appointmentRepository.getOne(10)).thenReturn(mockAppointment);
+		Mockito.when(diagnosticCenterRepository.getOne(20)).thenReturn(mockDiagnosticCenter);
+		DiagnosticTest dt=mockAppointment.getDiagnosticCenter().getTests().stream().findFirst().get();
+		TestResultId tri=new TestResultId(10,dt.getId());
+		Mockito.when(testResultRepository.getOne(tri)).thenReturn(mockTestResult);
+		TestResult tr=patientService.viewTestResult(tri);
+		double d=tr.getTestReading();
+		assertEquals(13.5,d);
 	}
 	
 	

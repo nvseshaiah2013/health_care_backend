@@ -22,6 +22,7 @@ import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.GeneralBed;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
+import com.cg.healthcare.entities.TestResultId;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.WaitingPatient;
 
@@ -45,7 +46,9 @@ public class PatientService {
 	private DiagnosticCenterRepository diagnosticCenterRepo;
 
 	
-	// Pritam starts
+	/*
+	 * Pritam starts
+	 */
 	
 	//fetch patient details from username
 	public Patient getPatientByUserName(String patientUserName) {
@@ -106,6 +109,20 @@ public class PatientService {
 			return bed;
 	}
 	
+	// view test result for patient
+	public TestResult viewTestResult(TestResultId testResultId) throws Exception{
+		TestResult testResult=testResultRepository.getOne(testResultId);
+		if(testResult==null)
+			throw new Exception("No Test");
+		else
+			return testResult;
+	}
+	
+	/* 
+	 * 
+	 * Pritam ends
+	 * 
+	   */
 	
 	
 	
