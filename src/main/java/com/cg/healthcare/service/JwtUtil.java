@@ -16,22 +16,25 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
-public class JwtUtil {
+public class JwtUtil implements IJwtUtil {
 
 	private final String SECRET_KEY = "BP8HoYR4hxBJAbhF9N0dlRgkc6y3TjyXZcgRaoSQNSjwGYAsbjmHPYrS2qqZjZJ";
 
 	@Autowired
 	private UserRepository userRepository;
 	
-    public String extractUsername(String token) {
+    @Override
+	public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public Date extractExpiration(String token) {
+    @Override
+	public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+    @Override
+	public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
@@ -43,7 +46,8 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(UserDetails userDetails) {
+    @Override
+	public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         String role = userRepository.findByUsername(userDetails.getUsername()).getRole();
         return createToken(claims, userDetails.getUsername(), role);
@@ -56,7 +60,8 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
+    @Override
+	public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }

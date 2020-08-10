@@ -3,7 +3,6 @@ package com.cg.healthcare.tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +14,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import org.springframework.test.context.ContextConfiguration;
 
 import com.cg.healthcare.dao.AppointmentRepository;
 import com.cg.healthcare.dao.DiagnosticCenterRepository;

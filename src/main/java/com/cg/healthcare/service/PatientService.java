@@ -28,7 +28,7 @@ import com.cg.healthcare.entities.WaitingPatient;
 
 @Service
 @Transactional
-public class PatientService {
+public class PatientService implements IPatientService {
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -51,6 +51,7 @@ public class PatientService {
 	 */
 	
 	//fetch patient details from username
+	@Override
 	public Patient getPatientByUserName(String patientUserName) {
 		User user= userRepository.findByUsername(patientUserName);
 		Patient patient=patientRepository.getOne(user.getId());
@@ -58,17 +59,20 @@ public class PatientService {
 	}
 	
 	//fetch all the TestResult taken by the patient
+	@Override
 	public Set<TestResult> getAllTestResult(String patientUserName){
 		return null;
 	}
 	
 	//fetch all the vacant beds
+	@Override
 	public DiagnosticCenter getDiagnosticCenterByUsername(String diagnosticCenterUsername) {
 		User user = userRepository.findByUsername(diagnosticCenterUsername);
 		DiagnosticCenter diagnosticCenter = diagnosticCenterRepo.getOne(user.getId());
 		return diagnosticCenter;
 	}
 	
+	@Override
 	public Set<Bed> getAllBed(String diagnosticCenterUserName){
 		
 		DiagnosticCenter diagnosticCenter = getDiagnosticCenterByUsername(diagnosticCenterUserName);
@@ -78,6 +82,7 @@ public class PatientService {
 	}
 	
 	//apply for bed
+	@Override
 	public boolean applyForBed(int appointmentId) {
 		Appointment appointment= appointmentRepository.getOne(appointmentId);
 		Patient patient=appointment.getPatient();
@@ -99,6 +104,7 @@ public class PatientService {
 	}
 	
 	//view bed allocation status and details(example no of days and Total price)
+	@Override
 	public Bed viewBedStatus(int appointmentId) throws Exception{
 		Appointment appointment= appointmentRepository.getOne(appointmentId);
 		DiagnosticCenter diagnosticCenter= appointment.getDiagnosticCenter();
@@ -110,6 +116,7 @@ public class PatientService {
 	}
 	
 	// view test result for patient
+	@Override
 	public TestResult viewTestResult(TestResultId testResultId) throws Exception{
 		TestResult testResult=testResultRepository.getOne(testResultId);
 		if(testResult==null)

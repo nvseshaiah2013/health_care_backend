@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.cg.healthcare.responses.ErrorMessage;
-import com.cg.healthcare.service.JwtUtil;
-import com.cg.healthcare.service.LoginUserService;
+import com.cg.healthcare.service.IJwtUtil;
 
 import io.jsonwebtoken.JwtException;
 
@@ -26,10 +26,10 @@ import io.jsonwebtoken.JwtException;
 public class JwtFilter extends OncePerRequestFilter {
 
 	@Autowired
-	private JwtUtil jwtUtil;
+	private IJwtUtil jwtUtil;
 	
 	@Autowired 
-	private LoginUserService userService;
+	private UserDetailsService userService;
 	
 	
 	@Override
