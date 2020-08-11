@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -50,6 +51,10 @@ public class Appointment implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="D_CENTER_ID", nullable = false)
 	private DiagnosticCenter diagnosticCenter;
+	
+	@OneToOne
+	@JoinColumn(name="T_RESULT_ID",referencedColumnName = "id")
+	private TestResult testResult;
 	
 	public Appointment()
 	{
@@ -134,6 +139,18 @@ public class Appointment implements Serializable{
 	public void setDiagnosticTest(DiagnosticTest diagnosticTest) {
 		this.diagnosticTest = diagnosticTest;
 	}
+
+
+	public TestResult getTestResult() {
+		return testResult;
+	}
+
+
+	public void setTestResult(TestResult testResult) {
+		this.testResult = testResult;
+	}
+	
+	
 	
 	
 }

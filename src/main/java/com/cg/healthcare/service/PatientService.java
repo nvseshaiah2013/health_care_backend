@@ -2,11 +2,13 @@ package com.cg.healthcare.service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.aspectj.weaver.ast.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
+import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.entities.User;
@@ -66,6 +69,12 @@ public class PatientService implements IPatientService {
 	//fetch all the TestResult taken by the patient
 	@Override
 	public Set<TestResult> getAllTestResult(String patientUserName){
+//		Patient patient=getPatientByUserName(patientUserName);
+//		Set<Appointment> appointments=patient.getAppointments();
+//		Set<TestResult> tests=new HashSet<>();
+//		for(Appointment a:appointments) {
+//			tests.add();
+//		}
 		return null;
 	}
 	
