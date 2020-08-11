@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="WAITING_PATIENTS")
@@ -31,6 +32,9 @@ public class WaitingPatient implements Serializable{
 	@Column(name="REQUEST_DATE", nullable = false)
 
 	private Timestamp requestedOn;
+	
+	@Pattern(regexp = "General|ICU|ICCU|Ventilator")
+	private String type;
 	
 	public WaitingPatient() {
 		
@@ -58,6 +62,16 @@ public class WaitingPatient implements Serializable{
 
 	public void setRequestedOn(Timestamp requestedOn) {
 		this.requestedOn = requestedOn;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}	
+	
+	
 	
 }

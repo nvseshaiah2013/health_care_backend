@@ -151,7 +151,7 @@ public class AdminService implements IAdminService {
 
 			if (waitingIndex < approvedWaitingPatientsLength) {
 
-				if (!bed.isOccupied() && bedType.isInstance(bed)) {
+				if (!bed.isOccupied() && bedType.isInstance(bed) && type.equals(waitingPatients.get(waitingIndex).getType())) {
 
 					WaitingPatient patient = waitingPatients.get(waitingIndex);
 
