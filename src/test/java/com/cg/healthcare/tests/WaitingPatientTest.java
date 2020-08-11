@@ -117,12 +117,15 @@ public class WaitingPatientTest {
 		WaitingPatient waitingPatient1 = new WaitingPatient();
 		waitingPatient1.setAppointment(appointment1);
 		waitingPatient1.setId(1);
+		waitingPatient1.setType("General");
 		WaitingPatient waitingPatient2 = new WaitingPatient();
 		waitingPatient2.setAppointment(appointment2);
 		waitingPatient2.setId(2);
+		waitingPatient2.setType("General");
 		WaitingPatient waitingPatient3 = new WaitingPatient();
 		waitingPatient3.setAppointment(appointment3);
 		waitingPatient3.setId(3);
+		waitingPatient3.setType("General");
 		
 		Mockito.when(waitingPatientRepository.getOne(1)).thenReturn(waitingPatient1);
 		
@@ -162,12 +165,15 @@ public class WaitingPatientTest {
 		WaitingPatient waitingPatient1 = new WaitingPatient();
 		waitingPatient1.setAppointment(appointment1);
 		waitingPatient1.setId(1);
+		waitingPatient1.setType("General");
 		WaitingPatient waitingPatient2 = new WaitingPatient();
 		waitingPatient2.setAppointment(appointment2);
 		waitingPatient2.setId(2);
+		waitingPatient2.setType("General");
 		WaitingPatient waitingPatient3 = new WaitingPatient();
 		waitingPatient3.setAppointment(appointment3);
 		waitingPatient3.setId(3);
+		waitingPatient3.setType("General");
 		
 		Mockito.when(waitingPatientRepository.getOne(1)).thenReturn(waitingPatient1);
 		
@@ -218,13 +224,15 @@ public class WaitingPatientTest {
 		WaitingPatient waitingPatient1 = new WaitingPatient();
 		waitingPatient1.setAppointment(appointment1);
 		waitingPatient1.setId(1);
+		waitingPatient1.setType("General");
 		WaitingPatient waitingPatient2 = new WaitingPatient();
 		waitingPatient2.setAppointment(appointment2);
 		waitingPatient2.setId(2);
+		waitingPatient2.setType("General");
 		WaitingPatient waitingPatient3 = new WaitingPatient();
 		waitingPatient3.setAppointment(appointment3);
 		waitingPatient3.setId(3);
-		
+		waitingPatient3.setType("General");
 		Mockito.when(waitingPatientRepository.getOne(1)).thenReturn(waitingPatient1);
 		
 		Mockito.when(waitingPatientRepository.getOne(2)).thenReturn(waitingPatient2);
@@ -267,13 +275,15 @@ public class WaitingPatientTest {
 		WaitingPatient waitingPatient1 = new WaitingPatient();
 		waitingPatient1.setAppointment(appointment1);
 		waitingPatient1.setId(1);
+		waitingPatient1.setType("General");
 		WaitingPatient waitingPatient2 = new WaitingPatient();
 		waitingPatient2.setAppointment(appointment2);
 		waitingPatient2.setId(2);
+		waitingPatient2.setType("General");
 		WaitingPatient waitingPatient3 = new WaitingPatient();
 		waitingPatient3.setAppointment(appointment3);
 		waitingPatient3.setId(3);
-		
+		waitingPatient3.setType("General");
 		Mockito.when(waitingPatientRepository.getOne(1)).thenReturn(waitingPatient1);
 		
 		Mockito.when(waitingPatientRepository.getOne(2)).thenReturn(waitingPatient2);
@@ -322,13 +332,15 @@ public class WaitingPatientTest {
 		WaitingPatient waitingPatient1 = new WaitingPatient();
 		waitingPatient1.setAppointment(appointment1);
 		waitingPatient1.setId(1);
+		waitingPatient1.setType("General");
 		WaitingPatient waitingPatient2 = new WaitingPatient();
 		waitingPatient2.setAppointment(appointment2);
 		waitingPatient2.setId(2);
+		waitingPatient2.setType("General");
 		WaitingPatient waitingPatient3 = new WaitingPatient();
 		waitingPatient3.setAppointment(appointment3);
 		waitingPatient3.setId(3);
-		
+		waitingPatient3.setType("General");
 		Mockito.when(waitingPatientRepository.getOne(1)).thenReturn(waitingPatient1);
 		
 		Mockito.when(waitingPatientRepository.getOne(2)).thenReturn(waitingPatient2);
