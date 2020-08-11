@@ -31,12 +31,6 @@ public interface IDiagnosticCenterService {
 
 	void removeBed(String diagnosticCenterUsername, Integer bedId) throws Exception;
 
-	List<Bed> getBeds();
-
-	List<Bed> admitPatient();
-
-	List<Bed> canNotAdmitPatient();
-
-	List<Bed> dischargePatient();
+	
 
 }

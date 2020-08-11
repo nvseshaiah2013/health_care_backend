@@ -230,26 +230,5 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 	
 	// Venkat Ends
 
-	BedDao dao;
 
-
-	@Override
-	public List<Bed> getBeds() {
-		return dao.getAllBeds();
-		
-	}
-	@Override
-	public List<Bed> admitPatient() {
-		return dao.getVacantBeds();
-		
-	}
-	@Override
-	public List<Bed> canNotAdmitPatient(){
-		return dao.getVacantBeds();
-	}
-	@Override
-	public List<Bed> dischargePatient() {
-		return dao.deallocateAssignedBed();
-		
-	}
 }
