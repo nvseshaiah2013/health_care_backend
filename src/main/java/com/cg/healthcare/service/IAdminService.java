@@ -17,7 +17,7 @@ public interface IAdminService {
 	DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId);
 
 	// Remove
-	List<DiagnosticCenter> removeDiagnosticCenter(int diagnosticCenterId);
+	List<DiagnosticCenter> removeDiagnosticCenter(int diagnosticCenterId) throws Exception;
 
 	// Update
 	DiagnosticCenter updateDiagnosticCenter(DiagnosticCenter diagnosticCenter);
