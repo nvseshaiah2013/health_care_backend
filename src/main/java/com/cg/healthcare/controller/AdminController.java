@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.healthcare.service.IAdminService;
 import com.cg.healthcare.service.IJwtUtil;
 
 @RestController
@@ -14,6 +15,9 @@ public class AdminController {
 	
 	@Autowired
 	private IJwtUtil jwtUtil;
+	
+	@Autowired
+	private IAdminService adminService;
 
 	public String getAdminByUsername(HttpServletRequest request) throws Exception {
 		String header = request.getHeader("Authorization");
@@ -21,4 +25,6 @@ public class AdminController {
 		String username = jwtUtil.extractUsername(token);
 		return username;	
 }
+	
+	
 }

@@ -29,6 +29,7 @@ import com.cg.healthcare.exception.TestNotPresentInCenter;
 import com.cg.healthcare.exception.UsernameAlreadyExistsException;
 import com.cg.healthcare.requests.DiagnosticCenterSignUpRequest;
 import com.cg.healthcare.service.AdminService;
+import com.cg.healthcare.service.IAdminService;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -117,7 +118,9 @@ public class AdminTests {
 	 * Sachin Kumar( Ends )
 	 */
 	
-	
+	/*
+	 * Ayush Gupta code starts
+	 */
 	
 	@Mock
 	private TestRepository testRepository;

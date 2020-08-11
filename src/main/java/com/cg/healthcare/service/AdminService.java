@@ -282,11 +282,13 @@ public class AdminService implements IAdminService {
 	@Override
 	public DiagnosticTest addNewTest(DiagnosticTest test) {
 		DiagnosticTest addedTest=testRepository.save(test);
+		LOGGER.info("test added successfully...");
 		return addedTest;
 	}
 	@Override
 	public DiagnosticTest updateTestDetail(DiagnosticTest test) {
 		DiagnosticTest updatedTest=testRepository.save(test);
+		LOGGER.info("test updated successfully...");
 		return updatedTest;
 	}
 	
@@ -301,6 +303,7 @@ public class AdminService implements IAdminService {
 		DiagnosticCenter center=centerRepository.getOne(centerId);
 		List<DiagnosticTest> testList=new LinkedList<>(center.getTests());
 		if(testList.size()==0) {
+			LOGGER.error("No Test Found At This Center");
 			throw new NoTestFoundAtThisCenterException("No Test Found At This Center");
 		}
 		return testList;
@@ -311,6 +314,7 @@ public class AdminService implements IAdminService {
 		List<DiagnosticTest> centerTest=new LinkedList<DiagnosticTest>(center.getTests());
 		for(int i=0;i<tests.size();i++) {
 			if(centerTest.contains(tests.get(i))) {
+				LOGGER.error("Some Tests are already Found in Diagnostic Center");
 				throw new TestAlreadyFoundException("Some Tests are already Found in Diagnostic Center");
 			}
 		}
@@ -325,11 +329,13 @@ public class AdminService implements IAdminService {
 		List<DiagnosticTest> centerTest=new LinkedList<DiagnosticTest>(center.getTests());
 		for(int i=0;i<tests.size();i++) {
 			if(!centerTest.contains(tests.get(i))) {
+				LOGGER.error("Some Tests are not present in Diagnostic Center");
 				throw new TestNotPresentInCenter("Some Tests are not present in Diagnostic Center");
 			}
 		}
 		center.getTests().removeAll(tests);
 		centerRepository.save(center);
+		LOGGER.info("Tests are removed successfully....");
 		List<DiagnosticTest> updatedTestList=new LinkedList<DiagnosticTest>(center.getTests());
 		return updatedTestList;
 	}
