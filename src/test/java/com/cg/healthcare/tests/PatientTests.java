@@ -142,6 +142,7 @@ public class PatientTests {
 	{
 		Mockito.when(appointmentRepository.getOne(10)).thenReturn(mockAppointment);
 		Mockito.when(diagnosticCenterRepository.getOne(20)).thenReturn(mockDiagnosticCenter);
+
 		DiagnosticTest dt=mockAppointment.getDiagnosticCenter().getTests().stream().findFirst().get();
 		Mockito.when(testResultRepository.getOne(1001)).thenReturn(mockTestResult);
 		TestResult tr=patientService.viewTestResult(1001);
