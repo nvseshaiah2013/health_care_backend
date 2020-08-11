@@ -30,6 +30,7 @@ import com.cg.healthcare.entities.VentilatorBed;
 import com.cg.healthcare.entities.WaitingPatient;
 import com.cg.healthcare.exception.AppointmentNotApprovedException;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
+import com.cg.healthcare.exception.DiagnosticCenterNotPresentException;
 import com.cg.healthcare.exception.InvalidBedAllocationException;
 import com.cg.healthcare.exception.InvalidBedTypeException;
 import com.cg.healthcare.exception.NoBedAvailableException;
@@ -74,35 +75,54 @@ public class AdminService implements IAdminService {
 				diagnosticCenter.getContactNo(), diagnosticCenter.getAddress(), diagnosticCenter.getContactEmail(),
 				diagnosticCenter.getServicesOffered());
 		DiagnosticCenter addedCenter = diagnosticCenterRepository.save(newDiagnosticCenter);
+		LOGGER.info("Diagnostic center added successfully...");
 		return addedCenter;
 	}
 
 	// Get by Id
 	@Override
-	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId) {
+	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId){
 		DiagnosticCenter center = diagnosticCenterRepository.findById(diagnosticCenterId).get();
+		LOGGER.info("Fetched diagnostic center successfully...");
 		return center;
 	}
 
 	// Remove
 	@Override
-	public List<DiagnosticCenter> removeDiagnosticCenter(int diagnosticCenterId) {
+	public List<DiagnosticCenter> removeDiagnosticCenter(int diagnosticCenterId) throws Exception{
+		
 		DiagnosticCenter center = getDiagnosticCenterById(diagnosticCenterId);
+		
+		if(center==null)
+		{
+			throw new DiagnosticCenterNotPresentException("Diagnostic center not present");
+		}
 		diagnosticCenterRepository.delete(center);
+		userRepository.deleteById(center.getId());
+		LOGGER.info("Diagnostic center removed successfully...");
 		return getAllDiagnosticCenter();
 	}
 
 	// Update
 	@Override
 	public DiagnosticCenter updateDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
-		DiagnosticCenter updatedCenter = diagnosticCenterRepository.save(diagnosticCenter);
+		DiagnosticCenter center = getDiagnosticCenterById(diagnosticCenter.getId());
+		center.setId(diagnosticCenter.getId());
+		center.setName(diagnosticCenter.getName());
+		center.setContactNo(diagnosticCenter.getContactNo());
+		center.setAddress(diagnosticCenter.getAddress());
+		center.setContactEmail(diagnosticCenter.getContactEmail());
+		center.setServicesOffered(diagnosticCenter.getServicesOffered());
+		DiagnosticCenter updatedCenter = diagnosticCenterRepository.save(center);
+		LOGGER.info("Diagnostic center updated successfully...");
 		return updatedCenter;
 	}
 
 	// GetAll
 	@Override
-	public List<DiagnosticCenter> getAllDiagnosticCenter() {
+	public List<DiagnosticCenter> getAllDiagnosticCenter(){
 		List<DiagnosticCenter> centers = diagnosticCenterRepository.findAll();
+		LOGGER.info("Fetched all diagnostic centers successfully...");
 		return centers;
 	}
 

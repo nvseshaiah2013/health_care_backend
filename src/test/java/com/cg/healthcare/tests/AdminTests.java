@@ -29,7 +29,6 @@ import com.cg.healthcare.exception.TestNotPresentInCenter;
 import com.cg.healthcare.exception.UsernameAlreadyExistsException;
 import com.cg.healthcare.requests.DiagnosticCenterSignUpRequest;
 import com.cg.healthcare.service.AdminService;
-import com.cg.healthcare.service.IAdminService;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -44,18 +43,35 @@ public class AdminTests {
 	@Mock
 	private DiagnosticCenterRepository diagnosticCenterRepository;
 	
-	private static User mockDiagnosticUser;
-	private static DiagnosticCenter mockDiagnosticCenter;
-	private static DiagnosticCenterSignUpRequest mockRequestSignUp;
+	private static User mockDiagnosticUser, mockDiagnosticUser2, mockDiagnosticUser3, mockDiagnosticUser4;
+	private static DiagnosticCenter mockDiagnosticCenter, mockDiagnosticCenter2, mockDiagnosticCenter3, mockDiagnosticCenter4;
+	private static DiagnosticCenterSignUpRequest mockRequestSignUp, mockRequestSignUp2, mockRequestSignUp3, mockRequestSignUp4;
 	
 	@BeforeEach
 	public void init()
 	{
-		mockDiagnosticUser = new User(10, "center1@gmail.com", "Password@123", "ROLE_CENTER");
+		mockDiagnosticUser = new User(10, "center1@gmail.com", "Password@12310", "ROLE_CENTER");
+		mockDiagnosticUser2 = new User(11, "center2@gmail.com", "Password@12311", "ROLE_CENTER");
+		mockDiagnosticUser3 = new User(12, "center3@gmail.com", "Password@12312", "ROLE_CENTER");
+		mockDiagnosticUser4 = new User(13, "center4@gmail.com", "Password@12313", "ROLE_CENTER");
+		
 		mockDiagnosticCenter = new DiagnosticCenter(mockDiagnosticUser.getId(), "Center 1", "9876543210", "Address",
 				"email@gmail.com", "Services");
+		mockDiagnosticCenter2 = new DiagnosticCenter(mockDiagnosticUser2.getId(), "Center 2", "9474543560", "Address2",
+				"email2@gmail.com", "Services2");
+		mockDiagnosticCenter3 = new DiagnosticCenter(mockDiagnosticUser3.getId(), "Center 3", "7256489312", "Address3",
+				"email3@gmail.com", "Services3");
+		mockDiagnosticCenter4 = new DiagnosticCenter(mockDiagnosticUser4.getId(), "Center 4", "8624576810", "Address4",
+				"email4@gmail.com", "Services4");
+		
 		mockRequestSignUp = new DiagnosticCenterSignUpRequest("Center 1","9876543210","Address","email@gmail.com", "Services",
-				"center1@gmail.com","Password@123");
+				"center1@gmail.com","Password@12310");
+		mockRequestSignUp2 = new DiagnosticCenterSignUpRequest("Center 2","9474543560","Address2","email2@gmail.com", "Services2",
+				"center2@gmail.com","Password@12311");
+		mockRequestSignUp3 = new DiagnosticCenterSignUpRequest("Center 3","7256489312","Address3","email3@gmail.com", "Services3",
+				"center3@gmail.com","Password@12312");
+		mockRequestSignUp4 = new DiagnosticCenterSignUpRequest("Center 4","8624576810","Address4","email4@gmail.com", "Services4",
+				"center4@gmail.com","Password@12313");
 		
 		diagnosticCenter=new DiagnosticCenter("Akash Diagnostic Center","1223","UP","akash@gmail.com","testing");
 		diagnosticCenter.setId(101);
@@ -89,10 +105,9 @@ public class AdminTests {
 	}
 	
 	@Test 
-	public void removeDiagnosticCenter()
+	public void removeDiagnosticCenter() throws Exception
 	{
 		Mockito.when(diagnosticCenterRepository.findById(10)).thenReturn(Optional.of(mockDiagnosticCenter));
-		//Mockito.when(diagnosticCenterRepository.delete(mockDiagnosticCenter)).thenReturn(Optional.of(mockDiagnosticCenter));
 		List<DiagnosticCenter> center = adminService.removeDiagnosticCenter(mockDiagnosticCenter.getId());
 		assertEquals(0,center.size());
 	}
