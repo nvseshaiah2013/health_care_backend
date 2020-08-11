@@ -60,7 +60,7 @@ public class AdminService implements IAdminService {
 	@Autowired
 	private WaitingPatientRepository waitingPatientRepository;
 
-	// Add
+	// Add diagnostic center
 	@Override
 	public DiagnosticCenter addDiagnosticCenter(DiagnosticCenterSignUpRequest diagnosticCenter) throws Exception {
 		User toFindUser = userRepository.findByUsername(diagnosticCenter.getUserName());
@@ -79,7 +79,7 @@ public class AdminService implements IAdminService {
 		return addedCenter;
 	}
 
-	// Get by Id
+	// Get diagnostic center by Id
 	@Override
 	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId){
 		DiagnosticCenter center = diagnosticCenterRepository.findById(diagnosticCenterId).get();
@@ -87,7 +87,7 @@ public class AdminService implements IAdminService {
 		return center;
 	}
 
-	// Remove
+	// Remove diagnostic center by Id
 	@Override
 	public List<DiagnosticCenter> removeDiagnosticCenter(int diagnosticCenterId) throws Exception{
 		
@@ -103,7 +103,7 @@ public class AdminService implements IAdminService {
 		return getAllDiagnosticCenter();
 	}
 
-	// Update
+	// Update diagnostic center
 	@Override
 	public DiagnosticCenter updateDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
 		DiagnosticCenter center = getDiagnosticCenterById(diagnosticCenter.getId());
@@ -118,7 +118,7 @@ public class AdminService implements IAdminService {
 		return updatedCenter;
 	}
 
-	// GetAll
+	// Get all diagnostic center
 	@Override
 	public List<DiagnosticCenter> getAllDiagnosticCenter(){
 		List<DiagnosticCenter> centers = diagnosticCenterRepository.findAll();

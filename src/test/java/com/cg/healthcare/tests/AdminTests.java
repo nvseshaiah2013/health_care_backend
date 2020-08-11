@@ -83,6 +83,8 @@ public class AdminTests {
 	/*
 	 * Sachin Kumar( Starts )
 	 */
+	
+	//Add diagnostic center test case
 	@Test
 	public void addDiagnosticCenter() throws Exception
 	{
@@ -96,6 +98,7 @@ public class AdminTests {
 		
 	}
 	
+	//Get diagnostic center by id test case
 	@Test
 	public void getDiagnosticCenterById()
 	{
@@ -104,6 +107,7 @@ public class AdminTests {
 		assertEquals(10, center.getId());
 	}
 	
+	//Remove diagnostic center test case
 	@Test 
 	public void removeDiagnosticCenter() throws Exception
 	{
@@ -112,6 +116,7 @@ public class AdminTests {
 		assertEquals(0,center.size());
 	}
 	
+	//Update diagnostic center test case
 	@Test
 	public void updateDiagnosticCenter()
 	{
@@ -120,6 +125,7 @@ public class AdminTests {
 		assertEquals(10, center.getId());
 	}
 	
+	//Get all diagnostic center test case
 	@Test
 	public void getAllDiagnosticCenter()
 	{
