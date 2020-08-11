@@ -40,8 +40,7 @@ public class TestResult implements Serializable{
 		
 	}
 
-<<<<<<< HEAD
-=======
+
 	public TestResult(int id, double testReading,
 			@Pattern(regexp = "(Below Normal)|(Normal)|(Above Normal)") String condition, Appointment appointment) {
 		this.id = id;
@@ -50,13 +49,9 @@ public class TestResult implements Serializable{
 		this.appointment = appointment;
 	}
 
->>>>>>> d949bff287ea5e67c38ecda55dba96ada863dfbd
-
-
 	public double getTestReading() {
 		return testReading;
 	}
-
 	public void setTestReading(double testReading) {
 		this.testReading = testReading;
 	}
