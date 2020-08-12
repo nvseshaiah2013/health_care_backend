@@ -3,6 +3,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +23,7 @@ import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
+import com.cg.healthcare.entities.WaitingPatient;
 import com.cg.healthcare.requests.DiagnosticCenterSignUpRequest;
 import com.cg.healthcare.responses.SuccessMessage;
 import com.cg.healthcare.service.IAdminService;
@@ -28,6 +32,8 @@ import com.cg.healthcare.service.IJwtUtil;
 @RestController
 @RequestMapping(path="/api/admin")
 public class AdminController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
 	
 	@Autowired
 	private IJwtUtil jwtUtil;
@@ -106,23 +112,25 @@ public class AdminController {
 	 * 
 	 */	
 	
-	@GetMapping("/allappointments/{id}{test}{status}")
-	public List<Appointment> getAppointmentList(@PathVariable("id") String id,@PathVariable("test") String test,
-			@PathVariable("test") String status){
+	@GetMapping("/getappointment/{id}")
+	public ResponseEntity<List<Appointment>> getAppointmentList(@PathVariable("id") String id, @RequestBody Map<String, String> request){
 		
 		int centreId=Integer.parseInt(id);
-		int status1=Integer.parseInt(status);
-		return adminService.getApppointmentList(centreId,test,status1); 
+		int status1= Integer.parseInt(request.get("status"));
+		List<Appointment> response=adminService.getApppointmentList(centreId,request.get("test"),status1); 
+		LOGGER.info("Admin watching appointments for centre id "+centreId+" , test "+request.get("test")+" having status "+status1);
+		return new ResponseEntity<List<Appointment>>(response,HttpStatus.OK);
 	}
 	
-	@PostMapping("/processAppointment")
-	public String processAppointment(@RequestBody Map<String,String> appDetails) {
-		int centreId=Integer.parseInt(appDetails.get("id"));
-		String test=appDetails.get("test");
-		int testtime=Integer.parseInt(appDetails.get("testtime"));		// time taken by test.
-		int seats=Integer.parseInt(appDetails.get("seats"));				// no of appointment can handle
-		return adminService.processAppointment(centreId,test,testtime,seats);
-		
+	@PostMapping("/processappointment")
+	public ResponseEntity<String> processAppointment(@RequestBody Map<String,String> appointmentDetails) {
+		int centreId=Integer.parseInt(appointmentDetails.get("id"));
+		String test=appointmentDetails.get("test");
+		int testtime=Integer.parseInt(appointmentDetails.get("testtime"));			
+		int seats=Integer.parseInt(appointmentDetails.get("seats"));				// no of appointment can handle
+		LOGGER.info("Processing appointments with centre id "+centreId+" ,test "+test+" ,testtime "+testtime+"  & no of seat at a time "+seats);
+		String response=adminService.processAppointment(centreId,test,testtime,seats);	
+		return new ResponseEntity<String>(response,HttpStatus.OK);
 	}
 	
 	/*
@@ -181,4 +189,28 @@ public class AdminController {
 	 * Ayush Gupta code ends
 	 */
 	
+	/**
+	 * @author Venkat
+	 * @return Returns Success if All patients are allocated beds successfully.
+	 */
+	
+	@PostMapping(value = "/allocateBeds", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<SuccessMessage> allocateBedsToWaitingPatients() throws Exception {
+		LOGGER.info("Beds Allocated Successfully");
+		return new ResponseEntity<SuccessMessage>(new SuccessMessage("Bed Allocation", "Beds Allocated Successfully"),HttpStatus.OK);
+	}
+	
+	/**
+	 * 
+	 * @author Venkat
+	 * @return A List of WaitingPatients
+	 * @throws Exception
+	 */
+	
+	@GetMapping(value = "/getWaitingPatients", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<WaitingPatient>> getWaitingPatients() throws Exception{
+		List<WaitingPatient> patients = adminService.getWaitingPatients();
+		LOGGER.info("Waiting Patients Fetched!");
+		return new ResponseEntity<List<WaitingPatient>>(patients,HttpStatus.OK);
+	}
 }

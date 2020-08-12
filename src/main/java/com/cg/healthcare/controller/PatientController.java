@@ -1,6 +1,7 @@
 package com.cg.healthcare.controller;
 
 
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,25 +29,25 @@ public class PatientController {
 	 */
 	
 	@PostMapping(value="/allBeds", produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Set<Bed>> getAllBeds(@RequestBody String diagnosticCenterName) throws Exception{
-		Set<Bed> beds=patientService.getAllBed(diagnosticCenterName);
+	public ResponseEntity<Set<Bed>> getAllBeds(@RequestBody Map<String,String> request) throws Exception{
+		Set<Bed> beds=patientService.getAllBed(request.get("username"));
 		return new ResponseEntity<Set<Bed>>(beds,HttpStatus.OK);
 	}
 	
 	@PostMapping(value="/allTestResult", produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Set<TestResult>> getAllTestResult(@RequestBody String patientUserName) throws Exception{
-		Set<TestResult> testResults=patientService.getAllTestResult(patientUserName);
+	public ResponseEntity<Set<TestResult>> getAllTestResult(@RequestBody Map<String,String> request) throws Exception{
+		Set<TestResult> testResults=patientService.getAllTestResult(request.get("username"));
 		return new ResponseEntity<Set<TestResult>>(testResults,HttpStatus.OK);
 	}
 	
 	@PostMapping(value="/bedStatus", produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Bed> getBedStatus(@RequestBody int appointmentId) throws Exception{
-		return new ResponseEntity<Bed>(patientService.viewBedStatus(appointmentId),HttpStatus.OK);
+	public ResponseEntity<Bed> getBedStatus(@RequestBody Map<String,Integer> request) throws Exception{
+		return new ResponseEntity<Bed>(patientService.viewBedStatus(request.get("appointmentId")),HttpStatus.OK);
 	}
 	
 	@PostMapping(value="/testResult", produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TestResult> getTestResultById(@RequestBody int testResultId) throws Exception{
-		return new ResponseEntity<TestResult>(patientService.viewTestResult(testResultId),HttpStatus.OK);
+	public ResponseEntity<TestResult> getTestResultById(@RequestBody Map<String,Integer> request) throws Exception{
+		return new ResponseEntity<TestResult>(patientService.viewTestResult(request.get("testResultId")),HttpStatus.OK);
 	}
 	
 	// Pritam Ends

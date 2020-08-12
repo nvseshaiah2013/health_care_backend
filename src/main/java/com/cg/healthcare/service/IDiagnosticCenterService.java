@@ -32,7 +32,7 @@ public interface IDiagnosticCenterService {
 
 	void removeBed(String diagnosticCenterUsername, Integer bedId) throws Exception;
 
-	String updateTestResult(TestResultForm testResult);
+	String updateTestResult(TestResultForm testResult) throws Exception;
 
 	
 

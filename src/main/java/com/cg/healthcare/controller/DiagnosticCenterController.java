@@ -165,9 +165,9 @@ public class DiagnosticCenterController {
 	}
 	
 	/**
-	 * 
-	 * @param request
-	 * @return
+	 * Controller to Return List of Beds in DiagnosticCenter
+	 * @param request - HttpServletRequest
+	 * @return BedsList
 	 * @throws Exception
 	 */
 	@GetMapping(value = "/getBeds", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -201,9 +201,15 @@ public class DiagnosticCenterController {
 		return new ResponseEntity<BedsList>(bedsList, HttpStatus.OK);
 	}
 	
+	/**
+	 * Updates the Test Result in the Database
+	 * @param testresultForm
+	 * @return
+	 */
+	
 	
 	@PostMapping("/updatetestresult")
-	public String updateTestResult(@RequestBody TestResultForm testresultForm)
+	public String updateTestResult(@RequestBody TestResultForm testresultForm) throws Exception
 	{
 			return diagnosticService.updateTestResult(testresultForm);
 	}
@@ -215,9 +221,6 @@ public class DiagnosticCenterController {
 	 * @return - SuccessMessage
 	 * @throws Exception - JWTException
 	 */
-	
-	
-
 	public String getDiagnosticCenterByUsername(HttpServletRequest request) throws Exception {
 		String header = request.getHeader("Authorization");
 		String token = header.substring(7);

@@ -39,6 +39,7 @@ import com.cg.healthcare.exception.InvalidGeneralBedException;
 import com.cg.healthcare.exception.InvalidICCUBedException;
 import com.cg.healthcare.exception.InvalidICUBedException;
 import com.cg.healthcare.exception.InvalidVentilatorBedException;
+import com.cg.healthcare.exception.NoAppointmentException;
 import com.cg.healthcare.exception.OccupiedBedException;
 import com.cg.healthcare.requests.TestResultForm;
 
@@ -105,6 +106,12 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 		return diagnosticCenter;
 	}
 
+	/**
+	 * Method to Add ICU Beds
+	 * @author Venkat
+	 * @return void
+	 * @exception InvalidICUBedException
+	 */
 	@Override
 	public void addICUBeds(String diagnosticCenterUsername, int noOfBeds, double bedPrice, boolean isKneeTiltAvailable,
 			boolean isHeadTiltAvailable, boolean isElectric, int noOfFunctions) throws Exception {
@@ -138,6 +145,12 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 		diagnosticCenterRepo.save(diagnosticCenter);
 	}
 
+	/**
+	 * Method To add ICCU Beds
+	 * @author Venkat
+	 * @return void
+	 * @throws InvalidICCUBeds Exception
+	 */
 	@Override
 	public void addICCUBeds(String diagnosticCenterUsername, int noOfBeds, double bedPrice, boolean batteryBackUp,
 			boolean hasABS, boolean remoteOperated, String type) throws Exception {
@@ -169,6 +182,12 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 		diagnosticCenterRepo.save(diagnosticCenter);
 	}
 
+	/**
+	 * Method to Add General Beds
+	 * @author Venkat
+	 * @return void
+	 * @throws Invalid GeneralBedException
+	 */
 	@Override
 	public void addGeneralBeds(String diagnosticCenterUsername, int noOfBeds, double bedPrice, boolean isMovable,
 			String frameMaterial) throws Exception {
@@ -198,6 +217,12 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 		diagnosticCenterRepo.save(diagnosticCenter);
 	}
 
+	/**
+	 * Method to Add Ventilator Beds
+	 * @author Venkat
+	 * @return void
+	 * @throws InvalidVentilatorBedException
+	 */
 	@Override
 	public void addVentilatorBeds(String diagnosticCenterUsername, int noOfBeds, double bedPrice, int respiratoryRate,
 			String type) throws Exception {
@@ -229,12 +254,24 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 		diagnosticCenterRepo.save(diagnosticCenter);
 	}
 
+	/**
+	 * Method to Get the List Of Beds
+	 * @author Venkat
+	 * @return Set<Bed>
+	 * @exception Exception
+	 */
 	@Override
 	public Set<Bed> getBeds(String diagnosticCenterUsername) throws Exception {
 		DiagnosticCenter diagnosticCenter = getDiagnosticCenterByUsername(diagnosticCenterUsername);
 		return diagnosticCenter.getBeds();
 	}
 
+	/**
+	 * Method To Remove the Bed From Diagnostic Center
+	 * @author Venkat
+	 * @return void
+	 * @exception OccupiedBedException
+	 */
 	@Override
 	public void removeBed(String diagnosticCenterUsername, Integer bedId) throws Exception {
 
@@ -245,7 +282,7 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 		Optional<Bed> toBeDeletedBed = beds.stream().filter((bed) -> bed.getId() == bedId).findFirst();
 
 		if (toBeDeletedBed.isPresent()) {
-
+			
 			if (toBeDeletedBed.get().isOccupied()) {
 				LOGGER.error("Error While Deleting the bed as bed is occupied");
 				throw new OccupiedBedException("Bed Exception",
@@ -254,6 +291,7 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 				diagnosticCenter.getBeds().remove(toBeDeletedBed.get());
 				bedRepository.delete(toBeDeletedBed.get());
 				diagnosticCenterRepo.save(diagnosticCenter);
+				LOGGER.info("Bed Deleted");
 			}
 		} else {
 			LOGGER.error("Error while trying to delete the bed");
@@ -267,14 +305,23 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 	// Madhu Starts
 	
 	@Override
-	public String updateTestResult(TestResultForm testResult) {
+	public String updateTestResult(TestResultForm testResult) throws Exception {
 		TestResult result =new TestResult();
-		Appointment appointment = appointmentRepository.getOne(testResult.getAppointmentId());
-		result.setCondition(testResult.getCondition());
-		result.setTestReading(testResult.getTestReading());
-		result.setAppointment(appointment);
-		testResultRepository.save(result);
-		return "Test results of "+testResult.getAppointmentId()+"Updated";
+		if (appointmentRepository.existsById(testResult.getAppointmentId()))
+		{
+			Appointment appointment = appointmentRepository.getOne(testResult.getAppointmentId());
+			result.setCondition(testResult.getCondition());
+			result.setTestReading(testResult.getTestReading());
+			result.setAppointment(appointment);
+			testResultRepository.save(result);
+			return "Test results of "+testResult.getAppointmentId()+"Updated";
+		} 
+		else
+		{
+			LOGGER.error("Error while Updating the Test Result");
+			throw new NoAppointmentException("Appointment Exception",
+					"Entered appointment id does not xists");
+		}
 	}
 	
 	// Madhu Ends

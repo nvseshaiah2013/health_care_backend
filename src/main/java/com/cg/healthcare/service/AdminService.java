@@ -34,6 +34,7 @@ import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.VentilatorBed;
 import com.cg.healthcare.entities.WaitingPatient;
 import com.cg.healthcare.exception.AppointmentNotApprovedException;
+import com.cg.healthcare.exception.DataBaseException;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 import com.cg.healthcare.exception.DiagnosticCenterNotPresentException;
 import com.cg.healthcare.exception.InvalidBedAllocationException;
@@ -94,7 +95,7 @@ public class AdminService implements IAdminService {
 	}
 
 	// Get diagnostic center by Id
-	@Override
+	
 	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId) {
 		DiagnosticCenter center = diagnosticCenterRepository.findById(diagnosticCenterId).get();
 		LOGGER.info("Fetched diagnostic center successfully...");
@@ -144,6 +145,14 @@ public class AdminService implements IAdminService {
 	 */
 
 	// Venkat Starts
+	
+	/**
+	 * @author Venkat
+	 * Function to Allocated Beds to the Waiting Patient who have taken appointment
+	 * returns void
+	 * @throws DiagnosticCenterNotFoundException, InvalidBedAllocationException, 
+	 * AppointmentNotApprovedException, PartialBedAllocationException, NoBedAvailableException
+	 */
 
 	@Override
 	public void allocateBeds(int diagnosticCenterId, List<Integer> waitingPatientIds, String type) throws Exception {
@@ -244,7 +253,13 @@ public class AdminService implements IAdminService {
 		}
 	}
 
-	@Override
+	/**
+	 * @author Venkat
+	 * @param bedType - String Type of Bed Category - Ventilator, ICU, ICCU, General
+	 * @return Class Type
+	 * @throws Exception - InvalidBedTypeException
+	 */
+
 	public Class<?> getBedType(String bedType) throws Exception {
 
 		if (bedType.equals("General")) {
@@ -261,6 +276,12 @@ public class AdminService implements IAdminService {
 		}
 	}
 
+	/**
+	 * @author Venkat
+	 * @param diagnosticCenterId - Integer
+	 * @return - Set<Bed>
+	 * @throws DiagnosticCenterNotFoundException
+	 */
 	@Override
 	public Set<Bed> getBeds(int diagnosticCenterId) throws Exception {
 
@@ -279,7 +300,13 @@ public class AdminService implements IAdminService {
 		}
 	}
 
-	List<WaitingPatient> getWaitingPatients() throws Exception {
+	/**
+	 * Returns the list Of Waiting Patients in the HealthCare system
+	 * @return - List<WaitingPatient>
+	 *
+	 */
+	@Override
+	public List<WaitingPatient> getWaitingPatients() throws Exception {
 		return this.waitingPatientRepository.findAll();
 	}
 
@@ -425,62 +452,87 @@ public class AdminService implements IAdminService {
 	 * Sachin Pant Starts
 	 * 
 	 */
-	@Override
-	public List<Appointment> getApppointmentList(int centreId, String test, int status) {
-
-		List<Appointment> allappoints = appointmentRepo.findAll();
-		List<Appointment> appointments = new ArrayList<>();
-		for (Appointment a : allappoints) {
-			int tomorrow = LocalDateTime.now().getDayOfYear() + 1;
-			int date = a.getAppointmentDate().toLocalDateTime().getDayOfYear();
-
-			if (a.getApprovalStatus() == status && test.equals(a.getDiagnosticTest().getTestName())
-					&& centreId == a.getDiagnosticCenter().getId() && tomorrow == date)
-				appointments.add(a);
-
+public List<Appointment> getApppointmentList(int centreId,String test,int status){
+		
+		List<Appointment> allappoints;
+		try {
+			allappoints=appointmentRepo.findAll();
 		}
+		catch(Exception e) {
+			throw new DataBaseException();
+		}
+		
+		List<Appointment> appointments=new ArrayList<>();
+		for(Appointment a:allappoints) {
+			int tomorrow =LocalDateTime.now().getDayOfYear()+1;					// admin will see next day's appointment
+			int date=a.getAppointmentDate().toLocalDateTime().getDayOfYear();
+			
+			if(a.getApprovalStatus()==status && test.equals(a.getDiagnosticTest().getTestName()) &&
+					centreId==a.getDiagnosticCenter().getId() && tomorrow==date)
+				appointments.add(a);
+		}
+		LOGGER.info(appointments.size() + " appointments has been accessed.");
 		return appointments;
 	}
-
-	@Override
-	public String processAppointment(int centreId, String test, int bursttime, int seats) {
-
-		List<Appointment> appointment = this.getApppointmentList(centreId, test, 0); // 0 means neutral
-		for (Appointment a : appointment) {
-			int already = checkSeatLeft(bursttime, seats, a, appointment);
-			if (already < seats)
-				a.setApprovalStatus(1); // confirm
-			else
-				a.setApprovalStatus(2); // rejected
-
+	
+	
+	// bursttime is the time taken to handle one patient
+	// seats is the no of test can be done at a time
+	public String processAppointment(int centreId,String test,int bursttime,int seats) {
+		
+		List<Appointment> appointment=this.getApppointmentList(centreId, test, 0);		// 0 means neutral
+		for(Appointment a:appointment) {
+			int already=checkSeatLeft(bursttime,seats,a,appointment);
+			if(already<seats)
+			{
+				a.setApprovalStatus(1);													// confirm
+				LOGGER.info("appointment with id : "+a.getId()+" is approved");
+			}
+			else 
+			{
+				a.setApprovalStatus(2);													// rejected
+				LOGGER.info("appointment with id : "+a.getId()+" is rejected");
+			}
+			
+			try {
+				appointmentRepo.save(a);		//	status is updated
+			}
+			catch(Exception e) {
+				LOGGER.info("appointment not updated for some issue in database for appointment Id: "+a.getId());
+				throw new DataBaseException();
+			}
 		}
 		return "done";
 	}
-
-	public static int checkSeatLeft(int bursttime, int seats, Appointment currApp, List<Appointment> appointments) {
-		int already = 0;
-		for (Appointment a : appointments) {
-
-			if (a.getApprovalStatus() != 1 || a.getId() == currApp.getId()) // if not approved or same appointment
+	
+	public static int checkSeatLeft(int bursttime,int seats,Appointment currApp,List<Appointment> appointments) {
+		int already=0;
+		for(Appointment a:appointments) {
+			
+			if(a.getApprovalStatus()!=1 || a.getId()==currApp.getId())		// if not approved or same appointment
+			{
+				//System.out.println("Same one");
 				continue;
-
-			int h1 = currApp.getAppointmentDate().toLocalDateTime().getHour();
-			int m1 = currApp.getAppointmentDate().toLocalDateTime().getMinute();
-
-			int h2 = a.getAppointmentDate().toLocalDateTime().getHour();
-			int m2 = a.getAppointmentDate().toLocalDateTime().getMinute();
-
-			if (coincide(h1, m1, h2, m2, bursttime)) // if time collide with approved request
+			}
+			
+			int h1=currApp.getAppointmentDate().toLocalDateTime().getHour();
+			int m1=currApp.getAppointmentDate().toLocalDateTime().getMinute();
+			
+			int h2=a.getAppointmentDate().toLocalDateTime().getHour();
+			int m2=a.getAppointmentDate().toLocalDateTime().getMinute();
+			
+			if(coincide(h1,m1,h2,m2,bursttime))						// if time collide with approved request
 				already++;
 		}
+		
 		return already;
 	}
-
-	public static boolean coincide(int hour1, int min1, int hour2, int min2, int bursttime) {
-
-		int time1 = 60 * hour1 + min1;
-		int time2 = 60 * hour2 + min2;
-		if (Math.min(time2, time1) + bursttime >= Math.max(time2, time1))
+	
+	public static boolean coincide(int hour1,int min1,int hour2,int min2,int bursttime) {
+		
+		int time1=60*hour1+min1;
+		int time2=60*hour2+min2;
+		if(Math.min(time2, time1)+bursttime>=Math.max(time2, time1))
 			return true;
 		else
 			return false;

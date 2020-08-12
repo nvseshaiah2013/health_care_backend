@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,6 +23,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.cg.healthcare.dao.AppointmentRepository;
 import com.cg.healthcare.dao.BedRepository;
 import com.cg.healthcare.dao.DiagnosticCenterRepository;
 import com.cg.healthcare.dao.TestRepository;
@@ -35,6 +37,7 @@ import com.cg.healthcare.entities.GeneralBed;
 import com.cg.healthcare.entities.IntensiveCareBed;
 import com.cg.healthcare.entities.IntensiveCriticalCareBed;
 import com.cg.healthcare.entities.Patient;
+import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.VentilatorBed;
 import com.cg.healthcare.exception.BedNotFoundException;
@@ -43,6 +46,7 @@ import com.cg.healthcare.exception.InvalidICCUBedException;
 import com.cg.healthcare.exception.InvalidICUBedException;
 import com.cg.healthcare.exception.InvalidVentilatorBedException;
 import com.cg.healthcare.exception.OccupiedBedException;
+import com.cg.healthcare.requests.TestResultForm;
 import com.cg.healthcare.service.DiagnosticCenterService;
 
 @ExtendWith(MockitoExtension.class)
@@ -64,6 +68,9 @@ public class DiagnosticCenterTests {
 	private TestResultRepository testResultRepository;
 	
 	@Mock
+	private AppointmentRepository appointmentRepository;
+	
+	@Mock
 	private BedRepository bedRepository; 
 
 	private static User mockDiagnosticUser;
@@ -72,6 +79,9 @@ public class DiagnosticCenterTests {
 	private static Patient mockPatient;
 	private static DiagnosticTest mockDiagnosticTest;
 	private static Appointment mockAppointment;
+	private static TestResultForm testResultForm;
+	private static TestResult mocKTestResult;
+	
 	
 	@BeforeEach
 	public void init() {
@@ -84,6 +94,8 @@ public class DiagnosticCenterTests {
 		mockDiagnosticTest.setId(1001);
 		final Timestamp timestamp = Timestamp.valueOf(LocalDateTime.of(LocalDate.of(2018, 10, 7), LocalTime.of(8, 45, 0)));
 		mockAppointment= new Appointment(1000,timestamp, 1, "Blood","Blood Pressure", mockPatient, mockDiagnosticCenter );
+		testResultForm=new TestResultForm(1000,"Normal",21.3);
+		mocKTestResult=new TestResult(1000,21.3,"Normal",mockAppointment);
 	}
 	@Test
 	public void getTestInfoTest()  {
@@ -100,79 +112,128 @@ public class DiagnosticCenterTests {
 	}
 	
 	@Test
+	public void updateTestResultsTest() throws Exception
+	{
+		Mockito.when(appointmentRepository.existsById(1000)).thenReturn(true);
+		Mockito.when(appointmentRepository.getOne(1000)).thenReturn(mockAppointment);
+		assertEquals("Test results of "+testResultForm.getAppointmentId()+"Updated",diagnosticCenterService.updateTestResult(testResultForm));
+	}
+	
+	@Test
 	public void vacantBedsList() {
 		Mockito.when(bedRepository.findAll()).thenReturn(Stream
 				.of( new Bed(1000,false,mockAppointment,1200.00,mockDiagnosticCenter)).collect(Collectors.toList()));
 		assertEquals(1,diagnosticCenterService.listOfVacantBeds().size());
 	}
 
+	/**
+	 * Test To Add Intensive Care Beds
+	 * @throws Exception
+	 */
 	@Test
+	@DisplayName("Add Intensive Care Beds Test")
 	public void addICUBedsTest() throws Exception {
 		Mockito.when(userRepository.findByUsername("center1@gmail.com")).thenReturn(mockDiagnosticUser);
 		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter);
+		for(int bedIndex = 0; bedIndex < 5; ++bedIndex) {
+			mockDiagnosticCenter.getBeds().add(new IntensiveCareBed(10000.0,true, true, true, 5));
+		}
+		Mockito.when(diagnosticCenterRepository.save(mockDiagnosticCenter)).thenReturn(mockDiagnosticCenter);
 		diagnosticCenterService.addICUBeds("center1@gmail.com", 5, 10000.0,true, true, true, 5);
 		Set<Bed> beds = diagnosticCenterService.getBeds("center1@gmail.com");
 		Long count = beds.stream().filter(bed -> (bed instanceof IntensiveCareBed)).count();
 		assertEquals(5, count);
 	}
 
+	/**
+	 * Test to Add Intensive Critical Care Beds
+	 * @throws Exception
+	 */
 	@Test
+	@DisplayName("Add Intensive Critical Care Bed Test")
 	public void addICCUBedsTest() throws Exception {
 		Mockito.when(userRepository.findByUsername("center1@gmail.com")).thenReturn(mockDiagnosticUser);
 		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter);
+		for(int bedIndex = 0; bedIndex < 3; ++bedIndex) {
+			mockDiagnosticCenter.getBeds().add(new IntensiveCriticalCareBed(11000.0,true, true, true, "Fowler"));
+		}
+		Mockito.when(diagnosticCenterRepository.save(mockDiagnosticCenter)).thenReturn(mockDiagnosticCenter);
 		diagnosticCenterService.addICCUBeds("center1@gmail.com", 3, 11000.0,true, true, true, "Fowler");
 		Set<Bed> beds = diagnosticCenterService.getBeds("center1@gmail.com");
 		Long count = beds.stream().filter(bed -> (bed instanceof IntensiveCriticalCareBed)).count();
 		assertEquals(3, count);
 	}
 
+	/**
+	 * Test to Add General Beds Test
+	 * @throws Exception
+	 */
 	@Test
+	@DisplayName("Add General Beds Test")
 	public void addGeneralBedsTest() throws Exception {
 		Mockito.when(userRepository.findByUsername("center1@gmail.com")).thenReturn(mockDiagnosticUser);
 		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter);
+		for(int bedIndex = 0; bedIndex < 6; ++bedIndex) {
+			mockDiagnosticCenter.getBeds().add(new GeneralBed(1000.0,true, "Steel"));
+		}
+		Mockito.when(diagnosticCenterRepository.save(mockDiagnosticCenter)).thenReturn(mockDiagnosticCenter);
 		diagnosticCenterService.addGeneralBeds("center1@gmail.com", 6, 1000.0,true, "Steel");
 		Set<Bed> beds = diagnosticCenterService.getBeds("center1@gmail.com");
 		Long count = beds.stream().filter(bed -> (bed instanceof GeneralBed)).count();
 		assertEquals(6, count);
 	}
 
+	/**
+	 * Test To Add Ventilator Beds
+	 * @throws Exception
+	 */
 	@Test
+	@DisplayName("Add Ventilator Beds")
 	public void addVentilatorBedsTest() throws Exception {
 		Mockito.when(userRepository.findByUsername("center1@gmail.com")).thenReturn(mockDiagnosticUser);
 		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter);
+		for(int bedIndex = 0; bedIndex < 7; ++bedIndex) {
+			mockDiagnosticCenter.getBeds().add(new VentilatorBed(5000.0,11,"Volume"));
+		}
+		Mockito.when(diagnosticCenterRepository.save(mockDiagnosticCenter)).thenReturn(mockDiagnosticCenter);
 		diagnosticCenterService.addVentilatorBeds("center1@gmail.com", 7, 5000.0,11,"Volume");
 		Set<Bed> beds = diagnosticCenterService.getBeds("center1@gmail.com");
 		Long count = beds.stream().filter(bed -> (bed instanceof VentilatorBed)).count();
 		assertEquals(7, count);
 	}
 
+	/**
+	 * Test To Remove Bed Successfully
+	 * @throws Exception
+	 */
 	@Test
+	@DisplayName("Test To Remove Bed")
 	public void removeBedSuccessfull() throws Exception {
 		Mockito.when(userRepository.findByUsername("center1@gmail.com")).thenReturn(mockDiagnosticUser);
 		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter);
-		diagnosticCenterService.addVentilatorBeds("center1@gmail.com", 7, 5000.0,11,"Volume");
-		Random random = new Random();
-		int noOfBeds = mockDiagnosticCenter.getBeds().size();
-		int currentIndex = 0;
-		int randomIndex = random.nextInt(noOfBeds);
-		Bed bedToBeRemoved = null;
-		Iterator<Bed> iterator = mockDiagnosticCenter.getBeds().iterator();
-		while(iterator.hasNext()) {
-			if(currentIndex == randomIndex) {
-				bedToBeRemoved = iterator.next();
-				break;
-			}
-			++currentIndex;
+		for(int bedIndex = 0; bedIndex < 7; ++bedIndex) {
+			VentilatorBed bed = new VentilatorBed(5000.0,11,"Volume");
+			bed.setId(bedIndex+1);
+			mockDiagnosticCenter.getBeds().add(bed);
 		}
-		diagnosticCenterService.removeBed(mockDiagnosticUser.getUsername(), bedToBeRemoved.getId());
-		assertEquals(6,mockDiagnosticCenter.getBeds().size());
+		diagnosticCenterService.removeBed("center1@gmail.com",2);
+		assertEquals(6,diagnosticCenterService.getBeds("center1@gmail.com").size());
 	}
 
+	/**
+	 * Removal of Non Existing Bed Throws Exception
+	 * @throws Exception
+	 */
 	@Test
+	@DisplayName("Removing A Non Existing Bed Throws Exception")
 	public void removeBedThrowsBedNotFoundException() throws Exception {
 		Mockito.when(userRepository.findByUsername("center1@gmail.com")).thenReturn(mockDiagnosticUser);
 		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter);
-		diagnosticCenterService.addVentilatorBeds("center1@gmail.com", 7, 5000.0,11,"Volume");
+		for(int bedIndex = 0; bedIndex < 7; ++bedIndex) {
+			VentilatorBed bed = new VentilatorBed(5000.0,11,"Volume");
+			bed.setId(bedIndex+1);
+			mockDiagnosticCenter.getBeds().add(bed);
+		}
 		Set<Integer> bedIds = mockDiagnosticCenter.getBeds().stream().map(bed -> bed.getId()).collect(Collectors.toSet());
 		assertThrows(BedNotFoundException.class, () -> {
 			diagnosticCenterService.removeBed(mockDiagnosticUser.getUsername(),Collections.max(bedIds) + 1);
@@ -180,11 +241,21 @@ public class DiagnosticCenterTests {
 		
 	}
 	
+	/**
+	 * Test to Throw an Exception when an Occupied Bed is being tried to delete
+	 * @throws Exception
+	 */
+	
 	@Test
+	@DisplayName("Occupied Exception on Bed Removal")
 	public void removeBedThrowsOccupiedException() throws Exception {
 		Mockito.when(userRepository.findByUsername("center1@gmail.com")).thenReturn(mockDiagnosticUser);
 		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter);
-		diagnosticCenterService.addVentilatorBeds("center1@gmail.com", 7, 5000.0,11,"Volume");
+		for(int bedIndex = 0; bedIndex < 7; ++bedIndex) {
+			VentilatorBed bed = new VentilatorBed(5000.0,11,"Volume");
+			bed.setId(bedIndex+1);
+			mockDiagnosticCenter.getBeds().add(bed);
+		}
 		Random random = new Random();
 		int noOfBeds = mockDiagnosticCenter.getBeds().size();
 		int currentIndex = 0;
@@ -206,8 +277,12 @@ public class DiagnosticCenterTests {
 			diagnosticCenterService.removeBed(mockDiagnosticUser.getUsername(),bedId);
 		} );
 	}
-	
+	/**
+	 * Method To Test Throwing Exception when invalid Ventilator Bed is Added
+	 * @throws Exception
+	 */
 	@Test
+	@DisplayName("Add Ventilator Bed Will Throw Exception")
 	public void addVentilatorBedThrowsException() throws Exception {
 		Mockito.when(userRepository.findByUsername("center1@gmail.com")).thenReturn(mockDiagnosticUser);
 		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter);
@@ -216,7 +291,12 @@ public class DiagnosticCenterTests {
 		});
 	}
 	
+	/**
+	 * Method To Test Throwing Exception when Invalid General Bed is added 
+	 * @throws Exception
+	 */
 	@Test
+	@DisplayName("Adding General Bed Throws Exception")
 	public void addGeneralBedThrowsException() throws Exception {
 		Mockito.when(userRepository.findByUsername("center1@gmail.com")).thenReturn(mockDiagnosticUser);
 		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter);
@@ -225,7 +305,12 @@ public class DiagnosticCenterTests {
 		});
 	}
 	
+	/**
+	 * Method To Test Throwing Exception when invalid ICU Bed is Added
+	 * @throws Exception
+	 */
 	@Test
+	@DisplayName("Adding ICU Bed Throws Exception")
 	public void addICUBedThrowsException() throws Exception {
 		Mockito.when(userRepository.findByUsername("center1@gmail.com")).thenReturn(mockDiagnosticUser);
 		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter);
@@ -234,7 +319,13 @@ public class DiagnosticCenterTests {
 		});
 	}
 	
+	/**
+	 * Method To Test Throwing Exception when invalid ICCU Bed is added
+	 * @throws Exception
+	 */
+	
 	@Test
+	@DisplayName("Adding ICCU Bed Throws Exception")
 	public void addICCUBedThrowsException() throws Exception {
 		Mockito.when(userRepository.findByUsername("center1@gmail.com")).thenReturn(mockDiagnosticUser);
 		Mockito.when(diagnosticCenterRepository.getOne(10)).thenReturn(mockDiagnosticCenter);

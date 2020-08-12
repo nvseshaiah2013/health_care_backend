@@ -7,6 +7,7 @@ import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
+import com.cg.healthcare.entities.WaitingPatient;
 import com.cg.healthcare.requests.DiagnosticCenterSignUpRequest;
 
 public interface IAdminService {
@@ -25,10 +26,16 @@ public interface IAdminService {
 
 	// GetAll
 	List<DiagnosticCenter> getAllDiagnosticCenter();
+	
+	/**
+	 * Function To Allocate Beds to Waiting Patients
+	 * @param diagnosticCenterId
+	 * @param waitingPatientIds
+	 * @param type
+	 * @throws Exception
+	 */
 
 	void allocateBeds(int diagnosticCenterId, List<Integer> waitingPatientIds, String type) throws Exception;
-
-	Class<?> getBedType(String bedType) throws Exception;
 
 	Set<Bed> getBeds(int diagnosticCenterId) throws Exception;
 
@@ -44,16 +51,8 @@ public interface IAdminService {
 
 	List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId);
 
-//	List<DiagnosticTest> addTestToDiagnosticCenter(int centerId, List<DiagnosticTest> tests) throws Exception;
-
-//	List<DiagnosticTest> removeTestFromDiagnosticCenter(int centerId, List<DiagnosticTest> tests) throws Exception;
-
 	List<Bed> listOfVacantBeds();
 
-	/**
-	 * Sachin Pant Starts
-	 * 
-	 */
 	List<Appointment> getApppointmentList(int centreId, String test, int status);
 
 	String processAppointment(int centreId, String test, int bursttime, int seats);
@@ -61,5 +60,12 @@ public interface IAdminService {
 	List<DiagnosticTest> removeTestFromDiagnosticCenter(int centerId, DiagnosticTest test) throws Exception;
 
 	List<DiagnosticTest> addTestToDiagnosticCenter(int centerId, DiagnosticTest test) throws Exception;
+
+	/**
+	 * Returns the list Of Waiting Patients in the HealthCare system
+	 * @return - List<WaitingPatient>
+	 *
+	 */
+	List<WaitingPatient> getWaitingPatients() throws Exception;
 
 }

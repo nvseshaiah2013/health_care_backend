@@ -1,5 +1,9 @@
 package com.cg.healthcare.service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cg.healthcare.dao.AppointmentRepository;
+import com.cg.healthcare.dao.BedRepository;
+import com.cg.healthcare.dao.WaitingPatientRepository;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
@@ -24,6 +30,12 @@ public class BedService implements IBedService{
 
 	@Autowired
 	private AppointmentRepository appointmentRepository;
+	
+	@Autowired
+	private WaitingPatientRepository waitPatientRepository;
+	
+	@Autowired
+	private BedRepository bedRepository;
 
 	//assigning bed to patient
 	@Override
@@ -62,20 +74,23 @@ public class BedService implements IBedService{
 		
 		DiagnosticCenter diagnosticCenter=appointment.getDiagnosticCenter();
 		
-		Bed bed = diagnosticCenter.getBeds().stream().filter(b -> b instanceof GeneralBed).filter(b->b.isOccupied()==false).findFirst().get();
+		Optional<Bed> bed = diagnosticCenter.getBeds().stream().filter(b -> b instanceof GeneralBed).filter(b->b.isOccupied()==false).findFirst();
 		
-		if(bed==null) {
+		if(!bed.isPresent()) {
 			
-			LOGGER.info("No Bed Available adding Bed Request to Waiting Bed List");
-			
+			LOGGER.info("No Bed Available adding Bed Request to Waiting Bed List");			
 			WaitingPatient waitingPatient=new WaitingPatient();
 			waitingPatient.setAppointment(appointment);
+			waitingPatient.setRequestedOn(Timestamp.valueOf(LocalDateTime.now()));
+			waitingPatient.setType("General");
+			waitPatientRepository.save(waitingPatient);
 			return false;
 			}
 		else {
 			LOGGER.info("Successfully Applied for Bed");
-			bed.setOccupied(true);
-			bed.setAppointment(appointment);
+			bed.get().setOccupied(true);
+			bed.get().setAppointment(appointment);
+			bedRepository.save(bed.get());
 			return true;
 			}
 	}
@@ -97,12 +112,16 @@ public class BedService implements IBedService{
 			
 			WaitingPatient waitingPatient=new WaitingPatient();
 			waitingPatient.setAppointment(appointment);
+			waitingPatient.setRequestedOn(Timestamp.valueOf(LocalDateTime.now()));
+			waitingPatient.setType("ICU");
+			waitPatientRepository.save(waitingPatient);
 			return false;
 			}
 		else {
 			LOGGER.info("Successfully Applied for Bed");
 			bed.setOccupied(true);
 			bed.setAppointment(appointment);
+			bedRepository.save(bed);
 			return true;
 			}
 	}
@@ -124,12 +143,16 @@ public class BedService implements IBedService{
 			
 			WaitingPatient waitingPatient=new WaitingPatient();
 			waitingPatient.setAppointment(appointment);
+			waitingPatient.setRequestedOn(Timestamp.valueOf(LocalDateTime.now()));
+			waitingPatient.setType("ICCU");
+			waitPatientRepository.save(waitingPatient);
 			return false;
 			}
 		else {
 			LOGGER.info("Successfully Applied for Bed");
 			bed.setOccupied(true);
 			bed.setAppointment(appointment);
+			bedRepository.save(bed);
 			return true;
 			}
 	}
@@ -151,12 +174,16 @@ public class BedService implements IBedService{
 			
 			WaitingPatient waitingPatient=new WaitingPatient();
 			waitingPatient.setAppointment(appointment);
+			waitingPatient.setRequestedOn(Timestamp.valueOf(LocalDateTime.now()));
+			waitingPatient.setType("Ventilator");
+			waitPatientRepository.save(waitingPatient);
 			return false;
 			}
 		else {
 			LOGGER.info("Successfully Applied for Bed");
 			bed.setOccupied(true);
 			bed.setAppointment(appointment);
+			bedRepository.save(bed);
 			return true;
 			}
 	}

@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -108,8 +109,13 @@ public class WaitingPatientTest {
 		mockPatient6 = new Patient(mockPatientUser6.getId(), "Patient 6", 21, "Female", "9796979797");
 		
 		}
+	/**
+	 * Method to Test the Allocation Of Bed To All waiting Patients
+	 * @throws Exception
+	 */
 	
 	@Test
+	@DisplayName("Allocation Of Bed To All Waiting Patients")
 	public void allocateBedToAll()  throws Exception {
 		Appointment appointment1 = new Appointment(101, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient1, mockDiagnosticCenter1);
 		Appointment appointment2 = new Appointment(102, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient2, mockDiagnosticCenter1);
@@ -153,7 +159,13 @@ public class WaitingPatientTest {
 		assertEquals(3, count);
 	}
 	
+	/**
+	 * Method to Test the Allocation of Beds To Waiting Patient
+	 * @throws Exception
+	 */
+	
 	@Test
+	@DisplayName("Allocation Of Beds to Some Patients")
 	public void allocateBedsPartially() throws Exception {
 		Appointment appointment1 = new Appointment(101, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient1, mockDiagnosticCenter1);
 		Appointment appointment2 = new Appointment(102, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient2, mockDiagnosticCenter1);
@@ -212,7 +224,11 @@ public class WaitingPatientTest {
 		});		
 	}
 	
+	/**
+	 * Method to Test Bed Allocation Failure on non availability of Beds
+	 */
 	@Test
+	@DisplayName("Bed Allocation Failure")
 	public void failIfNoBedAvailable() {
 		Appointment appointment1 = new Appointment(101, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient1, mockDiagnosticCenter1);
 		Appointment appointment2 = new Appointment(102, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient2, mockDiagnosticCenter1);
@@ -263,7 +279,12 @@ public class WaitingPatientTest {
 		});	
 	}
 	
+	/**
+	 * Method to Test the Exception thrown when bed is being tried to 
+	 * allocate to patient outside the Diagnostic Center from where he applied the appointment
+	 */
 	@Test
+	@DisplayName("Cannot Allocate a Bed To a Person outside the Appointed Center")
 	public void failIfAllocatedBedInDifferentCenter() {
 		Appointment appointment1 = new Appointment(101, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient1, mockDiagnosticCenter1);
 		Appointment appointment2 = new Appointment(102, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient2, mockDiagnosticCenter2);
@@ -320,7 +341,13 @@ public class WaitingPatientTest {
 		});
 	}
 	
+	/**
+	 * Method to test the Exception thrown when bed is being allocated to person with non approval of appointment
+	 * 
+	 */
+	
 	@Test
+	@DisplayName("Appointment Not Approved then no Bed is Allocated")
 	public void failIfAppointmentIsNotApproved() {
 		Appointment appointment1 = new Appointment(101, Timestamp.valueOf(LocalDateTime.now()), 0, "Diagnosis", "Symptoms", mockPatient1, mockDiagnosticCenter1);
 		Appointment appointment2 = new Appointment(102, Timestamp.valueOf(LocalDateTime.now()), 1, "Diagnosis", "Symptoms", mockPatient2, mockDiagnosticCenter1);
@@ -377,7 +404,12 @@ public class WaitingPatientTest {
 		});
 	}
 	
+	/**
+	 * Method to Test throwing of Exception when Invalid Diagnostic Center is entered 
+	 * @throws Exception
+	 */
 	@Test
+	@DisplayName("Throw Invalid Diagnostic Center")
 	public void throwInvalidDiagnosticCenterException () throws Exception {
 		List<Integer> waitingIds = new ArrayList<>();
 		waitingIds.add(1);
@@ -388,21 +420,38 @@ public class WaitingPatientTest {
 		});
 	}
 	
+	/**
+	 * Returns the Bed type class when String name of the type is passed.
+	 * @throws Exception
+	 */
+	
 	@Test
+	@DisplayName("Checking the Instance According To Bed Type Given")
 	public void getBedTypeReturnsAICUBedClass() throws Exception {
 		Class<?> bedType = adminService.getBedType("ICU");
 		IntensiveCareBed bed = new IntensiveCareBed();
 		assertTrue(bedType.isInstance(bed));
 	}
 	
+	/**
+	 * Method to Test Whether the Type String passed returns the Required Class Type
+	 * @throws Exception
+	 */
 	@Test
+	@DisplayName("Sibling of The Parent Bed Should not match each other")
 	public void getBedTypeReturnDoesNotMatchOtherInheritedInstances() throws Exception {
 		Class<?> bedType = adminService.getBedType("ICCU");
 		IntensiveCareBed bed = new IntensiveCareBed();
 		assertFalse(bedType.isInstance(bed));
 	}
 	
+	/**
+	 * Method To Test the Throwing of Exception when Some Random String is passed to retreive a Class Type
+	 * @throws Exception
+	 */
+	
 	@Test
+	@DisplayName("Invalid Bed Type When passed Throws Exception")
 	public void getBedTypeThrowsExceptionWhenInvalidTypePassed() throws Exception {
 		assertThrows(InvalidBedTypeException.class,() -> {
 			adminService.getBedType("Some Random Type");
