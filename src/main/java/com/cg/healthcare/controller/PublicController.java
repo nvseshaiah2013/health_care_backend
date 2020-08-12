@@ -1,5 +1,7 @@
 package com.cg.healthcare.controller;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +17,14 @@ import com.cg.healthcare.requests.LoginRequest;
 import com.cg.healthcare.requests.PatientSignUpRequest;
 import com.cg.healthcare.responses.LoginResponse;
 import com.cg.healthcare.responses.SuccessMessage;
-import com.cg.healthcare.service.IPublicService;
+import com.cg.healthcare.service.PublicService;
 
 @RestController
 @RequestMapping(value = "/api/public")
 public class PublicController {
 
 	@Autowired
-	private IPublicService publicService;
+	private PublicService publicService;
 	
 	// Venkat Starts
 
@@ -40,6 +42,15 @@ public class PublicController {
 		LoginResponse loginResponse = publicService.getAuthenticationToken(loginRequest.getUsername(),
 				loginRequest.getPassword());
 		return new ResponseEntity<LoginResponse>(loginResponse, HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/registerAdmin", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<SuccessMessage> registerPatient(@RequestBody Map<String, String> list)
+			throws Exception {
+//		publicService.registerPatient(patientDetails);
+		publicService.registerAdmin(list.get("username"), list.get("password"));
+		return new ResponseEntity<SuccessMessage>(
+				new SuccessMessage("Patient Registration", "The Patient Registered Successfully"), HttpStatus.ACCEPTED);
 	}
 	
 	// Venkat Ends

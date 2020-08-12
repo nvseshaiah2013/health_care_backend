@@ -3,6 +3,7 @@ package com.cg.healthcare.service;
 import java.util.List;
 import java.util.Set;
 
+import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
@@ -43,8 +44,22 @@ public interface IAdminService {
 
 	List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId);
 
-	List<DiagnosticTest> addTestToDiagnosticCenter(int centerId, List<DiagnosticTest> tests) throws Exception;
+//	List<DiagnosticTest> addTestToDiagnosticCenter(int centerId, List<DiagnosticTest> tests) throws Exception;
 
-	List<DiagnosticTest> removeTestFromDiagnosticCenter(int centerId, List<DiagnosticTest> tests) throws Exception;
+//	List<DiagnosticTest> removeTestFromDiagnosticCenter(int centerId, List<DiagnosticTest> tests) throws Exception;
+
+	List<Bed> listOfVacantBeds();
+
+	/**
+	 * Sachin Pant Starts
+	 * 
+	 */
+	List<Appointment> getApppointmentList(int centreId, String test, int status);
+
+	String processAppointment(int centreId, String test, int bursttime, int seats);
+
+	List<DiagnosticTest> removeTestFromDiagnosticCenter(int centerId, DiagnosticTest test) throws Exception;
+
+	List<DiagnosticTest> addTestToDiagnosticCenter(int centerId, DiagnosticTest test) throws Exception;
 
 }

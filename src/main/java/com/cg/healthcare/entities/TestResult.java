@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,7 +31,7 @@ public class TestResult implements Serializable{
 	@Pattern(regexp ="(Below Normal)|(Normal)|(Above Normal)")
 	private String condition;
 	
-	@OneToOne(mappedBy="TEST_RESULTS")
+	@OneToOne(mappedBy="testResult")
 	private Appointment appointment;
 
 	public TestResult() {
@@ -70,6 +68,16 @@ public class TestResult implements Serializable{
 
 	public void setAppointment(Appointment appointment) {
 		this.appointment = appointment;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}	
 	
 }

@@ -1,5 +1,7 @@
 package com.cg.healthcare.service;
 
+import java.util.Map;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import com.cg.healthcare.dao.AdminRepository;
 import com.cg.healthcare.dao.PatientRepository;
 import com.cg.healthcare.dao.UserRepository;
+import com.cg.healthcare.entities.Admin;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.exception.UsernameAlreadyExistsException;
@@ -36,6 +40,9 @@ public class PublicService implements IPublicService {
 
 	@Autowired
 	private LoginUserService loginService;
+	
+	@Autowired
+	private AdminRepository adminRepository;
 	
 	// Venkat Starts
 
@@ -72,4 +79,19 @@ public class PublicService implements IPublicService {
 	
 	//Venkat Ends
 
+	@Override
+	public void registerAdmin(String username, String password) throws Exception {
+		User user = userRepository.findByUsername(username);
+		if (user != null) {
+			throw new UsernameAlreadyExistsException("Sign Up Exception"," Username Already exists in the System");
+		} else {
+			String salt = BCrypt.gensalt(10);
+			User newUser = new User(username, BCrypt.hashpw(password, salt),
+					"ROLE_ADMIN");
+			User savedUser = userRepository.save(newUser);
+			Admin patient = new Admin();
+			patient.setId(savedUser.getId());
+			adminRepository.save(patient);
+		}
+	}
 }

@@ -18,17 +18,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.healthcare.dao.BedDao;
+import com.cg.healthcare.dao.AppointmentRepository;
 import com.cg.healthcare.dao.BedRepository;
 import com.cg.healthcare.dao.DiagnosticCenterRepository;
 import com.cg.healthcare.dao.TestRepository;
+import com.cg.healthcare.dao.TestResultRepository;
 import com.cg.healthcare.dao.UserRepository;
+import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.GeneralBed;
 import com.cg.healthcare.entities.IntensiveCareBed;
 import com.cg.healthcare.entities.IntensiveCriticalCareBed;
+import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.entities.VentilatorBed;
 import com.cg.healthcare.exception.BedNotFoundException;
@@ -37,6 +40,7 @@ import com.cg.healthcare.exception.InvalidICCUBedException;
 import com.cg.healthcare.exception.InvalidICUBedException;
 import com.cg.healthcare.exception.InvalidVentilatorBedException;
 import com.cg.healthcare.exception.OccupiedBedException;
+import com.cg.healthcare.requests.TestResultForm;
 
 
 @Service
@@ -58,6 +62,12 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 	@Autowired
 	private BedRepository bedRepository;
 	
+	@Autowired
+	private AppointmentRepository appointmentRepository;
+	
+	
+	@Autowired
+	private TestResultRepository testResultRepository;
 	
 	
 	@Override
@@ -115,9 +125,13 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 		Set<Bed> newBeds = new HashSet<>();
 
 		for (int bedIndex = 0; bedIndex < noOfBeds; ++bedIndex) {
-
-			newBeds.add(new IntensiveCareBed(bedPrice, isKneeTiltAvailable, isHeadTiltAvailable, isElectric,
-					noOfFunctions));
+			Bed bed = new IntensiveCareBed(bedPrice, isKneeTiltAvailable, isHeadTiltAvailable, isElectric,
+					noOfFunctions);
+			bed.setAppointment(null);
+			bed.setDiagnosticCenter(diagnosticCenter);			
+			Bed newBed = bedRepository.save(bed);
+			
+			newBeds.add(newBed);
 		}
 		diagnosticCenter.getBeds().addAll(newBeds);
 
@@ -144,9 +158,15 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 		Set<Bed> newBeds = new HashSet<>();
 
 		for (int bedIndex = 0; bedIndex < noOfBeds; ++bedIndex) {
-			newBeds.add(new IntensiveCriticalCareBed(bedPrice, batteryBackUp, hasABS, remoteOperated,type));
+			Bed bed = new IntensiveCriticalCareBed(bedPrice, batteryBackUp, hasABS, remoteOperated,type);
+			bed.setAppointment(null);
+			bed.setDiagnosticCenter(diagnosticCenter);
+			Bed newBed = bedRepository.save(bed); 
+			newBeds.add(newBed);
 		}
 		diagnosticCenter.getBeds().addAll(newBeds);
+		
+		diagnosticCenterRepo.save(diagnosticCenter);
 	}
 
 	@Override
@@ -167,9 +187,15 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 		}
 		Set<Bed> newBeds = new HashSet<>();
 		for (int bedIndex = 0; bedIndex < noOfBeds; ++bedIndex) {
-			newBeds.add(new GeneralBed(bedPrice, isMovable, frameMaterial));
+			Bed bed = new GeneralBed(bedPrice, isMovable, frameMaterial);
+			bed.setAppointment(null);
+			bed.setDiagnosticCenter(diagnosticCenter);
+			Bed newBed = bedRepository.save(bed);
+			newBeds.add(newBed);
 		}
 		diagnosticCenter.getBeds().addAll(newBeds);
+		
+		diagnosticCenterRepo.save(diagnosticCenter);
 	}
 
 	@Override
@@ -192,9 +218,15 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 		Set<Bed> newBeds = new HashSet<>();
 
 		for (int bedIndex = 0; bedIndex < noOfBeds; ++bedIndex) {
-			newBeds.add(new VentilatorBed(bedPrice, respiratoryRate, type));
+			Bed bed = new VentilatorBed(bedPrice, respiratoryRate, type);
+			bed.setAppointment(null);
+			bed.setDiagnosticCenter(diagnosticCenter);
+			Bed newBed = bedRepository.save(bed);
+			newBeds.add(newBed);
 		}
 		diagnosticCenter.getBeds().addAll(newBeds);
+		
+		diagnosticCenterRepo.save(diagnosticCenter);
 	}
 
 	@Override
@@ -219,7 +251,9 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 				throw new OccupiedBedException("Bed Exception",
 						"The bed cannot be deleted as the bed is already occupied");
 			} else {
-				beds.remove(toBeDeletedBed.get());
+				diagnosticCenter.getBeds().remove(toBeDeletedBed.get());
+				bedRepository.delete(toBeDeletedBed.get());
+				diagnosticCenterRepo.save(diagnosticCenter);
 			}
 		} else {
 			LOGGER.error("Error while trying to delete the bed");
@@ -230,5 +264,19 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 	
 	// Venkat Ends
 
-
+	// Madhu Starts
+	
+	@Override
+	public String updateTestResult(TestResultForm testResult) {
+		TestResult result =new TestResult();
+		Appointment appointment = appointmentRepository.getOne(testResult.getAppointmentId());
+		result.setCondition(testResult.getCondition());
+		result.setTestReading(testResult.getTestReading());
+		result.setAppointment(appointment);
+		testResultRepository.save(result);
+		return "Test results of "+testResult.getAppointmentId()+"Updated";
+	}
+	
+	// Madhu Ends
+	
 }

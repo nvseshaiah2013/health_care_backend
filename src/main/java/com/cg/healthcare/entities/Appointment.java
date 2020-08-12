@@ -53,7 +53,7 @@ public class Appointment implements Serializable{
 	private DiagnosticCenter diagnosticCenter;
 	
 	@OneToOne
-	@JoinColumn(name="T_RESULT_ID",referencedColumnName = "id")
+	@JoinColumn(name="T_RESULT_ID")
 	private TestResult testResult;
 	
 	public Appointment()
@@ -72,6 +72,19 @@ public class Appointment implements Serializable{
 		this.diagnosticCenter = diagnosticCenter;
 	}
 
+	
+	public Appointment(int id, Timestamp appointmentDate, String diagnosis, String symptoms, DiagnosticTest diagnosticTest,
+			Patient patient, DiagnosticCenter diagnosticCenter) {
+		super();
+		this.id = id;
+		this.appointmentDate = appointmentDate;
+		this.diagnosis = diagnosis;
+		this.symptoms = symptoms;
+		this.diagnosticTest = diagnosticTest;
+		this.patient = patient;
+		this.diagnosticCenter = diagnosticCenter;
+	}
+	
 	public int getId() {
 		return id;
 	}

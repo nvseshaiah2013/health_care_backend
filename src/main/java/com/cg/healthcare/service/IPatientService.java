@@ -13,7 +13,7 @@ public interface IPatientService {
 	Patient getPatientByUserName(String patientUserName);
 
 	//fetch all the TestResult taken by the patient
-	Set<TestResult> getAllTestResult(String patientUserName);
+	Set<TestResult> getAllTestResult(String patientUserName) throws Exception;
 
 	//fetch all the vacant beds
 	DiagnosticCenter getDiagnosticCenterByUsername(String diagnosticCenterUsername);

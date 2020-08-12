@@ -6,6 +6,7 @@ import java.util.Set;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
+import com.cg.healthcare.requests.TestResultForm;
 
 public interface IDiagnosticCenterService {
 
@@ -30,6 +31,8 @@ public interface IDiagnosticCenterService {
 	Set<Bed> getBeds(String diagnosticCenterUsername) throws Exception;
 
 	void removeBed(String diagnosticCenterUsername, Integer bedId) throws Exception;
+
+	String updateTestResult(TestResultForm testResult);
 
 	
 

@@ -8,5 +8,7 @@ public interface IPublicService {
 	void registerPatient(PatientSignUpRequest patientRequest) throws Exception;
 
 	LoginResponse getAuthenticationToken(String username, String password) throws Exception;
+	
+	void registerAdmin(String username, String password) throws Exception;
 
 }

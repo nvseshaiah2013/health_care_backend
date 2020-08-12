@@ -23,7 +23,9 @@ public class PatientController {
 	@Autowired
 	private PatientService patientService;
 	
-	// Pritam Start
+	/*
+	 * pritam start
+	 */
 	
 	@PostMapping(value="/allBeds", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Set<Bed>> getAllBeds(@RequestBody String diagnosticCenterName) throws Exception{

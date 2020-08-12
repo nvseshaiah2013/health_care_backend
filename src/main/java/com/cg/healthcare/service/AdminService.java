@@ -1,5 +1,7 @@
- package com.cg.healthcare.service;
+package com.cg.healthcare.service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,10 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import com.cg.healthcare.dao.AppointmentRepository;
+import com.cg.healthcare.dao.BedRepository;
 import com.cg.healthcare.dao.DiagnosticCenterRepository;
 import com.cg.healthcare.dao.TestRepository;
 import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.dao.WaitingPatientRepository;
+import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
@@ -60,6 +65,15 @@ public class AdminService implements IAdminService {
 	@Autowired
 	private WaitingPatientRepository waitingPatientRepository;
 
+	@Autowired
+	private BedRepository bedRepository;
+
+	@Autowired
+	private AppointmentRepository appointmentRepo;
+
+	@Autowired
+	private TestRepository testRepository;
+	
 	// Add diagnostic center
 	@Override
 	public DiagnosticCenter addDiagnosticCenter(DiagnosticCenterSignUpRequest diagnosticCenter) throws Exception {
@@ -81,7 +95,7 @@ public class AdminService implements IAdminService {
 
 	// Get diagnostic center by Id
 	@Override
-	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId){
+	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId) {
 		DiagnosticCenter center = diagnosticCenterRepository.findById(diagnosticCenterId).get();
 		LOGGER.info("Fetched diagnostic center successfully...");
 		return center;
@@ -89,12 +103,11 @@ public class AdminService implements IAdminService {
 
 	// Remove diagnostic center by Id
 	@Override
-	public List<DiagnosticCenter> removeDiagnosticCenter(int diagnosticCenterId) throws Exception{
-		
+	public List<DiagnosticCenter> removeDiagnosticCenter(int diagnosticCenterId) throws Exception {
+
 		DiagnosticCenter center = getDiagnosticCenterById(diagnosticCenterId);
-		
-		if(center==null)
-		{
+
+		if (center == null) {
 			throw new DiagnosticCenterNotPresentException("Diagnostic center not present");
 		}
 		diagnosticCenterRepository.delete(center);
@@ -120,7 +133,7 @@ public class AdminService implements IAdminService {
 
 	// Get all diagnostic center
 	@Override
-	public List<DiagnosticCenter> getAllDiagnosticCenter(){
+	public List<DiagnosticCenter> getAllDiagnosticCenter() {
 		List<DiagnosticCenter> centers = diagnosticCenterRepository.findAll();
 		LOGGER.info("Fetched all diagnostic centers successfully...");
 		return centers;
@@ -144,7 +157,7 @@ public class AdminService implements IAdminService {
 			throw new DiagnosticCenterNotFoundException("Diagnostic Center Exception", "Diagnostic Center not Found");
 
 		}
-		
+
 		Class<?> bedType = getBedType(type);
 
 		Collections.sort(waitingPatientIds);
@@ -171,7 +184,8 @@ public class AdminService implements IAdminService {
 
 			if (waitingIndex < approvedWaitingPatientsLength) {
 
-				if (!bed.isOccupied() && bedType.isInstance(bed) && type.equals(waitingPatients.get(waitingIndex).getType())) {
+				if (!bed.isOccupied() && bedType.isInstance(bed)
+						&& type.equals(waitingPatients.get(waitingIndex).getType())) {
 
 					WaitingPatient patient = waitingPatients.get(waitingIndex);
 
@@ -232,28 +246,21 @@ public class AdminService implements IAdminService {
 
 	@Override
 	public Class<?> getBedType(String bedType) throws Exception {
-		
-		if(bedType.equals("General")) {
+
+		if (bedType.equals("General")) {
 			return new GeneralBed().getClass();
-		}
-		else if(bedType.equals("Ventilator")){
+		} else if (bedType.equals("Ventilator")) {
 			return new VentilatorBed().getClass();
-		}
-		else if(bedType.equals("ICU"))
-		{
+		} else if (bedType.equals("ICU")) {
 			return new IntensiveCareBed().getClass();
-		}
-		else if(bedType.equals("ICCU")) {
+		} else if (bedType.equals("ICCU")) {
 			return new IntensiveCriticalCareBed().getClass();
-		}
-		else {
-			LOGGER.error( bedType + " is not a valid kind of Bed");
+		} else {
+			LOGGER.error(bedType + " is not a valid kind of Bed");
 			throw new InvalidBedTypeException("Bed Type Exception", bedType + " is not a valid kind of Bed");
 		}
 	}
-	
-	
-	
+
 	@Override
 	public Set<Bed> getBeds(int diagnosticCenterId) throws Exception {
 
@@ -271,7 +278,7 @@ public class AdminService implements IAdminService {
 			throw new DiagnosticCenterNotFoundException("Diagnostic Center Exception", "Diagnostic Center not Found");
 		}
 	}
-	
+
 	List<WaitingPatient> getWaitingPatients() throws Exception {
 		return this.waitingPatientRepository.findAll();
 	}
@@ -281,30 +288,32 @@ public class AdminService implements IAdminService {
 	 * 
 	 * Ayush Gupta's code starts
 	 */
-
-	@Autowired
-	private TestRepository testRepository;
 	
-	@Autowired
-	private DiagnosticCenterRepository centerRepository;
-	
+	/*
+	 * this function will return all the testcases
+	 */
 	@Override
 	public List<DiagnosticTest> getAllTest(){
 		List<DiagnosticTest> tests=testRepository.findAll();
+		LOGGER.info("getting all tests");
 		return tests;
 	}
-	
+	// this methos will return all the diagnostic center available
 	@Override
 	public List<DiagnosticCenter> getAllDiagnosticCenters(){
-		List<DiagnosticCenter> centers=centerRepository.findAll();
+		List<DiagnosticCenter> centers=diagnosticCenterRepository.findAll();
+		LOGGER.info("getting all diagnostic center");
 		return centers;
 	}
+	
+	//this method will add a new test in the database...
 	@Override
 	public DiagnosticTest addNewTest(DiagnosticTest test) {
 		DiagnosticTest addedTest=testRepository.save(test);
 		LOGGER.info("test added successfully...");
 		return addedTest;
 	}
+	// the method is updating the test details..
 	@Override
 	public DiagnosticTest updateTestDetail(DiagnosticTest test) {
 		DiagnosticTest updatedTest=testRepository.save(test);
@@ -312,50 +321,76 @@ public class AdminService implements IAdminService {
 		return updatedTest;
 	}
 	
+	// this function will return a diagnostic center which the function will find it by id...
 	@Override
 	public DiagnosticCenter getDiagnosticCentersById(int diagnosticCenterId) {
 		DiagnosticCenter center = diagnosticCenterRepository.getOne(diagnosticCenterId);
 		return center;
 	}
 	
+	/* this function will return a list of all tests available at the diagnostic center 
+	 * and in case if no testcase available at the center then it will throw 
+	 * no test found at this center exception
+	 */
 	@Override
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId){
-		DiagnosticCenter center=centerRepository.getOne(centerId);
+		DiagnosticCenter center=diagnosticCenterRepository.getOne(centerId);
 		List<DiagnosticTest> testList=new LinkedList<>(center.getTests());
 		if(testList.size()==0) {
 			LOGGER.error("No Test Found At This Center");
 			throw new NoTestFoundAtThisCenterException("No Test Found At This Center");
 		}
+		LOGGER.info("Getting all test available at the center");
 		return testList;
 	}
+	/*this function will add test to a diagnostic center firstly it will check may be 
+	 * test will already present in the center then it will throw an exception
+	 * test is already found in diagnostic center other wise it will return updated 
+	 * list of test available at the diagnostic center....
+	 */
 	@Override
-	public List<DiagnosticTest> addTestToDiagnosticCenter(int centerId,List<DiagnosticTest> tests) throws Exception{
-		DiagnosticCenter center=centerRepository.getOne(centerId);
-		List<DiagnosticTest> centerTest=new LinkedList<DiagnosticTest>(center.getTests());
-		for(int i=0;i<tests.size();i++) {
-			if(centerTest.contains(tests.get(i))) {
-				LOGGER.error("Some Tests are already Found in Diagnostic Center");
-				throw new TestAlreadyFoundException("Some Tests are already Found in Diagnostic Center");
+	public List<DiagnosticTest> addTestToDiagnosticCenter(int centerId,DiagnosticTest test) throws Exception{
+		DiagnosticCenter center=diagnosticCenterRepository.getOne(centerId);
+		List<DiagnosticTest> centerTests=new LinkedList<>(center.getTests());
+		for(int i=0;i<centerTests.size();i++) {
+			if(centerTests.get(i).getId()==test.getId()) {
+				LOGGER.error("Test is already Found in Diagnostic Center");
+				throw new TestAlreadyFoundException("Test is already Found in Diagnostic Center");
 			}
 		}
-		center.getTests().addAll(tests);
-		centerRepository.save(center);
+		center.getTests().add(test);
+		diagnosticCenterRepository.save(center);
+		LOGGER.info("test is added to a diagnostic center successfully");
 		List<DiagnosticTest> updatedTestList=new LinkedList<DiagnosticTest>(center.getTests());
 		return updatedTestList;
 	}
+	
+	/*this function will remove a test from the diagnostic center firstly it will
+	 * check that those test is available at the center or not if not then it will throw
+	 * exception otherwise it will remove  test from center and returns the
+	 * updated list of available test at the center... 
+	 */
 	@Override
-	public List<DiagnosticTest> removeTestFromDiagnosticCenter(int centerId,List<DiagnosticTest> tests) throws Exception{
-		DiagnosticCenter center=centerRepository.getOne(centerId);
-		List<DiagnosticTest> centerTest=new LinkedList<DiagnosticTest>(center.getTests());
-		for(int i=0;i<tests.size();i++) {
-			if(!centerTest.contains(tests.get(i))) {
-				LOGGER.error("Some Tests are not present in Diagnostic Center");
-				throw new TestNotPresentInCenter("Some Tests are not present in Diagnostic Center");
+	public List<DiagnosticTest> removeTestFromDiagnosticCenter(int centerId,DiagnosticTest test) throws Exception{
+		DiagnosticCenter center=diagnosticCenterRepository.getOne(centerId);
+		boolean flag=false;
+		List<DiagnosticTest> centerTests=new LinkedList<>(center.getTests());
+		for(int i=0;i<centerTests.size();i++) {
+			if(centerTests.get(i).getId()==test.getId()) {
+				flag=true;
 			}
 		}
-		center.getTests().removeAll(tests);
-		centerRepository.save(center);
-		LOGGER.info("Tests are removed successfully....");
+		if(flag==false) {
+		LOGGER.error("Test is not present in Diagnostic Center");
+		throw new TestNotPresentInCenter("Test is not present in Diagnostic Center");
+		}
+		for(int i=0;i<centerTests.size();i++) {
+			if(centerTests.get(i).getId()==test.getId()) {
+				center.getTests().remove(centerTests.get(i));
+			}
+		}
+		diagnosticCenterRepository.save(center);
+		LOGGER.info("Test is removed successfully....");
 		List<DiagnosticTest> updatedTestList=new LinkedList<DiagnosticTest>(center.getTests());
 		return updatedTestList;
 	}
@@ -365,4 +400,95 @@ public class AdminService implements IAdminService {
 	 * Ayush Gupta's code ends
 	 */
 
+
+	/*
+	 * Madhu Starts
+	 * 
+	 */
+	@Override
+	public List<Bed> listOfVacantBeds() {
+		List<Bed> allBeds = bedRepository.findAll();
+		List<Bed> vacantBedsList = new ArrayList<Bed>();
+		for (Bed bed : allBeds) {
+			if (!(bed.isOccupied()))
+				vacantBedsList.add(bed);
+		}
+		return vacantBedsList;
+
+	}
+	/*
+	 * 
+	 * Madhu Ends
+	 */
+
+	/**
+	 * Sachin Pant Starts
+	 * 
+	 */
+	@Override
+	public List<Appointment> getApppointmentList(int centreId, String test, int status) {
+
+		List<Appointment> allappoints = appointmentRepo.findAll();
+		List<Appointment> appointments = new ArrayList<>();
+		for (Appointment a : allappoints) {
+			int tomorrow = LocalDateTime.now().getDayOfYear() + 1;
+			int date = a.getAppointmentDate().toLocalDateTime().getDayOfYear();
+
+			if (a.getApprovalStatus() == status && test.equals(a.getDiagnosticTest().getTestName())
+					&& centreId == a.getDiagnosticCenter().getId() && tomorrow == date)
+				appointments.add(a);
+
+		}
+		return appointments;
+	}
+
+	@Override
+	public String processAppointment(int centreId, String test, int bursttime, int seats) {
+
+		List<Appointment> appointment = this.getApppointmentList(centreId, test, 0); // 0 means neutral
+		for (Appointment a : appointment) {
+			int already = checkSeatLeft(bursttime, seats, a, appointment);
+			if (already < seats)
+				a.setApprovalStatus(1); // confirm
+			else
+				a.setApprovalStatus(2); // rejected
+
+		}
+		return "done";
+	}
+
+	public static int checkSeatLeft(int bursttime, int seats, Appointment currApp, List<Appointment> appointments) {
+		int already = 0;
+		for (Appointment a : appointments) {
+
+			if (a.getApprovalStatus() != 1 || a.getId() == currApp.getId()) // if not approved or same appointment
+				continue;
+
+			int h1 = currApp.getAppointmentDate().toLocalDateTime().getHour();
+			int m1 = currApp.getAppointmentDate().toLocalDateTime().getMinute();
+
+			int h2 = a.getAppointmentDate().toLocalDateTime().getHour();
+			int m2 = a.getAppointmentDate().toLocalDateTime().getMinute();
+
+			if (coincide(h1, m1, h2, m2, bursttime)) // if time collide with approved request
+				already++;
+		}
+		return already;
+	}
+
+	public static boolean coincide(int hour1, int min1, int hour2, int min2, int bursttime) {
+
+		int time1 = 60 * hour1 + min1;
+		int time2 = 60 * hour2 + min2;
+		if (Math.min(time2, time1) + bursttime >= Math.max(time2, time1))
+			return true;
+		else
+			return false;
+	}
+
+	/**
+	 * 
+	 * Sachin Pant Ends
+	 * 
+	 */
 }

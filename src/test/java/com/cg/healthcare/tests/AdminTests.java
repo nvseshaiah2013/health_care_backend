@@ -41,7 +41,12 @@ public class AdminTests {
 	private UserRepository userRepository;
 	
 	@Mock
-	private DiagnosticCenterRepository diagnosticCenterRepository;
+	private DiagnosticCenterRepository diagnosticCenterRepository;	
+	@Mock
+	private TestRepository testRepository;
+	
+	private static DiagnosticCenter diagnosticCenter;
+	private static DiagnosticTest test1,test2,test3;
 	
 	private static User mockDiagnosticUser, mockDiagnosticUser2, mockDiagnosticUser3, mockDiagnosticUser4;
 	private static DiagnosticCenter mockDiagnosticCenter, mockDiagnosticCenter2, mockDiagnosticCenter3, mockDiagnosticCenter4;
@@ -76,8 +81,12 @@ public class AdminTests {
 		diagnosticCenter=new DiagnosticCenter("Akash Diagnostic Center","1223","UP","akash@gmail.com","testing");
 		diagnosticCenter.setId(101);
 		test1=new DiagnosticTest("blood test",1000,"13-17","gm/dl");
+		test1.setId(1001);
 		test2=new DiagnosticTest("Eye Test",1000,"6/6","mm");
+		test2.setId(1002);
 		test3=new DiagnosticTest("LFT",2000,"<1.1","milligm/dl");
+		test3.setId(1003);
+
 	}
 	
 	/*
@@ -120,6 +129,7 @@ public class AdminTests {
 	@Test
 	public void updateDiagnosticCenter()
 	{
+		Mockito.when(diagnosticCenterRepository.findById(10)).thenReturn(Optional.of(mockDiagnosticCenter));
 		Mockito.when(diagnosticCenterRepository.save(mockDiagnosticCenter)).thenReturn(mockDiagnosticCenter);
 		DiagnosticCenter center = adminService.updateDiagnosticCenter(mockDiagnosticCenter);
 		assertEquals(10, center.getId());
@@ -139,21 +149,12 @@ public class AdminTests {
 	 * Sachin Kumar( Ends )
 	 */
 	
+	
 	/*
 	 * Ayush Gupta code starts
-	 */
+	 */	
 	
-	@Mock
-	private TestRepository testRepository;
-	
-	@Mock
-	private DiagnosticCenterRepository centerRepository;
-	
-	private static DiagnosticCenter diagnosticCenter;
-	private static DiagnosticTest test1,test2,test3;
-	
-	
-	
+	//getting all test test case
 	@Test
 	public void getAllTestsTest() {
 		List<DiagnosticTest> tests=new LinkedList<>();
@@ -163,70 +164,66 @@ public class AdminTests {
 		assertEquals(2, adminService.getAllTest().size());
 	}
 	
+	// adding new test testcase
 	@Test
 	public void addNewTestTest() {
 		Mockito.when(testRepository.save(test1)).thenReturn(test1);
 		assertEquals(test1,adminService.addNewTest(test1));
 	}
-	
-
-	
+	//this test is for checking the exception which is throw when there is no test available
+	//at the given diagnostic center...
 	@Test
 	public void noTestFoundAtThisCenterExceptionTest() throws Exception{
-		Mockito.when(centerRepository.getOne(diagnosticCenter.getId())).thenReturn(diagnosticCenter);
+		Mockito.when(diagnosticCenterRepository.getOne(diagnosticCenter.getId())).thenReturn(diagnosticCenter);
 		assertThrows(NoTestFoundAtThisCenterException.class,()->{
 			adminService.getTestsOfDiagnosticCenter(diagnosticCenter.getId());
 		});
 	}
+	// this test is for testing add test to a diagnostic center...
 	@Test
 	public void addTestToDiagnosticCenterTest() throws Exception{
 		diagnosticCenter.getTests().add(test1);
-		Mockito.when(centerRepository.getOne(diagnosticCenter.getId())).thenReturn(diagnosticCenter);
-		List<DiagnosticTest> tests=new LinkedList<>();
-		tests.add(test2);
-		tests.add(test3);
-		assertEquals(3,adminService.addTestToDiagnosticCenter(diagnosticCenter.getId(),tests).size());
+		Mockito.when(diagnosticCenterRepository.getOne(diagnosticCenter.getId())).thenReturn(diagnosticCenter);
+		assertEquals(2,adminService.addTestToDiagnosticCenter(diagnosticCenter.getId(),test3).size());
 	}
 	
-	
+	//this test is for testing remove test from diagnostic center...
 	@Test
 	public void removeTestFromDiagnosticCenterTest() throws Exception {
-		Mockito.when(centerRepository.getOne(diagnosticCenter.getId())).thenReturn(diagnosticCenter);
+		Mockito.when(diagnosticCenterRepository.getOne(diagnosticCenter.getId())).thenReturn(diagnosticCenter);
 		diagnosticCenter.getTests().add(test1);
 		diagnosticCenter.getTests().add(test2);
 		diagnosticCenter.getTests().add(test3);
-		List<DiagnosticTest> tests=new LinkedList<>();
-		tests.add(test2);
-		assertEquals(2,adminService.removeTestFromDiagnosticCenter(diagnosticCenter.getId(), tests).size());
+		assertEquals(2,adminService.removeTestFromDiagnosticCenter(diagnosticCenter.getId(), test2).size());
 	}
-	
+	//this test is for getting tests of a diagnostic center...
 	@Test
 	public void getTestsOfDiagnosticCenterTest() throws Exception {
-		Mockito.when(centerRepository.getOne(diagnosticCenter.getId())).thenReturn(diagnosticCenter);
+		Mockito.when(diagnosticCenterRepository.getOne(diagnosticCenter.getId())).thenReturn(diagnosticCenter);
 		diagnosticCenter.getTests().add(test1);
 		diagnosticCenter.getTests().add(test2);
 		assertEquals(2,adminService.getTestsOfDiagnosticCenter(diagnosticCenter.getId()).size());
 	}
 	
+	//this test is for checking the exception which is raised when test is already
+	//available at the center and we want to add same test again...
 	@org.junit.jupiter.api.Test
 	public void testAlreadyFoundTest() throws Exception{
-		Mockito.when(centerRepository.getOne(diagnosticCenter.getId())).thenReturn(diagnosticCenter);
+		Mockito.when(diagnosticCenterRepository.getOne(diagnosticCenter.getId())).thenReturn(diagnosticCenter);
 		diagnosticCenter.getTests().add(test2);
 		diagnosticCenter.getTests().add(test3);
-		List<DiagnosticTest> tests=new LinkedList<>();
-		tests.add(test3);
 		assertThrows(TestAlreadyFoundException.class,()->{
-			adminService.addTestToDiagnosticCenter(diagnosticCenter.getId(), tests);
+			adminService.addTestToDiagnosticCenter(diagnosticCenter.getId(), test3);
 		});
 	}
-	@org.junit.jupiter.api.Test
+	//this test for checking the exception which is raised when we want to remove  a test
+	//from the diagnostic center that test is not available at the center....
+	@Test
 	public void testNotPresentInCenterExceptionTest() throws Exception{
-		Mockito.when(centerRepository.getOne(diagnosticCenter.getId())).thenReturn(diagnosticCenter);
+		Mockito.when(diagnosticCenterRepository.getOne(diagnosticCenter.getId())).thenReturn(diagnosticCenter);
 		diagnosticCenter.getTests().add(test1);
-		List<DiagnosticTest> tests=new LinkedList<>();
-		tests.add(test2);
 		assertThrows(TestNotPresentInCenter.class,()->{
-			adminService.removeTestFromDiagnosticCenter(diagnosticCenter.getId(), tests);
+			adminService.removeTestFromDiagnosticCenter(diagnosticCenter.getId(), test2);
 		});
 	}
 	/*
