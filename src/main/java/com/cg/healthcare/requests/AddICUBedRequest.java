@@ -19,7 +19,7 @@ public class AddICUBedRequest {
 	@NotNull(message = "Electronic Category is Required")
 	private boolean isElectric;
 
-	@Range(min = 3, max=5)
+	@Range(min = 3, max=5, message = "The number of functions can be in range of 3 and 5")
 	private int noOfFunctions;
 	
 	@Min(value = 1, message = "No Of Beds cannot be less than 1")

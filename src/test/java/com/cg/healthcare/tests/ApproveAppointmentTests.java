@@ -13,9 +13,10 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.cg.healthcare.dao.AppointmentRepository;
 import com.cg.healthcare.entities.Appointment;
@@ -24,8 +25,8 @@ import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.service.AdminService;
 
 
+@ExtendWith(MockitoExtension.class)
 @TestMethodOrder(OrderAnnotation.class)
-@SpringBootTest
 public class ApproveAppointmentTests {
 
 	@InjectMocks
@@ -90,9 +91,7 @@ public class ApproveAppointmentTests {
 	@Test
 	@Order(2)
 	public void processAllAppointmentTest() {
-		
 		when(appointmentRepo.findAll()).thenReturn(appointments);
-		when(appointmentRepo.save(a1)).thenReturn(a1);
 		String result=adminService.processAppointment(1000,"corona",60,2);		// 60 time taken and 2 is no of patient can be handled
 		assertEquals("done",result);
 	}

@@ -1,3 +1,4 @@
+
 package com.cg.healthcare.entities;
 
 import java.io.Serializable;

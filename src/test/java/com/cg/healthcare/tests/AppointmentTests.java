@@ -4,19 +4,15 @@ import static org.mockito.Mockito.when;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
 
 import com.cg.healthcare.dao.AppointmentRepository;
 import com.cg.healthcare.dao.DiagnosticCenterRepository;
@@ -31,7 +27,6 @@ import com.cg.healthcare.entities.User;
 import com.cg.healthcare.service.AppointmentService;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness=Strictness.LENIENT)
 public class AppointmentTests {
 	
 	@InjectMocks
@@ -61,8 +56,8 @@ public class AppointmentTests {
 	private static Appointment appointment;
 	private static Appointment appointment1;
 	
-	@BeforeAll
-	public static void init()
+	@BeforeEach
+	public void init()
 	{ 
 		
 		Timestamp instant=Timestamp.valueOf(LocalDateTime.now());
@@ -93,26 +88,23 @@ public class AppointmentTests {
 	}
 	
 	@Test
-	public void viewAppointments()
-	{   List<Appointment> list_of_appointments=new LinkedList<Appointment>();
-		list_of_appointments.add(appointment);
-		list_of_appointments.add(appointment1);
-		
-//		String str=appointment.toString()+appointment1.toString();
-		when(appointmentRepository.findAll()).thenReturn(list_of_appointments);
-		assertEquals(2, appointmentService.viewAppointments().size());
+	public void viewAppointments() throws Exception
+	{   
+		patient.getAppointments().add(appointment);
+		patient.getAppointments().add(appointment1);
+		when(userRepository.findByUsername("vikram@gmail.com")).thenReturn(mockPatientUser);
+		when(patientRepository.getOne(100)).thenReturn(patient);
+		assertEquals(2, appointmentService.viewAppointments("vikram@gmail.com").size());
 	}
 	
 	@Test
 	public void viewMyAppointment() throws Exception
 	{
-		List<Appointment> list_of_appointments=new LinkedList<Appointment>();
-		list_of_appointments.add(appointment);
-		list_of_appointments.add(appointment1);
-		
-//		String str=appointment.toString()+appointment1.toString();
-		when(appointmentRepository.findAll()).thenReturn(list_of_appointments);
-		when(appointmentRepository.findById(appointment.getId())).thenReturn(Optional.of(appointment));
-		assertEquals(123, appointmentService.viewMyAppointment(appointment.getId()).getId());
+		patient.getAppointments().add(appointment);
+		patient.getAppointments().add(appointment1);
+		when(userRepository.findByUsername("vikram@gmail.com")).thenReturn(mockPatientUser);
+		when(patientRepository.getOne(100)).thenReturn(patient);
+		when(appointmentRepository.findById(123)).thenReturn(Optional.of(appointment));
+		assertEquals(123, appointmentService.viewMyAppointment(appointment.getId(), "vikram@gmail.com").getId());
 	}
 }

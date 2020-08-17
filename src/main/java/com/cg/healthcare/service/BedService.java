@@ -19,7 +19,6 @@ import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.GeneralBed;
 import com.cg.healthcare.entities.IntensiveCareBed;
 import com.cg.healthcare.entities.IntensiveCriticalCareBed;
-import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.VentilatorBed;
 import com.cg.healthcare.entities.WaitingPatient;
 import com.cg.healthcare.exception.PatientNotAdmittedException;
@@ -43,13 +42,11 @@ public class BedService implements IBedService{
 		
 		Appointment appointment= appointmentRepository.getOne(appointmentId);
 		
-		Patient patient=appointment.getPatient();
-		
 		DiagnosticCenter diagnosticCenter=appointment.getDiagnosticCenter();
 		
-		Bed bed = diagnosticCenter.getBeds().stream().filter(b->b.isOccupied()==false).findFirst().get();
+		Optional<Bed> bed = diagnosticCenter.getBeds().stream().filter(b->b.isOccupied()==false).findFirst();
 		
-		if(bed==null) {
+		if(!bed.isPresent()) {
 			
 			LOGGER.info("No Bed Available adding Bed Request to Waiting Bed List");
 			
@@ -59,8 +56,9 @@ public class BedService implements IBedService{
 			}
 		else {
 			LOGGER.info("Successfully Applied for Bed");
-			bed.setOccupied(true);
-			bed.setAppointment(appointment);
+			bed.get().setOccupied(true);
+			bed.get().setAppointment(appointment);
+			bedRepository.save(bed.get());
 			return true;
 			}
 	}
@@ -69,8 +67,6 @@ public class BedService implements IBedService{
 	@Override
 	public boolean admittedGeneralBedSuccessfully(int appointmentId) {
 		Appointment appointment= appointmentRepository.getOne(appointmentId);
-		
-		Patient patient=appointment.getPatient();
 		
 		DiagnosticCenter diagnosticCenter=appointment.getDiagnosticCenter();
 		
@@ -100,13 +96,11 @@ public class BedService implements IBedService{
 	public boolean admittedIntensiveCareBedSuccessfully(int appointmentId) {
 		Appointment appointment= appointmentRepository.getOne(appointmentId);
 		
-		Patient patient=appointment.getPatient();
-		
 		DiagnosticCenter diagnosticCenter=appointment.getDiagnosticCenter();
 		
-		Bed bed = diagnosticCenter.getBeds().stream().filter(b -> b instanceof IntensiveCareBed).filter(b->b.isOccupied()==false).findFirst().get();
+		Optional<Bed> bed = diagnosticCenter.getBeds().stream().filter(b -> b instanceof IntensiveCareBed).filter(b->b.isOccupied()==false).findFirst();
 		
-		if(bed==null) {
+		if(!bed.isPresent()) {
 			
 			LOGGER.info("No Bed Available adding Bed Request to Waiting Bed List");
 			
@@ -119,9 +113,9 @@ public class BedService implements IBedService{
 			}
 		else {
 			LOGGER.info("Successfully Applied for Bed");
-			bed.setOccupied(true);
-			bed.setAppointment(appointment);
-			bedRepository.save(bed);
+			bed.get().setOccupied(true);
+			bed.get().setAppointment(appointment);
+			bedRepository.save(bed.get());
 			return true;
 			}
 	}
@@ -130,14 +124,12 @@ public class BedService implements IBedService{
 	@Override
 	public boolean admittedIntensiveCriticalCareBedSuccessfully(int appointmentId) {
 		Appointment appointment= appointmentRepository.getOne(appointmentId);
-		
-		Patient patient=appointment.getPatient();
-		
+
 		DiagnosticCenter diagnosticCenter=appointment.getDiagnosticCenter();
 		
-		Bed bed = diagnosticCenter.getBeds().stream().filter(b -> b instanceof IntensiveCriticalCareBed).filter(b->b.isOccupied()==false).findFirst().get();
+		Optional<Bed> bed = diagnosticCenter.getBeds().stream().filter(b -> b instanceof IntensiveCriticalCareBed).filter(b->b.isOccupied()==false).findFirst();
 		
-		if(bed==null) {
+		if(!bed.isPresent()) {
 			
 			LOGGER.info("No Bed Available adding Bed Request to Waiting Bed List");
 			
@@ -150,9 +142,9 @@ public class BedService implements IBedService{
 			}
 		else {
 			LOGGER.info("Successfully Applied for Bed");
-			bed.setOccupied(true);
-			bed.setAppointment(appointment);
-			bedRepository.save(bed);
+			bed.get().setOccupied(true);
+			bed.get().setAppointment(appointment);
+			bedRepository.save(bed.get());
 			return true;
 			}
 	}
@@ -162,13 +154,11 @@ public class BedService implements IBedService{
 	public boolean admittedVentilatorBedSuccessfully(int appointmentId) {
 		Appointment appointment= appointmentRepository.getOne(appointmentId);
 		
-		Patient patient=appointment.getPatient();
-		
 		DiagnosticCenter diagnosticCenter=appointment.getDiagnosticCenter();
 		
-		Bed bed = diagnosticCenter.getBeds().stream().filter(b -> b instanceof VentilatorBed).filter(b->b.isOccupied()==false).findFirst().get();
+		Optional<Bed> bed = diagnosticCenter.getBeds().stream().filter(b -> b instanceof VentilatorBed).filter(b->b.isOccupied()==false).findFirst();
 		
-		if(bed==null) {
+		if(!bed.isPresent()) {
 			
 			LOGGER.info("No Bed Available adding Bed Request to Waiting Bed List");
 			
@@ -181,9 +171,9 @@ public class BedService implements IBedService{
 			}
 		else {
 			LOGGER.info("Successfully Applied for Bed");
-			bed.setOccupied(true);
-			bed.setAppointment(appointment);
-			bedRepository.save(bed);
+			bed.get().setOccupied(true);
+			bed.get().setAppointment(appointment);
+			bedRepository.save(bed.get());
 			return true;
 			}
 	}
@@ -191,18 +181,21 @@ public class BedService implements IBedService{
 	//discharging patient
 	@Override
 	public boolean dischargePatient(int appointmentId) throws Exception {
-		Appointment appointment= appointmentRepository.getOne(appointmentId);
-		Patient patient=appointment.getPatient();
+		
+		Appointment appointment= appointmentRepository.findById(appointmentId).get();
+
 		DiagnosticCenter diagnosticCenter=appointment.getDiagnosticCenter();
-		Bed bed = diagnosticCenter.getBeds().stream().filter(b->b.getAppointment().getId()==appointmentId).findFirst().get();
-		if(bed==null) {
+		
+		Optional<Bed> bed = diagnosticCenter.getBeds().stream().filter(b->b.getAppointment().getId()==appointmentId).findFirst();
+		if(!bed.isPresent()) {
 			LOGGER.error("No Patient Available for Discharges");
 			throw new PatientNotAdmittedException("Patient not found", "Patient not admitted");
 			}
 		else {
 			LOGGER.info("Patient Successfully Discharged");
-			bed.setOccupied(false);
-			bed.setAppointment(null);
+			bed.get().setOccupied(false);
+			bed.get().setAppointment(null);
+			bedRepository.save(bed.get());
 			return true;
 			}
 	}

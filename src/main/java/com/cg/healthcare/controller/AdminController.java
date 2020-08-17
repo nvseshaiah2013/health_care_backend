@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.WaitingPatient;
+import com.cg.healthcare.requests.AllocateBedRequest;
 import com.cg.healthcare.requests.DiagnosticCenterSignUpRequest;
 import com.cg.healthcare.responses.SuccessMessage;
 import com.cg.healthcare.service.IAdminService;
@@ -31,6 +33,7 @@ import com.cg.healthcare.service.IJwtUtil;
 
 @RestController
 @RequestMapping(path="/api/admin")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AdminController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
@@ -71,8 +74,8 @@ public class AdminController {
 	}
 	
 	//Update diagnostic center
-	@PutMapping("/updateDiagnosticCenter")
-	public ResponseEntity<SuccessMessage> updateDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) throws Exception
+	@PutMapping("/updateDiagnosticCenter/{diagnosticCenterId}")
+	public ResponseEntity<SuccessMessage> updateDiagnosticCenter(@PathVariable("diagnosticCenterId") int diagnosticCenterId, @RequestBody DiagnosticCenter diagnosticCenter) throws Exception
 	{
 		adminService.updateDiagnosticCenter(diagnosticCenter);
 		return new ResponseEntity<SuccessMessage>(
@@ -195,7 +198,8 @@ public class AdminController {
 	 */
 	
 	@PostMapping(value = "/allocateBeds", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SuccessMessage> allocateBedsToWaitingPatients() throws Exception {
+	public ResponseEntity<SuccessMessage> allocateBedsToWaitingPatients( @RequestBody AllocateBedRequest request) throws Exception {
+		adminService.allocateBeds(request.getDiagnosticId(), request.getWaitingPatientIds(),request.getType());
 		LOGGER.info("Beds Allocated Successfully");
 		return new ResponseEntity<SuccessMessage>(new SuccessMessage("Bed Allocation", "Beds Allocated Successfully"),HttpStatus.OK);
 	}
@@ -210,7 +214,7 @@ public class AdminController {
 	@GetMapping(value = "/getWaitingPatients", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<WaitingPatient>> getWaitingPatients() throws Exception{
 		List<WaitingPatient> patients = adminService.getWaitingPatients();
-		LOGGER.info("Waiting Patients Fetched!");
+		LOGGER.info(patients.size() + "Waiting Patients Fetched!");
 		return new ResponseEntity<List<WaitingPatient>>(patients,HttpStatus.OK);
 	}
 }

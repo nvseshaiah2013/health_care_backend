@@ -1,7 +1,7 @@
 package com.cg.healthcare.service;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -51,27 +51,27 @@ public class AppointmentService implements IAppointmentService{
 		appointment.setDiagnosticTest(diagnosticTest);
 		appointment.setPatient(patient);
 		Appointment addAppointment=appointmentRepository.save(appointment);
+		patient.getAppointments().add(addAppointment);
 		return addAppointment;
 	}
 
 	@Override
-	public List<Appointment> viewAppointments() {
-		List<Appointment> appointments=appointmentRepository.findAll();
+	public Set<Appointment> viewAppointments(String username) throws Exception {
+		Patient patient = findPatientByUsername(username);
+		Set<Appointment> appointments= patient.getAppointments();
 		return appointments;
 	}
 
 	@Override
-	public Appointment viewMyAppointment(int appointmentId) throws Exception{
+	public Appointment viewMyAppointment(int appointmentId, String username ) throws Exception{
 		
-		List<Appointment> list=viewAppointments();
+		Set<Appointment> list=viewAppointments(username);
 		Optional<Appointment> optional=list.stream().
 				filter(f1->f1.getId() ==appointmentId).findFirst();
 		if(optional.isPresent())
 		{
 			return appointmentRepository.findById(appointmentId).get();
 		}
-		
-//		Appointment appointment=appointmentRepository.findById(appointmentId).get();
 		else
 			throw new NoAppointmentException("Appointment not found","ID Exception");
 		

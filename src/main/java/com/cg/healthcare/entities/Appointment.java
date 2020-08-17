@@ -162,6 +162,13 @@ public class Appointment implements Serializable{
 	public void setTestResult(TestResult testResult) {
 		this.testResult = testResult;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Appointment [id=" + id + ", appointmentDate=" + appointmentDate + ", approvalStatus=" + approvalStatus
+				+ ", diagnosis=" + diagnosis + ", symptoms=" + symptoms + ", patient=" + patient + "]";
+	}
 	
 	
 	
