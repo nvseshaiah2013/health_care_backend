@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="APPOINTMENTS")
 @SequenceGenerator(name = "appoint_id",initialValue = 1000, allocationSize = 1)
@@ -153,7 +155,7 @@ public class Appointment implements Serializable{
 		this.diagnosticTest = diagnosticTest;
 	}
 
-
+	@JsonIgnore
 	public TestResult getTestResult() {
 		return testResult;
 	}

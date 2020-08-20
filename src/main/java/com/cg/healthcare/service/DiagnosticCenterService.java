@@ -313,8 +313,9 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 			result.setCondition(testResult.getCondition());
 			result.setTestReading(testResult.getTestReading());
 			result.setAppointment(appointment);
-			testResultRepository.save(result);
-			return "Test results of "+testResult.getAppointmentId()+"Updated";
+			TestResult savedResult = testResultRepository.save(result);
+			appointment.setTestResult(savedResult);
+			return "Test results of "+testResult.getAppointmentId()+" Updated";
 		} 
 		else
 		{

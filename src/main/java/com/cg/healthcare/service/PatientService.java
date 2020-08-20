@@ -212,13 +212,13 @@ public class PatientService implements IPatientService {
 	 */
 	@Override
 	public TestResult viewTestResult(int testResultId) throws Exception {
-		TestResult testResult = testResultRepository.getOne(testResultId);
-		if (testResult==null) {
+		Optional<TestResult> testResult = testResultRepository.findById(testResultId);
+		if (!testResult.isPresent()) {
 			LOGGER.error("No Test Report are Present");
 			throw new NoTestTakenException("No Test Taken");
 		} else {
 			LOGGER.info("Test Result Found");
-			return testResult;
+			return testResult.get();
 		}
 	}
 	
