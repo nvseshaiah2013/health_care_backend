@@ -1,5 +1,6 @@
 package com.cg.healthcare.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -76,6 +77,25 @@ public class AppointmentService implements IAppointmentService{
 			throw new NoAppointmentException("Appointment not found","ID Exception");
 		
 	}
+	
+	public Set<DiagnosticTest> getTestNames(int id) throws Exception{
+		List<DiagnosticCenter> list=diagnosticCenterRepository.findAll();
+		Optional<DiagnosticCenter> testNames= list.stream().filter(f1->f1.getId()==id).findFirst();
+		
+		if(testNames.isPresent())
+		{
+			
+		Set<DiagnosticTest> testNames2=testNames.get().getTests();
+		
+		return testNames2;	
+			
+		}
+		else
+		   throw new NoAppointmentException("TestNotFound", "NoTest");
+		
+		
+	}
+	
 
 	public Patient findPatientByUsername(String username) throws Exception {
 			User user = userRepository.findByUsername(username);

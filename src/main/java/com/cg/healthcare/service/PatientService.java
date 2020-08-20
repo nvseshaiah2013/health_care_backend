@@ -2,7 +2,9 @@ package com.cg.healthcare.service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,6 +23,7 @@ import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
+import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.entities.User;
@@ -85,19 +88,22 @@ public class PatientService implements IPatientService {
 	 * 
 	 */
 	@Override
-	public Set<TestResult> getAllTestResult(String patientUserName) throws Exception {
+	public ArrayList<DiagnosticTest> getAllTestResult(String patientUserName) throws Exception {
 		Patient patient = getPatientByUserName(patientUserName);
 		Set<Appointment> appointments = patient.getAppointments();
 		if (appointments.isEmpty()) {
+			LOGGER.error("No Appointment");
 			throw new NoAppointmentException("Appointment Exception","No Appointment Present");
 		}
-		Set<TestResult> tests = new HashSet<>();
+		ArrayList<DiagnosticTest> tests = new ArrayList<>();
 		for (Appointment a : appointments) {
-			tests.add(a.getTestResult());
+			tests.add(a.getDiagnosticTest());
 		}
 		if (tests.isEmpty()) {
+			LOGGER.info("No Test Taken");
 			throw new NoTestTakenException("No Test Taken");
 		}
+		LOGGER.info("All Test Returned");
 		return tests;
 	}
 
@@ -127,8 +133,7 @@ public class PatientService implements IPatientService {
 	@Override
 	public Set<Bed> getAllBed(String diagnosticCenterUserName) throws Exception {
 		DiagnosticCenter diagnosticCenter = getDiagnosticCenterByUsername(diagnosticCenterUserName);
-		Set<Bed> vacantBeds = diagnosticCenter.getBeds().stream().filter(b -> b.isOccupied() == false)
-				.collect(Collectors.toSet());
+		Set<Bed> vacantBeds = diagnosticCenter.getBeds();
 		if (vacantBeds.isEmpty()) {
 			LOGGER.error("No Vacant Bed Available Right Now");
 			throw new NoVacantBedForPatient("No Vacant Bed Now");
@@ -181,15 +186,19 @@ public class PatientService implements IPatientService {
 	@Override
 	public Bed viewBedStatus(int appointmentId) throws Exception {
 		Appointment appointment = appointmentRepository.getOne(appointmentId);
+		System.out.println(appointment.getId());
 		DiagnosticCenter diagnosticCenter = appointment.getDiagnosticCenter();
-		Bed bed = diagnosticCenter.getBeds().stream().filter(b -> b.getAppointment().getId() == appointmentId)
-				.findFirst().get();
-		if (bed == null) {
+		System.out.println(diagnosticCenter.getId());
+		Optional<Bed> bed = diagnosticCenter.getBeds().stream().filter(b -> b.getAppointment()!=null && b.getAppointment().getId() == appointmentId).findFirst();
+		
+		if (!bed.isPresent()) {
+			System.out.println(bed);
 			LOGGER.error("No Bed Booked Till Now");
 			throw new BedNotFoundException("Bed Not Found", "No Bed booked");
 		} else {
+			System.out.println(bed.get().getId());
 			LOGGER.info("Booked Bed Found");
-			return bed;
+			return bed.get();
 		}
 	}
 
@@ -204,13 +213,34 @@ public class PatientService implements IPatientService {
 	@Override
 	public TestResult viewTestResult(int testResultId) throws Exception {
 		TestResult testResult = testResultRepository.getOne(testResultId);
-		if (testResult == null) {
+		if (testResult==null) {
 			LOGGER.error("No Test Report are Present");
 			throw new NoTestTakenException("No Test Taken");
 		} else {
 			LOGGER.info("Test Result Found");
 			return testResult;
 		}
+	}
+	
+	public List<DiagnosticCenter> getAllDiagnosticCenter() {
+		List<DiagnosticCenter> centers = diagnosticCenterRepo.findAll();
+		LOGGER.info("Fetched all diagnostic centers successfully...");
+		return centers;
+	}
+	
+	public String getUsername(int id) {
+		User user= userRepository.findById(id).get();
+		return user.getUsername();
+	}
+	public Set<Bed> getBeds(String diagnosticCenterUsername) throws Exception {
+		DiagnosticCenter diagnosticCenter = getDiagnosticCenterByUsername(diagnosticCenterUsername);
+		return diagnosticCenter.getBeds();
+	}
+	
+	public ArrayList<Appointment> getAllAppointments(String username){
+		Patient patient=getPatientByUserName(username);
+		ArrayList<Appointment> appointments=(ArrayList<Appointment>) patient.getAppointments().stream().collect(Collectors.toList());
+		return appointments;
 	}
 
 	/*

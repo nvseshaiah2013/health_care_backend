@@ -8,6 +8,7 @@ import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.WaitingPatient;
+import com.cg.healthcare.exception.DataBaseException;
 import com.cg.healthcare.requests.DiagnosticCenterSignUpRequest;
 
 public interface IAdminService {
@@ -49,13 +50,13 @@ public interface IAdminService {
 
 	DiagnosticCenter getDiagnosticCentersById(int diagnosticCenterId);
 
-	List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId);
+	List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) throws Exception;
 
 	List<Bed> listOfVacantBeds();
 
-	List<Appointment> getApppointmentList(int centreId, String test, int status);
+	List<Appointment> getApppointmentList(int centreId, String test, int status) throws Exception;
 
-	String processAppointment(int centreId, String test, int bursttime, int seats);
+	String processAppointment(int centreId, String test, int bursttime, int seats) throws Exception;
 
 	List<DiagnosticTest> removeTestFromDiagnosticCenter(int centerId, DiagnosticTest test) throws Exception;
 

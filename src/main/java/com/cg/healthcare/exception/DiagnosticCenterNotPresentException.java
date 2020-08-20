@@ -1,6 +1,6 @@
 package com.cg.healthcare.exception;
 
-public class DiagnosticCenterNotPresentException extends RuntimeException{
+public class DiagnosticCenterNotPresentException extends Exception{
 	
 	/**
 	 * 

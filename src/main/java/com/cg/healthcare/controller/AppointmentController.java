@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.healthcare.entities.Appointment;
+import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.requests.MakeAppointmentRequest;
+//import com.cg.healthcare.requests.MakeAppointmentRequest;
 import com.cg.healthcare.service.AppointmentService;
+//import com.cg.healthcare.service.IJwtUtil;
 import com.cg.healthcare.service.IJwtUtil;
 
 @RestController
@@ -30,21 +33,21 @@ public class AppointmentController {
 	@Autowired
 	private IJwtUtil jwtUtil;
 	
-	@GetMapping("/appointments")
+	@GetMapping("/all")
 	public Set<Appointment> viewAppointments(HttpServletRequest request) throws Exception
 	{
 		String username = getPatientByUsername(request);
 		return appointmentService.viewAppointments(username);
 	}
 	
-	@GetMapping(value="/appointment/{appointmentId}")
+	@GetMapping(value="/{appointmentId}")
 	public Appointment viewMyAppointment(@PathVariable int appointmentId, HttpServletRequest request) throws Exception 
 	{
 		String username = getPatientByUsername(request);
 		return appointmentService.viewMyAppointment(appointmentId, username);
 	}
 
-	@PostMapping(value="/appointment/add",consumes= MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value="/add",consumes= MediaType.APPLICATION_JSON_VALUE)
 	public Appointment makeAppointment(@RequestBody MakeAppointmentRequest appointment, HttpServletRequest request) throws Exception
 	{
 		String username = getPatientByUsername(request);
@@ -53,6 +56,15 @@ public class AppointmentController {
 		newAppointment.setApprovalStatus(0);
 		newAppointment.setSymptoms(appointment.getSymptoms());
 		return appointmentService.makeAppointment(newAppointment, username, appointment.getTestId(), appointment.getDiagnosticCenterId());
+	}
+	
+	
+	@GetMapping(value="/search/{diagnosticCenterID}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Set<DiagnosticTest> getTestNames(@PathVariable int diagnosticCenterID) throws Exception{
+		
+		Set<DiagnosticTest> tests = appointmentService.getTestNames(diagnosticCenterID);
+		System.out.print(tests.size());
+		return tests;
 	}
 	
 	public String getPatientByUsername(HttpServletRequest request) throws Exception {

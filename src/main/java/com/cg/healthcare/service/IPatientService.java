@@ -1,9 +1,11 @@
 package com.cg.healthcare.service;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
+import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 
@@ -13,7 +15,7 @@ public interface IPatientService {
 	Patient getPatientByUserName(String patientUserName);
 
 	//fetch all the TestResult taken by the patient
-	Set<TestResult> getAllTestResult(String patientUserName) throws Exception;
+	ArrayList<DiagnosticTest> getAllTestResult(String patientUserName) throws Exception;
 
 	//fetch all the vacant beds
 	DiagnosticCenter getDiagnosticCenterByUsername(String diagnosticCenterUsername);

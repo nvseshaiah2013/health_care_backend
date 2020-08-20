@@ -210,10 +210,11 @@ public class DiagnosticCenterController {
 	 */
 	
 	
-	@PostMapping("/updatetestresult")
-	public String updateTestResult(@RequestBody TestResultForm testresultForm) throws Exception
+	@PostMapping(value = "/updateTestResult", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<SuccessMessage> updateTestResult(@RequestBody TestResultForm testresultForm) throws Exception
 	{
-			return diagnosticService.updateTestResult(testresultForm);
+			String response =  diagnosticService.updateTestResult(testresultForm);
+			return new ResponseEntity<SuccessMessage>(new SuccessMessage("Test Result", response),HttpStatus.OK);
 	}
 	
 	/**

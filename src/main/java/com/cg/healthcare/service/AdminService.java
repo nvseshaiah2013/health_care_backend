@@ -181,7 +181,7 @@ public class AdminService implements IAdminService {
 
 				.map((waitingId) -> waitingPatientRepository.getOne(waitingId))
 
-				.filter((waitingPatient) -> waitingPatient.getAppointment().getApprovalStatus() == 1)
+				.filter((waitingPatient) -> waitingPatient !=null && waitingPatient.getAppointment().getApprovalStatus() == 1)
 
 				.collect(Collectors.toList());
 
@@ -378,7 +378,7 @@ public class AdminService implements IAdminService {
 	 * no test found at this center exception
 	 */
 	@Override
-	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) {
+	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) throws Exception {
 		DiagnosticCenter center = diagnosticCenterRepository.getOne(centerId);
 		List<DiagnosticTest> testList = new LinkedList<>(center.getTests());
 		if (testList.size() == 0) {
@@ -472,7 +472,7 @@ public class AdminService implements IAdminService {
 	 * Sachin Pant Starts
 	 * 
 	 */
-	public List<Appointment> getApppointmentList(int centreId, String test, int status) {
+	public List<Appointment> getApppointmentList(int centreId, String test, int status) throws Exception{
 
 		List<Appointment> allappoints;
 		
@@ -509,7 +509,7 @@ public class AdminService implements IAdminService {
 
 	// bursttime is the time taken to handle one patient
 	// seats is the no of test can be done at a time
-	public String processAppointment(int centreId, String test, int bursttime, int seats) {
+	public String processAppointment(int centreId, String test, int bursttime, int seats) throws Exception {
 
 		List<Appointment> appointment = this.getApppointmentList(centreId, test, 0); // 0 means neutral
 		

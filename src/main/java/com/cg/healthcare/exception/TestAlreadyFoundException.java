@@ -1,6 +1,6 @@
 package com.cg.healthcare.exception;
 
-public class TestAlreadyFoundException extends RuntimeException{
+public class TestAlreadyFoundException extends Exception{
 
 	private static final long serialVersionUID = 1L;
 

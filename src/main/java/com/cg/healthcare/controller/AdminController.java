@@ -116,7 +116,7 @@ public class AdminController {
 	 */	
 	
 	@GetMapping("/getappointment/{id}")
-	public ResponseEntity<List<Appointment>> getAppointmentList(@PathVariable("id") String id, @RequestBody Map<String, String> request){
+	public ResponseEntity<List<Appointment>> getAppointmentList(@PathVariable("id") String id, @RequestBody Map<String, String> request) throws Exception{
 		
 		int centreId=Integer.parseInt(id);
 		int status1= Integer.parseInt(request.get("status"));
@@ -126,7 +126,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("/processappointment")
-	public ResponseEntity<String> processAppointment(@RequestBody Map<String,String> appointmentDetails) {
+	public ResponseEntity<String> processAppointment(@RequestBody Map<String,String> appointmentDetails) throws Exception{
 		int centreId=Integer.parseInt(appointmentDetails.get("id"));
 		String test=appointmentDetails.get("test");
 		int testtime=Integer.parseInt(appointmentDetails.get("testtime"));			
@@ -170,7 +170,7 @@ public class AdminController {
 	}*/
 	//this method for getting tests of a diagnostic center
 	@GetMapping("/getTestsOfADiagnosticCenter/{centerId}")
-	public ResponseEntity<List<DiagnosticTest>> getTestsOfADiagnosticTest(@PathVariable int centerId){
+	public ResponseEntity<List<DiagnosticTest>> getTestsOfADiagnosticTest(@PathVariable int centerId) throws Exception{
 		List<DiagnosticTest> testsOfCenter=adminService.getTestsOfDiagnosticCenter(centerId);
 		return new ResponseEntity<List<DiagnosticTest>>(testsOfCenter,HttpStatus.OK);
 	}
@@ -187,6 +187,12 @@ public class AdminController {
 			@RequestBody DiagnosticTest test) throws Exception{
 		List<DiagnosticTest> updatedTestList=adminService.removeTestFromDiagnosticCenter(centerId, test);
 		return new ResponseEntity<List<DiagnosticTest>>(updatedTestList,HttpStatus.OK);
+	}
+	
+	@GetMapping("/getDiagnosticCenterById/{centerId}")
+	public ResponseEntity<DiagnosticCenter> getDiagnosticCenterbyId(@PathVariable("centerId") int centerId){
+		DiagnosticCenter center=adminService.getDiagnosticCenterById(centerId);
+		return new ResponseEntity<DiagnosticCenter>(center,HttpStatus.OK);
 	}
 	/*
 	 * Ayush Gupta code ends
@@ -214,7 +220,7 @@ public class AdminController {
 	@GetMapping(value = "/getWaitingPatients", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<WaitingPatient>> getWaitingPatients() throws Exception{
 		List<WaitingPatient> patients = adminService.getWaitingPatients();
-		LOGGER.info(patients.size() + "Waiting Patients Fetched!");
+		LOGGER.info(patients.size() + " Waiting Patients Fetched!");
 		return new ResponseEntity<List<WaitingPatient>>(patients,HttpStatus.OK);
 	}
 }

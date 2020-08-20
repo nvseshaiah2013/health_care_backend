@@ -2,7 +2,7 @@ package com.cg.healthcare.exception;
 
 
 
-public class NoTestFoundAtThisCenterException extends RuntimeException{
+public class NoTestFoundAtThisCenterException extends Exception{
 
 	private static final long serialVersionUID = 1L;
 

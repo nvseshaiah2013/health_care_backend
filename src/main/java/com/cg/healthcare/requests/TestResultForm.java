@@ -2,9 +2,9 @@ package com.cg.healthcare.requests;
 
 public class TestResultForm {
 
-	int appointmentId;
-	String condition;
-	double testReading;
+	private int appointmentId;
+	private String condition;
+	private double testReading;
 	
 
 	public TestResultForm(int appointmentId, String condition, double testReading) {

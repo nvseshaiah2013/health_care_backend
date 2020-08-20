@@ -44,7 +44,7 @@ public class BedController {
 	
 	}
 	
-	@PostMapping(value="/admitIntensiveCarePatient/{appointmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value="/admitIntensiveCareBedPatient/{appointmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SuccessMessage> admitIntesiveCareBedPatient(@PathVariable("appointmentId") int appointmentId)
 			throws Exception {
 		boolean status = bedService.admittedIntensiveCareBedSuccessfully(appointmentId);
@@ -57,7 +57,7 @@ public class BedController {
 		}
 	}
 	
-	@PostMapping(value="/admitIntensiveCriticalCarePatient/{appointmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value="/admitIntensiveCriticalCareBedPatient/{appointmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SuccessMessage> admitIntesiveCriticalCareBedPatient(@PathVariable("appointmentId") int appointmentId)
 			throws Exception {
 		boolean status = bedService.admittedIntensiveCriticalCareBedSuccessfully(appointmentId);

@@ -186,7 +186,7 @@ public class BedService implements IBedService{
 
 		DiagnosticCenter diagnosticCenter=appointment.getDiagnosticCenter();
 		
-		Optional<Bed> bed = diagnosticCenter.getBeds().stream().filter(b->b.getAppointment().getId()==appointmentId).findFirst();
+		Optional<Bed> bed = diagnosticCenter.getBeds().stream().filter(b-> b.getAppointment() != null && b.getAppointment().getId()==appointmentId).findFirst();
 		if(!bed.isPresent()) {
 			LOGGER.error("No Patient Available for Discharges");
 			throw new PatientNotAdmittedException("Patient not found", "Patient not admitted");

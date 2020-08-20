@@ -1,6 +1,6 @@
 package com.cg.healthcare.exception;
 
-public class DataBaseException extends RuntimeException{
+public class DataBaseException extends Exception{
 	/**
 	 * 
 	 */

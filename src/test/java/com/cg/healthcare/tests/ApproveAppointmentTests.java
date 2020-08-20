@@ -83,14 +83,14 @@ public class ApproveAppointmentTests {
 	
 	@Test 
 	@Order(1)
-	public void getNeutralAppointment() {
+	public void getNeutralAppointment() throws Exception{
 		when(appointmentRepo.findAll()).thenReturn(appointments);
 		assertEquals(adminService.getApppointmentList(1000,"corona",0).size(),3);	// 0 for neutral status , 1 for approved and 2 for rejected
 	}
 	
 	@Test
 	@Order(2)
-	public void processAllAppointmentTest() {
+	public void processAllAppointmentTest()  throws Exception{
 		when(appointmentRepo.findAll()).thenReturn(appointments);
 		String result=adminService.processAppointment(1000,"corona",60,2);		// 60 time taken and 2 is no of patient can be handled
 		assertEquals("done",result);
@@ -98,7 +98,7 @@ public class ApproveAppointmentTests {
 	
 	@Test
 	@Order(3)
-	public void getApprovedAppointmentTest() {
+	public void getApprovedAppointmentTest()  throws Exception{
 		when(appointmentRepo.findAll()).thenReturn(appointments);
 		assertEquals(adminService.getApppointmentList(1000,"corona",1).size(),2);		// means 2 appointment should be approved
 	}
