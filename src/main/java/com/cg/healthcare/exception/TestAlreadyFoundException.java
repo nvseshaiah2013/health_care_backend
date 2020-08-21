@@ -1,3 +1,4 @@
+  
 package com.cg.healthcare.exception;
 
 public class TestAlreadyFoundException extends Exception{

@@ -146,7 +146,7 @@ public class DiagnosticCenterTests {
 	{
 		Mockito.when(appointmentRepository.existsById(1000)).thenReturn(true);
 		Mockito.when(appointmentRepository.getOne(1000)).thenReturn(mockAppointment);
-		assertEquals("Test results of "+testResultForm.getAppointmentId()+"Updated",diagnosticCenterService.updateTestResult(testResultForm));
+		assertEquals("Test results of "+testResultForm.getAppointmentId()+" Updated",diagnosticCenterService.updateTestResult(testResultForm));
 	}
 	
 	
