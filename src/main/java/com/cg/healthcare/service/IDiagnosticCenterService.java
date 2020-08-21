@@ -3,6 +3,7 @@ package com.cg.healthcare.service;
 import java.util.List;
 import java.util.Set;
 
+import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
@@ -33,6 +34,8 @@ public interface IDiagnosticCenterService {
 	void removeBed(String diagnosticCenterUsername, Integer bedId) throws Exception;
 
 	String updateTestResult(TestResultForm testResult) throws Exception;
+
+	List<Appointment> listOfCenterAppointment(String centerUserName);
 
 	
 

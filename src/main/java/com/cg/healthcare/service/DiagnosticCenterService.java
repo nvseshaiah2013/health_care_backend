@@ -325,6 +325,28 @@ public class DiagnosticCenterService implements IDiagnosticCenterService {
 		}
 	}
 	
+	public List<Appointment> viewAppointments() {
+		List<Appointment> appointments=appointmentRepository.findAll();
+		
+		return appointments;
+	}
+	
+	
+	@Override
+	public List<Appointment> listOfCenterAppointment(String centerUserName)
+	{
+		List<Appointment> allAppointments = viewAppointments();
+		List<Appointment> appointmentsInCenter =new ArrayList<Appointment>();
+		DiagnosticCenter diognosticCenter =getDiagnosticCenterByUsername(centerUserName);
+		for(Appointment appointment : allAppointments) {
+			if((appointment.getDiagnosticCenter().getName()).contentEquals(diognosticCenter.getName()) && appointment.getApprovalStatus() == 1) {
+				appointmentsInCenter.add(appointment);
+			}
+		}
+		return appointmentsInCenter;
+		
+	}
+	
 	// Madhu Ends
 	
 }

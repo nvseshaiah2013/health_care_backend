@@ -1,5 +1,6 @@
 package com.cg.healthcare.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Bed;
 import com.cg.healthcare.entities.GeneralBed;
 import com.cg.healthcare.entities.IntensiveCareBed;
@@ -229,5 +231,11 @@ public class DiagnosticCenterController {
 		String token = header.substring(7);
 		String username = jwtUtil.extractUsername(token);
 		return username;
+	}
+	
+	@GetMapping(value = "/listOfCenterAppointment")
+	public List<Appointment> listOfCenterAppointment(HttpServletRequest request) throws Exception{
+			String username = getDiagnosticCenterByUsername(request);
+		return diagnosticService.listOfCenterAppointment(username);
 	}
 }
